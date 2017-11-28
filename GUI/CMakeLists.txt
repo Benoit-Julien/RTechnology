@@ -1,0 +1,27 @@
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt5Core REQUIRED)
+if (Qt5Core_FOUND)
+    include_directories(${Qt5Core_INCLUDE_DIRS})
+    link_directories(${Qt5Core_LIBRARY_DIRS})
+
+    find_package(Qt5Widgets REQUIRED)
+    if (Qt5Widgets_FOUND)
+        include_directories(${Qt5Widgets_INCLUDE_DIRS})
+        link_directories(${Qt5Widgets_LIBRARY_DIRS})
+    endif()
+endif()
+
+set(SOURCES_GUI
+        main.cpp
+        )
+
+include_directories(${INCLUDE_DIRECTORY_RAPIDJSON})
+
+include_directories(${INCLUDE_DIRECTORY_RAYTRACER})
+link_directories(${LIBRARY_DIRECTORY_RAYTRACER})
+
+add_executable(RTechnology ${SOURCES_GUI})
+target_link_libraries(RTechnology Qt5::Core Qt5::Widgets raytracer)
+add_dependencies(RTechnology raytracer)

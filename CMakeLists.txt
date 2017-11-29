@@ -13,5 +13,5 @@ else()
 	message("ArrayFire not use graphical card")
 endif()
 
-add_subdirectory(GUI)
+add_subdirectory(RTechnologyGUI)
 add_subdirectory(Raytracer)

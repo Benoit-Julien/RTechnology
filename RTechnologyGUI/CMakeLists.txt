@@ -14,7 +14,8 @@ if (Qt5Core_FOUND)
 endif()
 
 set(SOURCES_GUI
-        main.cpp
+        Sources/main.cpp
+		Sources/RTechnologyGUI.cpp
         )
 
 include_directories(${INCLUDE_DIRECTORY_RAPIDJSON})

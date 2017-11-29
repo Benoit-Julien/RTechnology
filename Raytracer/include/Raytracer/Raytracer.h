@@ -11,6 +11,6 @@
 #ifndef RTECHNOLOGY_RAYTRACER_H
 #define RTECHNOLOGY_RAYTRACER_H
 
-void entry_point(int device);
+void entry_point();
 
 #endif /* !RTECHNOLOGY_RAYTRACER_H */

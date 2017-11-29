@@ -11,7 +11,9 @@
 #include <iostream>
 #include <arrayfire.h>
 
-void entry_point(int device)
+//TODO: Ajouter DLL dans un config.h
+
+__declspec(dllexport) void entry_point()
 {
   af::info();
   char t_device_name[64] = {0};

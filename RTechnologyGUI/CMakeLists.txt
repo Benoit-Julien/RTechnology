@@ -19,6 +19,7 @@ set(SOURCES_GUI
         )
 
 include_directories(${INCLUDE_DIRECTORY_RAPIDJSON})
+include_directories(./GeneratedFiles)
 
 include_directories(${INCLUDE_DIRECTORY_RAYTRACER})
 link_directories(${LIBRARY_DIRECTORY_RAYTRACER})

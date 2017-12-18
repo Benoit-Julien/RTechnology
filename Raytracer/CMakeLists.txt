@@ -11,10 +11,10 @@ else()
 endif()
 
 set(SOURCES_RAYTRACER
-        entry_point.cpp
-        )
+        entry_point.cpp)
 
 include_directories(${INCLUDE_DIRECTORY_RAPIDJSON})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(raytracer SHARED ${SOURCES_RAYTRACER})
 target_link_libraries(raytracer ${EXTRA_LIBS})

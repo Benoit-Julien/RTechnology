@@ -37,20 +37,4 @@
   #define DLL
 #endif
 
-#ifndef RT_USE_FLOAT
-  #if !defined(RT_USE_DOUBLE) || defined(ENVIRONMENT32)
-    #define RT_USE_FLOAT
-  #endif
-#endif
-
-#ifndef RT_REAL_T
-  #define RT_REAL_T
-
-  #if defined(RT_USE_DOUBLE) && defined(ENVIRONMENT64)
-    typedef double real_t;
-  #elif defined(RT_USE_FLOAT)
-    typedef float real_t;
-  #endif
-#endif
-
 #endif /* !RTECHNOLOGY_CONFIG_H */

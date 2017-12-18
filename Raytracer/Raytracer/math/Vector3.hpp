@@ -17,6 +17,15 @@ template<typename T>
 class Vector3 : public AVector<T>
 {
  public:
+  static const Vector3<T> forward;
+  static const Vector3<T> back;
+
+  static const Vector3<T> up;
+  static const Vector3<T> down;
+
+  static const Vector3<T> right;
+  static const Vector3<T> left;
+
   explicit Vector3();
 
   Vector3(const T &x, const T &y, const T &z) : AVector<T>(af::constant(0, 3))
@@ -26,16 +35,16 @@ class Vector3 : public AVector<T>
     this->_array(2) = z;
   }
 
-  ~Vector3() = default;
+  virtual ~Vector3() = default;
 
-  virtual void Set(const T &x, const T &y, const T &z)
+  void Set(const T &x, const T &y, const T &z)
   {
     this->_array(0) = x;
     this->_array(1) = y;
     this->_array(2) = z;
   }
 
-  virtual void Set(T &&x, T &&y, T &&z)
+  void Set(T &&x, T &&y, T &&z)
   {
     this->_array(0) = x;
     this->_array(1) = y;
@@ -55,6 +64,23 @@ class Vector3 : public AVector<T>
 
   T magnitude() const;
 
+  static T Dot(const Vector3<T> &vec1, const Vector3<T> &vec2);
+
+  static Vector3<T> Cross(const Vector3<T> &vec1, const Vector3<T> &vec2)
+  {
+    Vector3<T> newvec;
+
+    newvec._array(0) = vec1._array(1) * vec2._array(2) - vec1._array(2) * vec2._array(1);
+    newvec._array(1) = vec1._array(2) * vec2._array(0) - vec1._array(0) * vec2._array(2);
+    newvec._array(2) = vec1._array(0) * vec2._array(1) - vec1._array(1) * vec2._array(0);
+
+    return newvec;
+  }
+
+  static T Distance(const Vector3<T> &vec1, const Vector3<T> &vec2);
+
+  static float Angle(const Vector3<T> &vec1, const Vector3<T> &vec2);
+
   bool operator==(const Vector3<T> &vec) const
   {
     return this->Equal(vec);
@@ -66,7 +92,25 @@ class Vector3 : public AVector<T>
   }
 };
 
-template <typename T>
+template<typename T>
+const Vector3<T> Vector3<T>::forward = Vector3(0, 0, 1);
+
+template<typename T>
+const Vector3<T> Vector3<T>::back = Vector3(0, 0, -1);
+
+template<typename T>
+const Vector3<T> Vector3<T>::up = Vector3(0, 1, 0);
+
+template<typename T>
+const Vector3<T> Vector3<T>::down = Vector3(0, -1, 0);
+
+template<typename T>
+const Vector3<T> Vector3<T>::right = Vector3(1, 0, 0);
+
+template<typename T>
+const Vector3<T> Vector3<T>::left = Vector3(-1, 0, 0);
+
+template<typename T>
 std::ostream &operator<<(std::ostream &os, const Vector3<T> &vec)
 {
   os << "Vector3 :" << std::endl;
@@ -76,6 +120,10 @@ std::ostream &operator<<(std::ostream &os, const Vector3<T> &vec)
 
   return os;
 }
+
+/*
+ * int specialization
+ */
 
 template<>
 Vector3<int>::Vector3() : AVector<int>(af::constant(0, 3, s32))
@@ -112,6 +160,31 @@ int Vector3<int>::magnitude() const
 {
   return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<int>();
 }
+
+template<>
+int Vector3<int>::Dot(const Vector3<int> &vec1, const Vector3<int> &vec2)
+{
+  return af::sum(vec1._array * vec1._array).scalar<int>();
+}
+
+template<>
+int Vector3<int>::Distance(const Vector3<int> &vec1, const Vector3<int> &vec2)
+{
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<int>();
+}
+
+template<>
+float Vector3<int>::Angle(const Vector3<int> &vec1, const Vector3<int> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
+
+/*
+ * long long specialization
+ */
 
 #ifdef ENVIRONMENT64
 
@@ -150,7 +223,32 @@ long long Vector3<long long>::magnitude() const
 {
   return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<long long>();
 }
+
+template<>
+long long Vector3<long long>::Dot(const Vector3<long long> &vec1, const Vector3<long long> &vec2)
+{
+  return af::sum(vec1._array * vec1._array).scalar<long long>();
+}
+
+template<>
+long long Vector3<long long>::Distance(const Vector3<long long> &vec1, const Vector3<long long> &vec2)
+{
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<long long>();
+}
+
+template<>
+float Vector3<long long>::Angle(const Vector3<long long> &vec1, const Vector3<long long> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
 #endif
+
+/*
+ * unsigned specialization
+ */
 
 template<>
 Vector3<unsigned>::Vector3() : AVector<unsigned>(af::constant(0, 3, u32))
@@ -187,6 +285,31 @@ unsigned Vector3<unsigned>::magnitude() const
 {
   return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<unsigned>();
 }
+
+template<>
+unsigned Vector3<unsigned>::Dot(const Vector3<unsigned> &vec1, const Vector3<unsigned> &vec2)
+{
+  return af::sum(vec1._array * vec1._array).scalar<unsigned>();
+}
+
+template<>
+unsigned Vector3<unsigned>::Distance(const Vector3<unsigned> &vec1, const Vector3<unsigned> &vec2)
+{
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<unsigned>();
+}
+
+template<>
+float Vector3<unsigned>::Angle(const Vector3<unsigned> &vec1, const Vector3<unsigned> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
+
+/*
+ * long long unsigned specialization
+ */
 
 #ifdef ENVIRONMENT64
 
@@ -225,7 +348,32 @@ long long unsigned Vector3<long long unsigned>::magnitude() const
 {
   return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<long long unsigned>();
 }
+
+template<>
+long long unsigned Vector3<long long unsigned>::Dot(const Vector3<long long unsigned> &vec1, const Vector3<long long unsigned> &vec2)
+{
+  return af::sum(vec1._array * vec1._array).scalar<long long unsigned>();
+}
+
+template<>
+long long unsigned Vector3<long long unsigned>::Distance(const Vector3<long long unsigned> &vec1, const Vector3<long long unsigned> &vec2)
+{
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<long long unsigned>();
+}
+
+template<>
+float Vector3<long long unsigned>::Angle(const Vector3<long long unsigned> &vec1, const Vector3<long long unsigned> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
 #endif
+
+/*
+ * float specialization
+ */
 
 template<>
 Vector3<float>::Vector3() : AVector<float>(af::constant(0, 3, f32))
@@ -263,46 +411,28 @@ float Vector3<float>::magnitude() const
   return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<float>();
 }
 
-#ifdef ENVIRONMENT64
-
 template<>
-Vector3<double>::Vector3() : AVector<double>(af::constant(0, 3, f64))
-{}
-
-template<>
-Vector3<double>::Vector3(const double &x, const double &y, const double &z) : AVector<double>(af::constant(0, 3, f64))
+float Vector3<float>::Dot(const Vector3<float> &vec1, const Vector3<float> &vec2)
 {
-  this->_array(0) = x;
-  this->_array(1) = y;
-  this->_array(2) = z;
+  return af::sum(vec1._array * vec1._array).scalar<float>();
 }
 
 template<>
-double Vector3<double>::x() const
+float Vector3<float>::Distance(const Vector3<float> &vec1, const Vector3<float> &vec2)
 {
-  return this->_array(0).scalar<double>();
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<float>();
 }
 
 template<>
-double Vector3<double>::y() const
+float Vector3<float>::Angle(const Vector3<float> &vec1, const Vector3<float> &vec2)
 {
-  return this->_array(1).scalar<double>();
-}
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
 
-template<>
-double Vector3<double>::z() const
-{
-  return this->_array(2).scalar<double>();
+  return af::acos(mul / norm).scalar<float>();
 }
-
-template<>
-double Vector3<double>::magnitude() const
-{
-  return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<double>();
-}
-#endif
 
 typedef Vector3<int> Vector3Int;
-typedef Vector3<real_t> Vector3Real;
+typedef Vector3<float> Vector3Float;
 
 #endif /* !RTECHNOLOGY_VECTOR3_HPP */

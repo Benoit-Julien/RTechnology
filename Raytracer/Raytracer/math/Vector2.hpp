@@ -11,207 +11,81 @@
 #ifndef RTECHNOLOGY_VECTOR2_HPP
 #define RTECHNOLOGY_VECTOR2_HPP
 
-#include <cmath>
-#include <iostream>
-#include <af/array.h>
-#include <af/arith.h>
-#include <arrayfire.h>
-
-#include "../config.h"
+#include "AVector.hpp"
 
 template<typename T>
-class Vector2
+class Vector2 : public AVector<T>
 {
- private:
-  af::array _array;
-
-  explicit Vector2(const af::array &array) : _array(array)
-  {}
-
-  explicit Vector2(af::array &&array) : _array(array)
-  {}
-
  public:
+  static const Vector2<T> up;
+  static const Vector2<T> down;
+
+  static const Vector2<T> right;
+  static const Vector2<T> left;
+
   explicit Vector2();
 
-  Vector2(const T &x, const T &y) : _array(af::constant(0, 2))
+  Vector2(const T &x, const T &y) : AVector<T>(af::constant(0, 2))
   {
     this->_array(0) = x;
     this->_array(1) = y;
   }
 
-  Vector2(const Vector2 &vector) : _array(vector._array)
-  {}
+  virtual ~Vector2() = default;
 
-  Vector2(Vector2 &&vector) noexcept : _array(vector._array)
-  {}
-
-  Vector2 &operator=(const Vector2 &vector)
-  {
-    this->_array = vector._array;
-
-    return *this;
-  }
-
-  Vector2 &operator=(Vector2 &&vector) noexcept
-  {
-    this->_array = vector._array;
-
-    return *this;
-  }
-
-  ~Vector2() = default;
-
-  inline void Set(const T &x, const T &y)
+  void Set(const T &x, const T &y)
   {
     this->_array(0) = x;
     this->_array(1) = y;
   }
 
-  inline void Set(T &&x, T &&y)
+  void Set(T &&x, T &&y)
   {
     this->_array(0) = x;
     this->_array(1) = y;
   }
 
-  inline void Normalize()
+  bool Equal(const Vector2<T> &vec) const
   {
-    this->_array /= this->magnitude();
+    return this->x() == vec.x() && this->y() == vec.y();
   }
 
   T x() const;
 
   T y() const;
 
-  inline T magnitude() const
-  {
-    return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar();
-  }
+  T magnitude() const;
 
-  Vector2 operator+(const Vector2<T> &vec) const
-  {
-    auto tmp = this->_array + vec._array;
+  static T Dot(const Vector2<T> &vec1, const Vector2<T> &vec2);
 
-    return Vector2(tmp);
-  }
-  Vector2 &operator+=(const Vector2<T> &vec)
-  {
-    this->_array += vec._array;
+  static T Distance(const Vector2<T> &vec1, const Vector2<T> &vec2);
 
-    return *this;
-  }
-
-  Vector2 operator+(const T &value) const
-  {
-    auto tmp = this->_array + value;
-
-    return Vector2(tmp);
-  }
-  Vector2 &operator+=(const T &value)
-  {
-    this->_array += value;
-
-    return *this;
-  }
-
-  Vector2 &operator-()
-  {
-    this->_array *= -1;
-
-    return *this;
-  }
-
-  Vector2 operator-(const Vector2<T> &vec) const
-  {
-    auto tmp = this->_array - vec._array;
-
-    return Vector2(tmp);
-  }
-  Vector2 &operator-=(const Vector2<T> &vec)
-  {
-    this->_array -= vec._array;
-
-    return *this;
-  }
-
-  Vector2 operator-(const T &value) const
-  {
-    auto tmp = this->_array - value;
-
-    return Vector2(tmp);
-  }
-  Vector2 &operator-=(const T &value)
-  {
-    this->_array -= value;
-
-    return *this;
-  }
-
-  Vector2 operator*(const Vector2<T> &vec) const
-  {
-    auto tmp = this->_array * vec._array;
-
-    return Vector2(tmp);
-  }
-  Vector2 &operator*=(const Vector2<T> &vec)
-  {
-    this->_array *= vec._array;
-
-    return *this;
-  }
-
-  Vector2 operator*(const T &value) const
-  {
-    auto tmp = this->_array * value;
-
-    return Vector2(tmp);
-  }
-  Vector2 &operator*=(const T &value)
-  {
-    this->_array *= value;
-
-    return *this;
-  }
-
-  Vector2 operator/(const Vector2<T> &vec) const
-  {
-    auto tmp = this->_array / vec._array;
-
-    return Vector2(tmp);
-  }
-  Vector2 &operator/=(const Vector2<T> &vec)
-  {
-    this->_array /= vec._array;
-
-    return *this;
-  }
-
-  Vector2 operator/(const T &value) const
-  {
-    auto tmp = this->_array / value;
-
-    return Vector2(tmp);
-  }
-  Vector2 operator/=(const T &value)
-  {
-    this->_array /= value;
-
-    return *this;
-  }
+  static float Angle(const Vector2<T> &vec1, const Vector2<T> &vec2);
 
   bool operator==(const Vector2<T> &vec) const
   {
-    return this->x() == vec.x()
-	   && this->y() == vec.y();
+    return this->Equal(vec);
   }
+
   bool operator!=(const Vector2<T> &vec) const
   {
-    return this->x() != vec.x()
-	   || this->y() != vec.y();
+    return !this->Equal(vec);
   }
 };
 
-template <typename T>
+template<typename T>
+const Vector2<T> Vector2<T>::up = Vector2(0, 1);
+
+template<typename T>
+const Vector2<T> Vector2<T>::down = Vector2(0, -1);
+
+template<typename T>
+const Vector2<T> Vector2<T>::right = Vector2(1, 0);
+
+template<typename T>
+const Vector2<T> Vector2<T>::left = Vector2(-1, 0);
+
+template<typename T>
 std::ostream &operator<<(std::ostream &os, const Vector2<T> &vec)
 {
   os << "Vector2 :" << std::endl;
@@ -221,15 +95,16 @@ std::ostream &operator<<(std::ostream &os, const Vector2<T> &vec)
   return os;
 }
 
-#ifndef INT_SPECIALIZATION
-  #define INT_SPECIALIZATION
+/*
+ * int specialization
+ */
 
 template<>
-Vector2<int>::Vector2() : _array(af::constant(0, 2, s32))
+Vector2<int>::Vector2() : AVector<int>(af::constant(0, 2, s32))
 {}
 
 template<>
-Vector2<int>::Vector2(const int &x, const int &y) : _array(af::constant(0, 2, s32))
+Vector2<int>::Vector2(const int &x, const int &y) : AVector<int>(af::constant(0, 2, s32))
 {
   this->_array(0) = x;
   this->_array(1) = y;
@@ -246,46 +121,101 @@ int Vector2<int>::y() const
 {
   return this->_array(1).scalar<int>();
 }
-#endif
-
-#ifndef LONG_SPECIALIZATION
-  #define LONG_SPECIALIZATION
-  #ifdef ENVIRONMENT64
 
 template<>
-Vector2<long>::Vector2() : _array(af::constant(0, 2, s64))
+int Vector2<int>::magnitude() const
+{
+  return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<int>();
+}
+
+template<>
+int Vector2<int>::Dot(const Vector2<int> &vec1, const Vector2<int> &vec2)
+{
+  return af::sum(vec1._array * vec1._array).scalar<int>();
+}
+
+template<>
+int Vector2<int>::Distance(const Vector2<int> &vec1, const Vector2<int> &vec2)
+{
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<int>();
+}
+
+template<>
+float Vector2<int>::Angle(const Vector2<int> &vec1, const Vector2<int> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
+
+/*
+ * long long specialization
+ */
+
+#ifdef ENVIRONMENT64
+
+template<>
+Vector2<long long>::Vector2() : AVector<long long>(af::constant(0, 2, s64))
 {}
 
 template<>
-Vector2<long>::Vector2(const long &x, const long &y) : _array(af::constant(0, 2, s64))
+Vector2<long long>::Vector2(const long long &x, const long long &y) : AVector<long long>(af::constant(0, 2, s64))
 {
   this->_array(0) = x;
   this->_array(1) = y;
 }
 
 template<>
-long Vector2<long>::x() const
+long long Vector2<long long>::x() const
 {
-  return this->_array(0).scalar<long>();
+  return this->_array(0).scalar<long long>();
 }
 
 template<>
-long Vector2<long>::y() const
+long long Vector2<long long>::y() const
 {
-  return this->_array(1).scalar<long>();
+  return this->_array(1).scalar<long long>();
 }
-  #endif
+
+template<>
+long long Vector2<long long>::magnitude() const
+{
+  return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<long long>();
+}
+
+template<>
+long long Vector2<long long>::Dot(const Vector2<long long> &vec1, const Vector2<long long> &vec2)
+{
+  return af::sum(vec1._array * vec1._array).scalar<long long>();
+}
+
+template<>
+long long Vector2<long long>::Distance(const Vector2<long long> &vec1, const Vector2<long long> &vec2)
+{
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<long long>();
+}
+
+template<>
+float Vector2<long long>::Angle(const Vector2<long long> &vec1, const Vector2<long long> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
 #endif
 
-#ifndef UNSIGNED_SPECIALIZATION
-  #define UNSIGNED_SPECIALIZATION
+/*
+ * unsigned specialization
+ */
 
 template<>
-Vector2<unsigned>::Vector2() : _array(af::constant(0, 2, u32))
+Vector2<unsigned>::Vector2() : AVector<unsigned>(af::constant(0, 2, u32))
 {}
 
 template<>
-Vector2<unsigned>::Vector2(const unsigned &x, const unsigned &y) : _array(af::constant(0, 2, u32))
+Vector2<unsigned>::Vector2(const unsigned &x, const unsigned &y) : AVector<unsigned>(af::constant(0, 2, u32))
 {
   this->_array(0) = x;
   this->_array(1) = y;
@@ -302,17 +232,101 @@ unsigned Vector2<unsigned>::y() const
 {
   return this->_array(1).scalar<unsigned>();
 }
-#endif
-
-#ifndef FLOAT_SPECIALIZATION
-  #define FLOAT_SPECIALIZATION
 
 template<>
-Vector2<float>::Vector2() : _array(af::constant(0, 2, f32))
+unsigned Vector2<unsigned>::magnitude() const
+{
+  return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<unsigned>();
+}
+
+template<>
+unsigned Vector2<unsigned>::Dot(const Vector2<unsigned> &vec1, const Vector2<unsigned> &vec2)
+{
+  return af::sum(vec1._array * vec1._array).scalar<unsigned>();
+}
+
+template<>
+unsigned Vector2<unsigned>::Distance(const Vector2<unsigned> &vec1, const Vector2<unsigned> &vec2)
+{
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<unsigned>();
+}
+
+template<>
+float Vector2<unsigned>::Angle(const Vector2<unsigned> &vec1, const Vector2<unsigned> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
+
+/*
+ * long long unsigned specialization
+ */
+
+#ifdef ENVIRONMENT64
+
+template<>
+Vector2<long long unsigned>::Vector2() : AVector<long long unsigned>(af::constant(0, 2, u64))
 {}
 
 template<>
-Vector2<float>::Vector2(const float &x, const float &y) : _array(af::constant(0, 2, f32))
+Vector2<long long unsigned>::Vector2(const long long unsigned &x, const long long unsigned &y) : AVector<long long unsigned>(af::constant(0, 2, u64))
+{
+  this->_array(0) = x;
+  this->_array(1) = y;
+}
+
+template<>
+long long unsigned Vector2<long long unsigned>::x() const
+{
+  return this->_array(0).scalar<long long unsigned>();
+}
+
+template<>
+long long unsigned Vector2<long long unsigned>::y() const
+{
+  return this->_array(1).scalar<long long unsigned>();
+}
+
+template<>
+long long unsigned Vector2<long long unsigned>::magnitude() const
+{
+  return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<long long unsigned>();
+}
+
+template<>
+long long unsigned Vector2<long long unsigned>::Dot(const Vector2<long long unsigned> &vec1, const Vector2<long long unsigned> &vec2)
+{
+  return af::sum(vec1._array * vec1._array).scalar<long long unsigned>();
+}
+
+template<>
+long long unsigned Vector2<long long unsigned>::Distance(const Vector2<long long unsigned> &vec1, const Vector2<long long unsigned> &vec2)
+{
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<long long unsigned>();
+}
+
+template<>
+float Vector2<long long unsigned>::Angle(const Vector2<long long unsigned> &vec1, const Vector2<long long unsigned> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
+#endif
+
+/*
+ * float specialization
+ */
+
+template<>
+Vector2<float>::Vector2() : AVector<float>(af::constant(0, 2, f32))
+{}
+
+template<>
+Vector2<float>::Vector2(const float &x, const float &y) : AVector<float>(af::constant(0, 2, f32))
 {
   this->_array(0) = x;
   this->_array(1) = y;
@@ -329,38 +343,35 @@ float Vector2<float>::y() const
 {
   return this->_array(1).scalar<float>();
 }
-#endif
-
-#ifndef DOUBLE_SPECIALIZATION
-  #define DOUBLE_SPECIALIZATION
-  #ifdef ENVIRONMENT64
 
 template<>
-Vector2<double>::Vector2() : _array(af::constant(0, 2, f64))
-{}
-
-template<>
-Vector2<double>::Vector2(const double &x, const double &y) : _array(af::constant(0, 2, f64))
+float Vector2<float>::magnitude() const
 {
-  this->_array(0) = x;
-  this->_array(1) = y;
+  return af::sqrt(af::sum(af::pow(this->_array, 2))).scalar<float>();
 }
 
 template<>
-double Vector2<double>::x() const
+float Vector2<float>::Dot(const Vector2<float> &vec1, const Vector2<float> &vec2)
 {
-  return this->_array(0).scalar<double>();
+  return af::sum(vec1._array * vec1._array).scalar<float>();
 }
 
 template<>
-double Vector2<double>::y() const
+float Vector2<float>::Distance(const Vector2<float> &vec1, const Vector2<float> &vec2)
 {
-  return this->_array(1).scalar<double>();
+  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<float>();
 }
-  #endif
-#endif
+
+template<>
+float Vector2<float>::Angle(const Vector2<float> &vec1, const Vector2<float> &vec2)
+{
+  auto mul = af::sum(vec1._array * vec2._array);
+  auto norm = vec1.getNormArray() * vec2.getNormArray();
+
+  return af::acos(mul / norm).scalar<float>();
+}
 
 typedef Vector2<int> Vector2Int;
-typedef Vector2<real_t> Vector2Real;
+typedef Vector2<float> Vector2Float;
 
 #endif /* !RTECHNOLOGY_VECTOR2_HPP */

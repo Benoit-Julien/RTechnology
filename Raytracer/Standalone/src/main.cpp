@@ -14,6 +14,7 @@
 #include <Raytracer/config.h>
 
 #include <Raytracer/math/Vector3.hpp>
+#include <Raytracer/math/Vector2.hpp>
 
 #if WINDOWS && !_DEBUG
 # include <Windows.h>
@@ -44,10 +45,10 @@ int main()
 
   return 0;*/
 
-  Vector3Real vec(2.2, 3, 5);
+  Vector3Float vec(2.2, 3, 5);
   std::cout << vec << std::endl;
 
-  real_t x = 3.2;
+  float x = 3.2;
 
   vec.Set(x, 6, 9.62);
   std::cout << vec << std::endl;
@@ -65,4 +66,34 @@ int main()
   std::cout << vec << std::endl;
 
   std::cout << std::boolalpha << (vec == vec) << std::noboolalpha << std::endl;
+
+  std::cout << std::boolalpha << (Vector3Int::up != Vector3Int::down) << std::noboolalpha << std::endl;
+
+  std::cout << (Vector3Int::Angle(Vector3Int::forward, Vector3Int::left) * 180 / 3.14) << std::endl;
+
+
+
+  Vector2Float vec2(2.2, 3);
+  std::cout << vec2 << std::endl;
+
+  vec2.Set(x, 6);
+  std::cout << vec2 << std::endl;
+
+  vec2 += 3;
+  std::cout << vec2 << std::endl;
+
+  vec2 -= 3;
+  std::cout << vec2 << std::endl;
+
+  vec2 *= 3;
+  std::cout << vec2 << std::endl;
+
+  vec2 /= 3;
+  std::cout << vec2 << std::endl;
+
+  std::cout << std::boolalpha << (vec2 == vec2) << std::noboolalpha << std::endl;
+
+  std::cout << std::boolalpha << (Vector2Int::up != Vector2Int::down) << std::noboolalpha << std::endl;
+
+  std::cout << (Vector2Int::Angle(Vector2Int::up, Vector2Int::left) * 180 / 3.14) << std::endl;
 }

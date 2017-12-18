@@ -171,51 +171,197 @@ class AVector
     return *this;
   }
 
-  static T Dot(const AVector<T> &vec1, const AVector<T> &vec2);
-
-  AVector<real_t> nomalized() const
+  AVector<float> nomalized() const
   {
-    AVector<real_t> norm;
+    AVector<float> norm;
 
     norm._array = this->_array / this->getNormArray();
     return norm;
   }
+
+  bool operator<(const AVector<T> &vec) const;
+  bool operator>(const AVector<T> &vec) const;
+  bool operator<=(const AVector<T> &vec) const;
+  bool operator>=(const AVector<T> &vec) const;
 };
 
+/*
+ * int specialization
+ */
+
 template<>
-int AVector<int>::Dot(const AVector<int> &vec1, const AVector<int> &vec2)
+bool AVector<int>::operator<(const AVector<int> &vec) const
 {
-  return af::dot(vec1._array, vec2._array).scalar<int>();
+  return this->getNormArray().scalar<int>() < vec.getNormArray().scalar<int>();
 }
 
 template<>
-long long AVector<long long>::Dot(const AVector<long long> &vec1, const AVector<long long> &vec2)
+bool AVector<int>::operator>(const AVector<int> &vec) const
 {
-  return af::dot(vec1._array, vec2._array).scalar<long long>();
+  return this->getNormArray().scalar<int>() > vec.getNormArray().scalar<int>();
 }
 
 template<>
-unsigned AVector<unsigned>::Dot(const AVector<unsigned> &vec1, const AVector<unsigned> &vec2)
+bool AVector<int>::operator<=(const AVector<int> &vec) const
 {
-  return af::dot(vec1._array, vec2._array).scalar<unsigned>();
+  return this->getNormArray().scalar<int>() <= vec.getNormArray().scalar<int>();
 }
 
 template<>
-long long unsigned AVector<long long unsigned>::Dot(const AVector<long long unsigned> &vec1, const AVector<long long unsigned> &vec2)
+bool AVector<int>::operator>=(const AVector<int> &vec) const
 {
-  return af::dot(vec1._array, vec2._array).scalar<long long unsigned>();
+  return this->getNormArray().scalar<int>() >= vec.getNormArray().scalar<int>();
+}
+
+/*
+ * long long specialization
+ */
+
+#ifdef ENVIRONMENT64
+
+template<>
+bool AVector<long long>::operator<(const AVector<long long> &vec) const
+{
+  return this->getNormArray().scalar<long long>() < vec.getNormArray().scalar<long long>();
 }
 
 template<>
-float AVector<float>::Dot(const AVector<float> &vec1, const AVector<float> &vec2)
+bool AVector<long long>::operator>(const AVector<long long> &vec) const
 {
-  return af::dot(vec1._array, vec2._array).scalar<float>();
+  return this->getNormArray().scalar<long long>() > vec.getNormArray().scalar<long long>();
 }
 
 template<>
-double AVector<double>::Dot(const AVector<double> &vec1, const AVector<double> &vec2)
+bool AVector<long long>::operator<=(const AVector<long long> &vec) const
 {
-  return af::dot(vec1._array, vec2._array).scalar<double>();
+  return this->getNormArray().scalar<long long>() <= vec.getNormArray().scalar<long long>();
 }
+
+template<>
+bool AVector<long long>::operator>=(const AVector<long long> &vec) const
+{
+  return this->getNormArray().scalar<long long>() >= vec.getNormArray().scalar<long long>();
+}
+#endif
+
+/*
+ * unsigned specialization
+ */
+
+template<>
+bool AVector<unsigned>::operator<(const AVector<unsigned> &vec) const
+{
+  return this->getNormArray().scalar<int>() < vec.getNormArray().scalar<int>();
+}
+
+template<>
+bool AVector<unsigned>::operator>(const AVector<unsigned> &vec) const
+{
+  return this->getNormArray().scalar<int>() > vec.getNormArray().scalar<int>();
+}
+
+template<>
+bool AVector<unsigned>::operator<=(const AVector<unsigned> &vec) const
+{
+  return this->getNormArray().scalar<int>() <= vec.getNormArray().scalar<int>();
+}
+
+template<>
+bool AVector<unsigned>::operator>=(const AVector<unsigned> &vec) const
+{
+  return this->getNormArray().scalar<int>() >= vec.getNormArray().scalar<int>();
+}
+
+/*
+ * long long unsigned specialization
+ */
+
+#ifdef ENVIRONMENT64
+
+template<>
+bool AVector<long long unsigned>::operator<(const AVector<long long unsigned> &vec) const
+{
+  return this->getNormArray().scalar<long long unsigned>() < vec.getNormArray().scalar<long long unsigned>();
+}
+
+template<>
+bool AVector<long long unsigned>::operator>(const AVector<long long unsigned> &vec) const
+{
+  return this->getNormArray().scalar<long long unsigned>() > vec.getNormArray().scalar<long long unsigned>();
+}
+
+template<>
+bool AVector<long long unsigned>::operator<=(const AVector<long long unsigned> &vec) const
+{
+  return this->getNormArray().scalar<long long unsigned>() <= vec.getNormArray().scalar<long long unsigned>();
+}
+
+template<>
+bool AVector<long long unsigned>::operator>=(const AVector<long long unsigned> &vec) const
+{
+  return this->getNormArray().scalar<long long unsigned>() >= vec.getNormArray().scalar<long long unsigned>();
+}
+
+#endif
+
+/*
+ * float specialization
+ */
+
+template<>
+bool AVector<float>::operator<(const AVector<float> &vec) const
+{
+  return this->getNormArray().scalar<float>() < vec.getNormArray().scalar<float>();
+}
+
+template<>
+bool AVector<float>::operator>(const AVector<float> &vec) const
+{
+  return this->getNormArray().scalar<float>() > vec.getNormArray().scalar<float>();
+}
+
+template<>
+bool AVector<float>::operator<=(const AVector<float> &vec) const
+{
+  return this->getNormArray().scalar<float>() <= vec.getNormArray().scalar<float>();
+}
+
+template<>
+bool AVector<float>::operator>=(const AVector<float> &vec) const
+{
+  return this->getNormArray().scalar<float>() >= vec.getNormArray().scalar<float>();
+}
+
+/*
+ * double specialization
+ */
+
+#ifdef ENVIRONMENT64
+
+template<>
+bool AVector<double>::operator<(const AVector<double> &vec) const
+{
+  return this->getNormArray().scalar<double>() < vec.getNormArray().scalar<double>();
+}
+
+template<>
+bool AVector<double>::operator>(const AVector<double> &vec) const
+{
+  return this->getNormArray().scalar<double>() > vec.getNormArray().scalar<double>();
+}
+
+template<>
+bool AVector<double>::operator<=(const AVector<double> &vec) const
+{
+  return this->getNormArray().scalar<double>() <= vec.getNormArray().scalar<double>();
+}
+
+template<>
+bool AVector<double>::operator>=(const AVector<double> &vec) const
+{
+  return this->getNormArray().scalar<double>() >= vec.getNormArray().scalar<double>();
+}
+
+#endif
 
 #endif /* !RTECHNOLOGY_AVECTOR_HPP */

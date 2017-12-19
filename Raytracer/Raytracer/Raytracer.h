@@ -11,8 +11,4 @@
 #ifndef RTECHNOLOGY_RAYTRACER_H
 #define RTECHNOLOGY_RAYTRACER_H
 
-#include <string>
-
-std::string entry_point();
-
 #endif /* !RTECHNOLOGY_RAYTRACER_H */

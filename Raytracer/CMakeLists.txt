@@ -11,7 +11,12 @@ else()
 endif()
 
 set(SOURCES_RAYTRACER
-        entry_point.cpp)
+        Raytracer/Color.cpp
+        Raytracer/Object.cpp
+        Raytracer/math/AVector.cpp
+        Raytracer/math/Vector2.cpp
+        Raytracer/math/Vector3.cpp
+        Raytracer/math/Ray.cpp)
 
 include_directories(${INCLUDE_DIRECTORY_RAPIDJSON})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

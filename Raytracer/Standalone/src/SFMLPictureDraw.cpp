@@ -46,7 +46,5 @@ void SFMLPictureDraw::updateWindow()
 
 void SFMLPictureDraw::_setPixel(const Vector2Int &position, const Color &pixColor)
 {
-  std::cout << "x = " << position.x() << " y = " << position.y() << std::endl;
-
   this->_array[position.y() * this->height + position.x()].color = sf::Color(pixColor.r, pixColor.g, pixColor.b);
 }

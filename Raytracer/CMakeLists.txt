@@ -16,6 +16,7 @@ set(SOURCES_RAYTRACER
         Raytracer/ObjectFactory.cpp
         Raytracer/AttributeFactory.cpp
         Raytracer/APictureDraw.cpp
+        Raytracer/Raytracer.cpp
         Raytracer/math/AVector.cpp
         Raytracer/math/Vector2.cpp
         Raytracer/math/Vector3.cpp

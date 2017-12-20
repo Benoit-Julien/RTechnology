@@ -13,6 +13,9 @@ endif()
 set(SOURCES_RAYTRACER
         Raytracer/Color.cpp
         Raytracer/Object.cpp
+        Raytracer/ObjectFactory.cpp
+        Raytracer/AttributeFactory.cpp
+        Raytracer/APictureDraw.cpp
         Raytracer/math/AVector.cpp
         Raytracer/math/Vector2.cpp
         Raytracer/math/Vector3.cpp

@@ -25,11 +25,7 @@ class Vector2 : public AVector<T>
 
   explicit Vector2();
 
-  Vector2(const T &x, const T &y) : AVector<T>(af::constant(0, 2))
-  {
-    this->_array(0) = x;
-    this->_array(1) = y;
-  }
+  Vector2(const T &x, const T &y);
 
   virtual ~Vector2() = default;
 

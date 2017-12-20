@@ -6,6 +6,7 @@ endif()
 
 set(SOURCES_STANDALONE
         src/main.cpp
+        src/SFMLPictureDraw.cpp
         )
 
 include_directories(${INCLUDE_DIRECTORY_RAYTRACER})

@@ -28,12 +28,7 @@ class Vector3 : public AVector<T>
 
   explicit Vector3();
 
-  Vector3(const T &x, const T &y, const T &z) : AVector<T>(af::constant(0, 3))
-  {
-    this->_array(0) = x;
-    this->_array(1) = y;
-    this->_array(2) = z;
-  }
+  Vector3(const T &x, const T &y, const T &z);
 
   virtual ~Vector3() = default;
 

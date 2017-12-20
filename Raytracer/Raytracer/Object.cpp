@@ -70,3 +70,8 @@ const Vector3Float &Object::getScale() const
 {
   return this->scale;
 }
+
+void Object::registerAttribute(std::shared_ptr<IAttribute> attribute)
+{
+  this->attributes.push_back(attribute);
+}

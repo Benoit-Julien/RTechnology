@@ -31,10 +31,12 @@
 # endif
 #endif
 
-#ifdef WINDOWS
-  #define DLL __declspec(dllexport)
-#else
-  #define DLL
+#ifndef RT_DLL
+# ifdef WINDOWS
+#  define RT_DLL __declspec(dllexport)
+# else
+#  define RT_DLL
+# endif
 #endif
 
 #endif /* !RTECHNOLOGY_CONFIG_H */

@@ -14,7 +14,7 @@
 #include "AVector.hpp"
 
 template<typename T>
-class Vector3 : public AVector<T>
+class RT_DLL Vector3 : public AVector<T>
 {
  public:
   static const Vector3<T> forward;

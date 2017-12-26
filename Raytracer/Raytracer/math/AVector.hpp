@@ -19,7 +19,7 @@
 #include "../config.h"
 
 template<typename T>
-class AVector
+class RT_DLL AVector
 {
  protected:
   af::array _array;

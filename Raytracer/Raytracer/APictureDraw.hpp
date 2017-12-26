@@ -18,7 +18,7 @@
 #include "config.h"
 #include "Color.hpp"
 
-class APictureDraw
+class RT_DLL APictureDraw
 {
   std::mutex _mutex;
 

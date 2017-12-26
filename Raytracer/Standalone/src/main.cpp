@@ -16,7 +16,7 @@
 #include <rapidjson/document.h>
 #include <rapidjson/filereadstream.h>
 
-#if WINDOWS && !_DEBUG
+#if defined(WINDOWS) && !defined(_DEBUG)
 # include <Windows.h>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)

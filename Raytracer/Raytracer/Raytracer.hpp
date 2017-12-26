@@ -16,7 +16,7 @@
 
 #include "APictureDraw.hpp"
 
-class Raytracer
+class RT_DLL Raytracer
 {
   std::shared_ptr<APictureDraw> _drawer;
 

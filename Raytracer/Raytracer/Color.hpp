@@ -14,7 +14,7 @@
 #include <string>
 #include "config.h"
 
-class Color
+class RT_DLL Color
 {
  public:
   uint8_t r;

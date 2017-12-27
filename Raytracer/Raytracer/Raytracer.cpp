@@ -10,9 +10,20 @@
 
 #include "Raytracer.hpp"
 
-Raytracer::Raytracer(std::shared_ptr<APictureDraw> drawer)
+#ifdef LINUX
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#else
+#endif
+
+
+Raytracer::Raytracer(std::shared_ptr<APictureDraw> drawer, const bool &useGraphicCard)
 	: _drawer(drawer)
-{}
+{
+  if (!useGraphicCard)
+    af::setBackend(AF_BACKEND_CPU);
+}
 
 void Raytracer::renderer()
 {
@@ -21,3 +32,34 @@ void Raytracer::renderer()
 
 void Raytracer::initialiseScene(const std::string &json)
 {}
+
+#ifdef LINUX
+bool Raytracer::testArrayFire()
+{
+  pid_t childIp = fork();
+  int status;
+
+  if (childIp == -1)
+    return false;
+  else if (childIp == 0)
+    {
+      af::array array1 = af::constant(0, 3);
+      af::array array2 = af::constant(1, 3);
+
+      auto result = array1 * array2;
+      std::exit(0);
+    }
+
+  if (waitpid(childIp, &status, 0) == -1)
+    return false;
+  else if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+    return true;
+
+  return false;
+}
+#else
+bool Raytracer::testArrayFire()
+{
+  return false;
+}
+#endif

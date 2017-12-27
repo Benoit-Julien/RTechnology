@@ -25,7 +25,7 @@ int main()
 #endif
 {
   auto draw = std::make_shared<SFMLPictureDraw>(1280, 720);
-  Raytracer raytracer(draw);
+  Raytracer raytracer(draw, false);
 
   std::string filename = "scene.json";
   std::ifstream file(filename);

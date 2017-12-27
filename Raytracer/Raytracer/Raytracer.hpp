@@ -21,7 +21,7 @@ class RT_DLL Raytracer
   std::shared_ptr<APictureDraw> _drawer;
 
  public:
-  explicit Raytracer(std::shared_ptr<APictureDraw> drawer);
+  Raytracer(std::shared_ptr<APictureDraw> drawer, const bool &useGraphicCard);
   Raytracer(const Raytracer &raytracer) = delete;
   Raytracer(Raytracer &&raytracer) noexcept = delete;
   Raytracer &operator=(const Raytracer &raytracer) = delete;
@@ -30,6 +30,8 @@ class RT_DLL Raytracer
 
   void renderer();
   void initialiseScene(const std::string &json);
+
+  static bool testArrayFire();
 };
 
 

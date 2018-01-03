@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <memory>
 #include <functional>
+#include <rapidjson/document.h>
 
 #include "config.h"
 #include "IAttribute.hpp"
@@ -21,14 +22,8 @@
 
 class AttributeFactory
 {
- public:
-  enum class AttributeType : unsigned int
-  {
-    COLOR
-  };
-
  private:
-  std::unordered_map<AttributeFactory::AttributeType, std::function<std::shared_ptr<IAttribute>(void)>, EnumClassHash<unsigned int>> _map;
+  std::unordered_map<std::string, std::function<std::shared_ptr<IAttribute>(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject)>> _map;
 
   AttributeFactory();
   static AttributeFactory &getSingleton();
@@ -40,10 +35,10 @@ class AttributeFactory
   AttributeFactory &operator=(AttributeFactory &&factory) = delete;
   ~AttributeFactory() = default;
 
-  static std::shared_ptr<IAttribute> createAttribute(const AttributeFactory::AttributeType &type);
+  static std::shared_ptr<IAttribute> createAttribute(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr);
 
  private:
-  static std::shared_ptr<IAttribute> makeColor();
+  static std::shared_ptr<IAttribute> makeColor(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr);
 };
 
 

@@ -9,11 +9,12 @@
 */
 
 #include "AttributeFactory.hpp"
+#include "attributes/Attributes.hpp"
 
 AttributeFactory::AttributeFactory()
 {
   this->_map = {
-	  {AttributeFactory::AttributeType::COLOR, &AttributeFactory::makeColor}
+	  {"color", &AttributeFactory::makeColor}
   };
 }
 
@@ -24,19 +25,20 @@ AttributeFactory &AttributeFactory::getSingleton()
   return factory;
 }
 
-std::shared_ptr<IAttribute> AttributeFactory::createAttribute(const AttributeFactory::AttributeType &type)
+std::shared_ptr<IAttribute> AttributeFactory::createAttribute(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr)
 {
   auto &factory = AttributeFactory::getSingleton();
 
-  for (auto &it : factory._map)
-    {
-      if (it.first == type)
-	return it.second();
-    }
+  assert(attr.HasMember("type") && attr["type"].IsString());
+
+  auto it = factory._map.find(attr["type"].GetString());
+  if (it != factory._map.end())
+    return it->second(attr);
+
   return nullptr;
 }
 
-std::shared_ptr<IAttribute> AttributeFactory::makeColor()
+std::shared_ptr<IAttribute> AttributeFactory::makeColor(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr)
 {
   return nullptr;
 }

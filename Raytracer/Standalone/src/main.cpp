@@ -28,7 +28,7 @@ int main()
   Raytracer raytracer(draw, false);
 
   std::string filename = "scene.json";
-  std::ifstream file(filename);
+  std::ifstream file(std::string(SCENES_PATH) + "/" + filename);
   std::string json;
 
   if (!file)
@@ -36,7 +36,7 @@ int main()
 
   std::string tmp;
   while (std::getline(file, tmp))
-    json.append(tmp);
+    json.append(tmp + "\n");
 
   file.close();
 

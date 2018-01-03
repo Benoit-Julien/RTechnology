@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <memory>
 #include <functional>
+#include <rapidjson/document.h>
 
 #include "config.h"
 #include "Object.hpp"
@@ -21,15 +22,10 @@
 
 class ObjectFactory
 {
- public:
-  enum class ObjectType : unsigned int
-  {
-    PLANE,
-    SPHERE
-  };
-
  private:
-  std::unordered_map<ObjectFactory::ObjectType, std::function<std::shared_ptr<Object>(void)>, EnumClassHash<unsigned int>> _map;
+  typedef std::function<std::shared_ptr<Object>(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject)> MakeFuncType;
+
+  std::unordered_map<std::string, MakeFuncType> _map;
 
   ObjectFactory();
   static ObjectFactory &getSingleton();
@@ -41,11 +37,15 @@ class ObjectFactory
   ObjectFactory &operator=(ObjectFactory &&factory) = delete;
   ~ObjectFactory() = default;
 
-  static std::shared_ptr<Object> createObject(const ObjectFactory::ObjectType &type);
+  static std::shared_ptr<Object> createObject(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
 
  private:
-  static std::shared_ptr<Object> makeSphere();
-  static std::shared_ptr<Object> makePlane();
+  static Vector3Float getVector3Of(const std::string &name, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::array<Vector3Float, 3> getPosRotScal(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+
+ private:
+  static std::shared_ptr<Object> makeSphere(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::shared_ptr<Object> makePlane(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
 };
 
 #endif /* !RTECHNOLOGY_OBJECTFACTORY_HPP */

@@ -8,6 +8,8 @@
 ** Last update mer. déc. 15:28 2017 benoit_g
 */
 
+#include <rapidjson/document.h>
+
 #include "Raytracer.hpp"
 
 #ifdef LINUX
@@ -16,7 +18,6 @@
 #include <sys/wait.h>
 #else
 #endif
-
 
 Raytracer::Raytracer(std::shared_ptr<APictureDraw> drawer, const bool &useGraphicCard)
 	: _drawer(drawer)
@@ -31,7 +32,17 @@ void Raytracer::renderer()
 }
 
 void Raytracer::initialiseScene(const std::string &json)
-{}
+{
+  rapidjson::Document doc;
+  doc.Parse(json.c_str());
+  try
+    {
+      this->_manager.parseSceneJson(doc);
+    }
+  catch (std::exception)
+    {
+    }
+}
 
 #ifdef LINUX
 bool Raytracer::testArrayFire()

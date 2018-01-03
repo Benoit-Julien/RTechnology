@@ -15,9 +15,11 @@
 #include <string>
 
 #include "APictureDraw.hpp"
+#include "SceneManager.hpp"
 
 class RT_DLL Raytracer
 {
+  SceneManager _manager;
   std::shared_ptr<APictureDraw> _drawer;
 
  public:

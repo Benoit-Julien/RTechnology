@@ -10,6 +10,9 @@
 
 #include "Object.hpp"
 
+Object::HitInfo::HitInfo() : haveHit(false), color(), distance(0)
+{}
+
 Object::Object()
 	: position(0, 0, 0),
 	  rotation(0, 0, 0),

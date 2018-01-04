@@ -11,11 +11,30 @@
 #ifndef RTECHNOLOGY_VECTOR3_HPP
 #define RTECHNOLOGY_VECTOR3_HPP
 
-#include "AVector.hpp"
+#include <cmath>
+#include <af/array.h>
+#include <af/arith.h>
+#include <arrayfire.h>
+
+#include "../config.h"
 
 template<typename T>
-class RT_DLL Vector3 : public AVector<T>
+class RT_DLL Vector3
 {
+  af::array _array;
+
+ private:
+  explicit Vector3(const af::array &array) : _array(array)
+  {}
+
+  explicit Vector3(af::array &&array) : _array(array)
+  {}
+
+  inline af::array getNormArray() const
+  {
+    return af::sqrt(af::sum(af::pow(this->_array, 2)));
+  }
+
  public:
   static const Vector3<T> forward;
   static const Vector3<T> back;
@@ -27,10 +46,152 @@ class RT_DLL Vector3 : public AVector<T>
   static const Vector3<T> left;
 
   explicit Vector3();
-
   Vector3(const T &x, const T &y, const T &z);
+  Vector3(const Vector3<T> &vector) : _array(vector._array)
+  {}
 
-  virtual ~Vector3() = default;
+  Vector3(Vector3<T> &&vector) noexcept : _array(vector._array)
+  {}
+
+  Vector3<T> &operator=(const Vector3<T> &vector)
+  {
+    this->_array = vector._array;
+
+    return *this;
+  }
+
+  Vector3<T> &operator=(Vector3<T> &&vector) noexcept
+  {
+    this->_array = vector._array;
+
+    return *this;
+  }
+
+  ~Vector3() = default;
+
+  Vector3<T> operator+(const Vector3<T> &vec) const
+  {
+    auto tmp = this->_array + vec._array;
+
+    return Vector3<T>(tmp);
+  }
+  Vector3<T> &operator+=(const Vector3<T> &vec)
+  {
+    this->_array += vec._array;
+
+    return *this;
+  }
+
+  Vector3<T> operator+(const T &value) const
+  {
+    auto tmp = this->_array + value;
+
+    return Vector3<T>(tmp);
+  }
+  Vector3<T> &operator+=(const T &value)
+  {
+    this->_array += value;
+
+    return *this;
+  }
+
+  Vector3<T> &operator-()
+  {
+    this->_array *= -1;
+
+    return *this;
+  }
+
+  Vector3<T> operator-(const Vector3<T> &vec) const
+  {
+    auto tmp = this->_array - vec._array;
+
+    return Vector3<T>(tmp);
+  }
+  Vector3<T> &operator-=(const Vector3<T> &vec)
+  {
+    this->_array -= vec._array;
+
+    return *this;
+  }
+
+  Vector3<T> operator-(const T &value) const
+  {
+    auto tmp = this->_array - value;
+
+    return Vector3<T>(tmp);
+  }
+  Vector3<T> &operator-=(const T &value)
+  {
+    this->_array -= value;
+
+    return *this;
+  }
+
+  Vector3<T> operator*(const Vector3<T> &vec) const
+  {
+    auto tmp = this->_array * vec._array;
+
+    return Vector3<T>(tmp);
+  }
+  Vector3<T> &operator*=(const Vector3<T> &vec)
+  {
+    this->_array *= vec._array;
+
+    return *this;
+  }
+
+  Vector3<T> operator*(const T &value) const
+  {
+    auto tmp = this->_array * value;
+
+    return Vector3<T>(tmp);
+  }
+  Vector3<T> &operator*=(const T &value)
+  {
+    this->_array *= value;
+
+    return *this;
+  }
+
+  Vector3<T> operator/(const Vector3<T> &vec) const
+  {
+    auto tmp = this->_array / vec._array;
+
+    return Vector3<T>(tmp);
+  }
+  Vector3<T> &operator/=(const Vector3<T> &vec)
+  {
+    this->_array /= vec._array;
+
+    return *this;
+  }
+
+  Vector3<T> operator/(const T &value) const
+  {
+    auto tmp = this->_array / value;
+
+    return Vector3<T>(tmp);
+  }
+  Vector3<T> &operator/=(const T &value)
+  {
+    this->_array /= value;
+
+    return *this;
+  }
+
+  Vector3<float> nomalized() const
+  {
+    Vector3<float> norm;
+
+    norm._array = this->_array / this->getNormArray();
+    return norm;
+  }
+
+  bool operator<(const Vector3<T> &vec) const;
+  bool operator>(const Vector3<T> &vec) const;
+  bool operator<=(const Vector3<T> &vec) const;
+  bool operator>=(const Vector3<T> &vec) const;
 
   void Set(const T &x, const T &y, const T &z)
   {

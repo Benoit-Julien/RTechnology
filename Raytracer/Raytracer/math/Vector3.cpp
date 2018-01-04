@@ -15,11 +15,11 @@
  */
 
 template<>
-Vector3<int>::Vector3() : AVector<int>(af::constant(0, 3, s32))
+Vector3<int>::Vector3() : _array(af::constant(0, 3, s32))
 {}
 
 template<>
-Vector3<int>::Vector3(const int &x, const int &y, const int &z) : AVector<int>(af::constant(0, 3, s32))
+Vector3<int>::Vector3(const int &x, const int &y, const int &z) : _array(af::constant(0, 3, s32))
 {
   this->_array(0) = x;
   this->_array(1) = y;
@@ -71,6 +71,30 @@ float Vector3<int>::Angle(const Vector3<int> &vec1, const Vector3<int> &vec2)
   return af::acos(mul / norm).scalar<float>();
 }
 
+template<>
+bool Vector3<int>::operator<(const Vector3<int> &vec) const
+{
+  return this->getNormArray().scalar<int>() < vec.getNormArray().scalar<int>();
+}
+
+template<>
+bool Vector3<int>::operator>(const Vector3<int> &vec) const
+{
+  return this->getNormArray().scalar<int>() > vec.getNormArray().scalar<int>();
+}
+
+template<>
+bool Vector3<int>::operator<=(const Vector3<int> &vec) const
+{
+  return this->getNormArray().scalar<int>() <= vec.getNormArray().scalar<int>();
+}
+
+template<>
+bool Vector3<int>::operator>=(const Vector3<int> &vec) const
+{
+  return this->getNormArray().scalar<int>() >= vec.getNormArray().scalar<int>();
+}
+
 /*
  * long long specialization
  */
@@ -78,11 +102,11 @@ float Vector3<int>::Angle(const Vector3<int> &vec1, const Vector3<int> &vec2)
 #ifdef ENVIRONMENT64
 
 template<>
-Vector3<long long>::Vector3() : AVector<long long>(af::constant(0, 3, s64))
+Vector3<long long>::Vector3() : _array(af::constant(0, 3, s64))
 {}
 
 template<>
-Vector3<long long>::Vector3(const long long &x, const long long &y, const long long &z) : AVector<long long>(af::constant(0, 3, s64))
+Vector3<long long>::Vector3(const long long &x, const long long &y, const long long &z) : _array(af::constant(0, 3, s64))
 {
   this->_array(0) = x;
   this->_array(1) = y;
@@ -133,6 +157,30 @@ float Vector3<long long>::Angle(const Vector3<long long> &vec1, const Vector3<lo
 
   return af::acos(mul / norm).scalar<float>();
 }
+
+template<>
+bool Vector3<long long>::operator<(const Vector3<long long> &vec) const
+{
+  return this->getNormArray().scalar<long long>() < vec.getNormArray().scalar<long long>();
+}
+
+template<>
+bool Vector3<long long>::operator>(const Vector3<long long> &vec) const
+{
+  return this->getNormArray().scalar<long long>() > vec.getNormArray().scalar<long long>();
+}
+
+template<>
+bool Vector3<long long>::operator<=(const Vector3<long long> &vec) const
+{
+  return this->getNormArray().scalar<long long>() <= vec.getNormArray().scalar<long long>();
+}
+
+template<>
+bool Vector3<long long>::operator>=(const Vector3<long long> &vec) const
+{
+  return this->getNormArray().scalar<long long>() >= vec.getNormArray().scalar<long long>();
+}
 #endif
 
 /*
@@ -140,11 +188,11 @@ float Vector3<long long>::Angle(const Vector3<long long> &vec1, const Vector3<lo
  */
 
 template<>
-Vector3<unsigned>::Vector3() : AVector<unsigned>(af::constant(0, 3, u32))
+Vector3<unsigned>::Vector3() : _array(af::constant(0, 3, u32))
 {}
 
 template<>
-Vector3<unsigned>::Vector3(const unsigned &x, const unsigned &y, const unsigned &z) : AVector<unsigned>(af::constant(0, 3, u32))
+Vector3<unsigned>::Vector3(const unsigned &x, const unsigned &y, const unsigned &z) : _array(af::constant(0, 3, u32))
 {
   this->_array(0) = x;
   this->_array(1) = y;
@@ -196,6 +244,30 @@ float Vector3<unsigned>::Angle(const Vector3<unsigned> &vec1, const Vector3<unsi
   return af::acos(mul / norm).scalar<float>();
 }
 
+template<>
+bool Vector3<unsigned>::operator<(const Vector3<unsigned> &vec) const
+{
+  return this->getNormArray().scalar<unsigned>() < vec.getNormArray().scalar<unsigned>();
+}
+
+template<>
+bool Vector3<unsigned>::operator>(const Vector3<unsigned> &vec) const
+{
+  return this->getNormArray().scalar<unsigned>() > vec.getNormArray().scalar<unsigned>();
+}
+
+template<>
+bool Vector3<unsigned>::operator<=(const Vector3<unsigned> &vec) const
+{
+  return this->getNormArray().scalar<unsigned>() <= vec.getNormArray().scalar<unsigned>();
+}
+
+template<>
+bool Vector3<unsigned>::operator>=(const Vector3<unsigned> &vec) const
+{
+  return this->getNormArray().scalar<unsigned>() >= vec.getNormArray().scalar<unsigned>();
+}
+
 /*
  * long long unsigned specialization
  */
@@ -203,11 +275,11 @@ float Vector3<unsigned>::Angle(const Vector3<unsigned> &vec1, const Vector3<unsi
 #ifdef ENVIRONMENT64
 
 template<>
-Vector3<long long unsigned>::Vector3() : AVector<long long unsigned>(af::constant(0, 3, u64))
+Vector3<long long unsigned>::Vector3() : _array(af::constant(0, 3, u64))
 {}
 
 template<>
-Vector3<long long unsigned>::Vector3(const long long unsigned &x, const long long unsigned &y, const long long unsigned &z) : AVector<long long unsigned>(af::constant(0, 3, u64))
+Vector3<long long unsigned>::Vector3(const long long unsigned &x, const long long unsigned &y, const long long unsigned &z) : _array(af::constant(0, 3, u64))
 {
   this->_array(0) = x;
   this->_array(1) = y;
@@ -258,6 +330,30 @@ float Vector3<long long unsigned>::Angle(const Vector3<long long unsigned> &vec1
 
   return af::acos(mul / norm).scalar<float>();
 }
+
+template<>
+bool Vector3<long long unsigned>::operator<(const Vector3<long long unsigned> &vec) const
+{
+  return this->getNormArray().scalar<long long unsigned>() < vec.getNormArray().scalar<long long unsigned>();
+}
+
+template<>
+bool Vector3<long long unsigned>::operator>(const Vector3<long long unsigned> &vec) const
+{
+  return this->getNormArray().scalar<long long unsigned>() > vec.getNormArray().scalar<long long unsigned>();
+}
+
+template<>
+bool Vector3<long long unsigned>::operator<=(const Vector3<long long unsigned> &vec) const
+{
+  return this->getNormArray().scalar<long long unsigned>() <= vec.getNormArray().scalar<long long unsigned>();
+}
+
+template<>
+bool Vector3<long long unsigned>::operator>=(const Vector3<long long unsigned> &vec) const
+{
+  return this->getNormArray().scalar<long long unsigned>() >= vec.getNormArray().scalar<long long unsigned>();
+}
 #endif
 
 /*
@@ -265,11 +361,11 @@ float Vector3<long long unsigned>::Angle(const Vector3<long long unsigned> &vec1
  */
 
 template<>
-Vector3<float>::Vector3() : AVector<float>(af::constant(0, 3, f32))
+Vector3<float>::Vector3() : _array(af::constant(0, 3, f32))
 {}
 
 template<>
-Vector3<float>::Vector3(const float &x, const float &y, const float &z) : AVector<float>(af::constant(0, 3, f32))
+Vector3<float>::Vector3(const float &x, const float &y, const float &z) : _array(af::constant(0, 3, f32))
 {
   this->_array(0) = x;
   this->_array(1) = y;
@@ -319,4 +415,28 @@ float Vector3<float>::Angle(const Vector3<float> &vec1, const Vector3<float> &ve
   auto norm = vec1.getNormArray() * vec2.getNormArray();
 
   return af::acos(mul / norm).scalar<float>();
+}
+
+template<>
+bool Vector3<float>::operator<(const Vector3<float> &vec) const
+{
+  return this->getNormArray().scalar<float>() < vec.getNormArray().scalar<float>();
+}
+
+template<>
+bool Vector3<float>::operator>(const Vector3<float> &vec) const
+{
+  return this->getNormArray().scalar<float>() > vec.getNormArray().scalar<float>();
+}
+
+template<>
+bool Vector3<float>::operator<=(const Vector3<float> &vec) const
+{
+  return this->getNormArray().scalar<float>() <= vec.getNormArray().scalar<float>();
+}
+
+template<>
+bool Vector3<float>::operator>=(const Vector3<float> &vec) const
+{
+  return this->getNormArray().scalar<float>() >= vec.getNormArray().scalar<float>();
 }

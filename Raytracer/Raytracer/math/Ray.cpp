@@ -50,3 +50,13 @@ const Vector3Float &Ray::getDirection() const
 {
   return this->_direction;
 }
+
+void Ray::setOrigin(const Vector3Float &origin)
+{
+  this->_origin = origin;
+}
+
+void Ray::setDirection(const Vector3Float &direction)
+{
+  this->_direction = direction;
+}

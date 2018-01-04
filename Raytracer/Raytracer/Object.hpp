@@ -22,6 +22,16 @@
 
 class Object
 {
+ public:
+  struct HitInfo
+  {
+    explicit HitInfo();
+
+    bool haveHit;
+    Color color;
+    float distance;
+  };
+
  protected:
   const Vector3Float position;
   const Vector3Float rotation;
@@ -46,8 +56,7 @@ class Object
 
   void registerAttribute(std::shared_ptr<IAttribute> attribute);
 
-  virtual bool Hit(const Ray &ray) = 0;
-  virtual Color GetColorHit() const = 0;
+  virtual HitInfo Hit(const Ray &ray) = 0;
 };
 
 #endif /* !RTECHNOLOGY_OBJECT_HPP */

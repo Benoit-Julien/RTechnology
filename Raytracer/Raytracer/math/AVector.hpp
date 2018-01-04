@@ -18,7 +18,7 @@
 
 #include "../config.h"
 
-template<typename T>
+template<typename T, class U>
 class RT_DLL AVector
 {
  protected:
@@ -60,111 +60,111 @@ class RT_DLL AVector
 
   virtual ~AVector() = default;
 
-  AVector<T> operator+(const AVector<T> &vec) const
+  U operator+(const U &vec) const
   {
     auto tmp = this->_array + vec._array;
 
-    return AVector<T>(tmp);
+    return U(tmp);
   }
-  AVector<T> &operator+=(const AVector<T> &vec)
+  U &operator+=(const U &vec)
   {
     this->_array += vec._array;
 
     return *this;
   }
 
-  AVector<T> operator+(const T &value) const
+  U operator+(const T &value) const
   {
     auto tmp = this->_array + value;
 
-    return AVector<T>(tmp);
+    return U(tmp);
   }
-  AVector<T> &operator+=(const T &value)
+  U &operator+=(const T &value)
   {
     this->_array += value;
 
     return *this;
   }
 
-  AVector &operator-()
+  U &operator-()
   {
     this->_array *= -1;
 
     return *this;
   }
 
-  AVector<T> operator-(const AVector<T> &vec) const
+  U operator-(const U &vec) const
   {
     auto tmp = this->_array - vec._array;
 
-    return AVector<T>(tmp);
+    return U(tmp);
   }
-  AVector<T> &operator-=(const AVector<T> &vec)
+  U &operator-=(const AVector<T> &vec)
   {
     this->_array -= vec._array;
 
     return *this;
   }
 
-  AVector<T> operator-(const T &value) const
+  U operator-(const T &value) const
   {
     auto tmp = this->_array - value;
 
-    return AVector<T>(tmp);
+    return U(tmp);
   }
-  AVector<T> &operator-=(const T &value)
+  U &operator-=(const T &value)
   {
     this->_array -= value;
 
     return *this;
   }
 
-  AVector<T> operator*(const AVector<T> &vec) const
+  U operator*(const AVector<T> &vec) const
   {
     auto tmp = this->_array * vec._array;
 
-    return AVector<T>(tmp);
+    return U(tmp);
   }
-  AVector<T> &operator*=(const AVector<T> &vec)
+  U &operator*=(const AVector<T> &vec)
   {
     this->_array *= vec._array;
 
     return *this;
   }
 
-  AVector<T> operator*(const T &value) const
+  U operator*(const T &value) const
   {
     auto tmp = this->_array * value;
 
-    return AVector<T>(tmp);
+    return U(tmp);
   }
-  AVector<T> &operator*=(const T &value)
+  U &operator*=(const T &value)
   {
     this->_array *= value;
 
     return *this;
   }
 
-  AVector<T> operator/(const AVector<T> &vec) const
+  U operator/(const AVector<T> &vec) const
   {
     auto tmp = this->_array / vec._array;
 
     return AVector<T>(tmp);
   }
-  AVector<T> &operator/=(const AVector<T> &vec)
+  U &operator/=(const AVector<T> &vec)
   {
     this->_array /= vec._array;
 
     return *this;
   }
 
-  AVector<T> operator/(const T &value) const
+  U operator/(const T &value) const
   {
     auto tmp = this->_array / value;
 
     return AVector<T>(tmp);
   }
-  AVector<T> &operator/=(const T &value)
+  U &operator/=(const T &value)
   {
     this->_array /= value;
 

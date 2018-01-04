@@ -28,6 +28,19 @@ const std::vector<std::shared_ptr<Object>> &SceneManager::getObjects() const
   return this->_objects;
 }
 
+Color SceneManager::checkHitAndGetColor(const Ray &ray) const
+{
+  Object::HitInfo objectHit;
+
+  for (auto &it : this->_objects)
+    {
+      auto tmp = it->Hit(ray);
+      if (!objectHit.haveHit || (tmp.distance > 0 && tmp.distance < objectHit.distance))
+	objectHit = tmp;
+    }
+  return objectHit.color;
+}
+
 void SceneManager::parseSceneJson(const rapidjson::Document &document)
 {
   assert(document.IsObject());

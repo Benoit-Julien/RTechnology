@@ -27,7 +27,7 @@ const std::size_t &APictureDraw::getWidth() const
 
 void APictureDraw::setPixel(const Vector2Int &position, const Color &pixColor)
 {
-  std::lock_guard<std::mutex> lock(this->_mutex);
+  //std::lock_guard<std::mutex> lock(this->_mutex);
 
   this->_setPixel(position, pixColor);
 }

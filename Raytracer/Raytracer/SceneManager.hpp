@@ -33,6 +33,8 @@ class SceneManager
   const SceneSettings &getSceneSettings() const;
   const std::vector<std::shared_ptr<Object>> &getObjects() const;
 
+  Color checkHitAndGetColor(const Ray &ray) const;
+
   void parseSceneJson(const rapidjson::Document &document);
 
  private:

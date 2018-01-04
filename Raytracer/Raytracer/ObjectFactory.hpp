@@ -46,6 +46,10 @@ class ObjectFactory
  private:
   static std::shared_ptr<Object> makeSphere(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
   static std::shared_ptr<Object> makePlane(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::shared_ptr<Object> makeCone(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::shared_ptr<Object> makeCylinder(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::shared_ptr<Object> makeSemiConeBot(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::shared_ptr<Object> makeSemiConeTop(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
 };
 
 #endif /* !RTECHNOLOGY_OBJECTFACTORY_HPP */

@@ -14,8 +14,13 @@
 ObjectFactory::ObjectFactory()
 {
   this->_map = {
-	  {"sphere", &ObjectFactory::makeSphere},
-	  {"plane",  &ObjectFactory::makePlane}
+	  {"sphere",        &ObjectFactory::makeSphere},
+	  {"plane",         &ObjectFactory::makePlane},
+	  {"cone",          &ObjectFactory::makeCone},
+	  {"semi_cone_bot", &ObjectFactory::makeSemiConeBot},
+	  {"semi_cone_top", &ObjectFactory::makeSemiConeTop},
+	  {},
+	  {"cylinder",      &ObjectFactory::makeCylinder}
   };
 }
 
@@ -39,7 +44,8 @@ std::shared_ptr<Object> ObjectFactory::createObject(rapidjson::GenericValue<rapi
   return nullptr;
 }
 
-Vector3Float ObjectFactory::getVector3Of(const std::string &name, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
+Vector3Float
+ObjectFactory::getVector3Of(const std::string &name, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
 {
   assert(params[name.c_str()].IsObject());
   assert(params[name.c_str()].HasMember("x") && params[name.c_str()]["x"].IsNumber());
@@ -73,7 +79,7 @@ std::shared_ptr<Object> ObjectFactory::makeSphere(rapidjson::GenericValue<rapidj
 {
   auto vec = getPosRotScal(params);
 
-  return nullptr;
+  return std::make_shared<Sphere>(vec[0], vec[1], vec[2]);
 }
 
 std::shared_ptr<Object> ObjectFactory::makePlane(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
@@ -81,4 +87,54 @@ std::shared_ptr<Object> ObjectFactory::makePlane(rapidjson::GenericValue<rapidjs
   auto vec = getPosRotScal(params);
 
   return nullptr;
+}
+
+std::shared_ptr<Object> ObjectFactory::makeCone(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
+{
+  auto vec = getPosRotScal(params);
+
+  auto cone = std::make_shared<Cone>(vec[0], vec[1], vec[2]);
+
+  if (params.HasMember("angle"))
+    {
+      assert(params["angle"].IsFloat());
+      cone->setAngle(params["angle"].GetFloat());
+    }
+
+  return cone;
+}
+
+std::shared_ptr<Object> ObjectFactory::makeCylinder(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
+{
+  auto vec = getPosRotScal(params);
+
+  return std::make_shared<Cylinder>(vec[0], vec[1], vec[2]);
+}
+
+std::shared_ptr<Object> ObjectFactory::makeSemiConeTop(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
+{
+  auto vec = getPosRotScal(params);
+
+  auto cone = std::make_shared<SemiConeTop>(vec[0], vec[1], vec[2]);
+
+  if (params.HasMember("angle"))
+    {
+      assert(params["angle"].IsFloat());
+      cone->setAngle(params["angle"].GetFloat());
+    }
+  return cone;
+}
+
+std::shared_ptr<Object> ObjectFactory::makeSemiConeBot(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
+{
+  auto vec = getPosRotScal(params);
+
+  auto cone = std::make_shared<SemiConeBot>(vec[0], vec[1], vec[2]);
+
+  if (params.HasMember("angle"))
+    {
+      assert(params["angle"].IsFloat());
+      cone->setAngle(params["angle"].GetFloat());
+    }
+  return cone;
 }

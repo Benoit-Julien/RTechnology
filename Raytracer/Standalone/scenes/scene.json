@@ -1,4 +1,12 @@
 {
   "defaultLight": 2,
-  "objects": []
+  "objects": [
+    {
+      "type": "sphere"
+    },
+    {
+      "type": "cone",
+      "angle": 100.0
+    }
+  ]
 }

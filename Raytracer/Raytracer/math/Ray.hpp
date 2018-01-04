@@ -28,6 +28,9 @@ class Ray
 
   const Vector3Float &getOrigin() const;
   const Vector3Float &getDirection() const;
+
+  void setOrigin(const Vector3Float &origin);
+  void setDirection(const Vector3Float &direction);
 };
 
 

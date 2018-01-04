@@ -22,6 +22,8 @@ class SceneSettings
  public:
   struct Settings
   {
+    Vector3Float cameraPosition;
+    Vector3Float cameraRotation;
     int defaultLight;
 
     explicit Settings();
@@ -51,6 +53,8 @@ class SceneSettings
 
  private:
   void setDefaultLight(const rapidjson::GenericValue<rapidjson::UTF8<>> &value);
+  void setCameraPosition(const rapidjson::GenericValue<rapidjson::UTF8<>> &value);
+  void setCameraRotation(const rapidjson::GenericValue<rapidjson::UTF8<>> &value);
 };
 
 #endif /* !RTECHNOLOGY_SCENESETTINGS_HPP */

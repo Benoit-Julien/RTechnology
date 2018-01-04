@@ -11,11 +11,30 @@
 #ifndef RTECHNOLOGY_VECTOR2_HPP
 #define RTECHNOLOGY_VECTOR2_HPP
 
-#include "AVector.hpp"
+#include <cmath>
+#include <af/array.h>
+#include <af/arith.h>
+#include <arrayfire.h>
+
+#include "../config.h"
 
 template<typename T>
-class RT_DLL Vector2 : public AVector<T>
+class RT_DLL Vector2
 {
+  af::array _array;
+
+ private:
+  explicit Vector2(const af::array &array) : _array(array)
+  {}
+
+  explicit Vector2(af::array &&array) : _array(array)
+  {}
+
+  inline af::array getNormArray() const
+  {
+    return af::sqrt(af::sum(af::pow(this->_array, 2)));
+  }
+
  public:
   static const Vector2<T> up;
   static const Vector2<T> down;
@@ -27,7 +46,149 @@ class RT_DLL Vector2 : public AVector<T>
 
   Vector2(const T &x, const T &y);
 
-  virtual ~Vector2() = default;
+  Vector2(const Vector2<T> &vector) : _array(vector._array)
+  {}
+
+  Vector2(Vector2<T> &&vector) noexcept : _array(vector._array)
+  {}
+
+  Vector2 &operator=(const Vector2<T> &vector)
+  {
+    this->_array = vector._array;
+    return *this;
+  }
+
+  Vector2 &operator=(Vector2<T> &&vector) noexcept
+  {
+    this->_array = vector._array;
+    return *this;
+  }
+
+  ~Vector2() = default;
+
+  Vector2<T> operator+(const Vector2<T> &vec) const
+  {
+    auto tmp = this->_array + vec._array;
+
+    return Vector2<T>(tmp);
+  }
+  Vector2<T> &operator+=(const Vector2<T> &vec)
+  {
+    this->_array += vec._array;
+
+    return *this;
+  }
+
+  Vector2<T> operator+(const T &value) const
+  {
+    auto tmp = this->_array + value;
+
+    return Vector2<T>(tmp);
+  }
+  Vector2<T> &operator+=(const T &value)
+  {
+    this->_array += value;
+
+    return *this;
+  }
+
+  Vector2<T> &operator-()
+  {
+    this->_array *= -1;
+
+    return *this;
+  }
+
+  Vector2<T> operator-(const Vector2<T> &vec) const
+  {
+    auto tmp = this->_array - vec._array;
+
+    return Vector2<T>(tmp);
+  }
+  Vector2<T> &operator-=(const Vector2<T> &vec)
+  {
+    this->_array -= vec._array;
+
+    return *this;
+  }
+
+  Vector2<T> operator-(const T &value) const
+  {
+    auto tmp = this->_array - value;
+
+    return Vector2<T>(tmp);
+  }
+  Vector2<T> &operator-=(const T &value)
+  {
+    this->_array -= value;
+
+    return *this;
+  }
+
+  Vector2<T> operator*(const Vector2<T> &vec) const
+  {
+    auto tmp = this->_array * vec._array;
+
+    return Vector2<T>(tmp);
+  }
+  Vector2<T> &operator*=(const Vector2<T> &vec)
+  {
+    this->_array *= vec._array;
+
+    return *this;
+  }
+
+  Vector2<T> operator*(const T &value) const
+  {
+    auto tmp = this->_array * value;
+
+    return Vector2<T>(tmp);
+  }
+  Vector2<T> &operator*=(const T &value)
+  {
+    this->_array *= value;
+
+    return *this;
+  }
+
+  Vector2<T> operator/(const Vector2<T> &vec) const
+  {
+    auto tmp = this->_array / vec._array;
+
+    return Vector2<T>(tmp);
+  }
+  Vector2<T> &operator/=(const Vector2<T> &vec)
+  {
+    this->_array /= vec._array;
+
+    return *this;
+  }
+
+  Vector2<T> operator/(const T &value) const
+  {
+    auto tmp = this->_array / value;
+
+    return Vector2<T>(tmp);
+  }
+  Vector2<T> &operator/=(const T &value)
+  {
+    this->_array /= value;
+
+    return *this;
+  }
+
+  Vector2<float> nomalized() const
+  {
+    Vector2<float> norm;
+
+    norm._array = this->_array / this->getNormArray();
+    return norm;
+  }
+
+  bool operator<(const Vector2<T> &vec) const;
+  bool operator>(const Vector2<T> &vec) const;
+  bool operator<=(const Vector2<T> &vec) const;
+  bool operator>=(const Vector2<T> &vec) const;
 
   void Set(const T &x, const T &y)
   {

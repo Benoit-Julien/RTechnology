@@ -8,6 +8,7 @@
 ** Last update mar. janv. 12:44 2018 benoit_g
 */
 
+#include <Raytracer/math/Vector3.hpp>
 #include "SceneSettings.hpp"
 
 SceneSettings::Settings::Settings() : defaultLight(10)
@@ -33,6 +34,8 @@ SceneSettings::SceneSettings()
 {
   this->_map = {
 	  {"defaultLight", &SceneSettings::setDefaultLight},
+	  {"cameraPosition", &SceneSettings::setCameraPosition},
+	  {"cameraRotation", &SceneSettings::setCameraRotation}
   };
 }
 
@@ -56,4 +59,26 @@ void SceneSettings::setDefaultLight(const rapidjson::GenericValue<rapidjson::UTF
 {
   assert(value.IsInt());
   this->_settings.defaultLight = value.GetInt();
+}
+
+void SceneSettings::setCameraPosition(const rapidjson::GenericValue<rapidjson::UTF8<>> &value)
+{
+  assert(value.IsObject());
+  assert(value.HasMember("x") && value["x"].IsNumber());
+  assert(value.HasMember("y") && value["y"].IsNumber());
+  assert(value.HasMember("z") && value["z"].IsNumber());
+  this->_settings.cameraPosition = Vector3Float(value["x"].GetFloat(),
+						value["y"].GetFloat(),
+						value["z"].GetFloat());
+}
+
+void SceneSettings::setCameraRotation(const rapidjson::GenericValue<rapidjson::UTF8<>> &value)
+{
+  assert(value.IsObject());
+  assert(value.HasMember("x") && value["x"].IsNumber());
+  assert(value.HasMember("y") && value["y"].IsNumber());
+  assert(value.HasMember("z") && value["z"].IsNumber());
+  this->_settings.cameraRotation = Vector3Float(value["x"].GetFloat(),
+						value["y"].GetFloat(),
+						value["z"].GetFloat());
 }

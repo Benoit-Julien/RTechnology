@@ -19,7 +19,6 @@ set(SOURCES_RAYTRACER
         Raytracer/Raytracer.cpp
         Raytracer/SceneSettings.cpp
         Raytracer/SceneManager.cpp
-        Raytracer/math/AVector.cpp
         Raytracer/math/Vector2.cpp
         Raytracer/math/Vector3.cpp
         Raytracer/math/Ray.cpp)

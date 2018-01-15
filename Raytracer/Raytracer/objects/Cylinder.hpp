@@ -21,8 +21,7 @@ class Cylinder : public Object
   Cylinder(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal);
   virtual ~Cylinder();
 
-  virtual bool Hit(const Ray &ray);
-  virtual Color GetColorHit() const;
+  virtual HitInfo Hit(const Ray &ray);
 };
 
 

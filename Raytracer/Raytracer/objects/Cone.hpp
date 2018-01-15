@@ -23,8 +23,7 @@ class Cone : public Object
   Cone(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal);
   virtual ~Cone();
 
-  virtual bool Hit(const Ray &ray);
-  virtual Color GetColorHit() const;
+  virtual HitInfo Hit(const Ray &ray);
   void setAngle(const float &angle);
 };
 

@@ -14,13 +14,13 @@
 ObjectFactory::ObjectFactory()
 {
   this->_map = {
-	  {"sphere",        &ObjectFactory::makeSphere},
-	  {"plane",         &ObjectFactory::makePlane},
-	  {"cone",          &ObjectFactory::makeCone},
-	  {"semi_cone_bot", &ObjectFactory::makeSemiConeBot},
-	  {"semi_cone_top", &ObjectFactory::makeSemiConeTop},
-	  {},
-	  {"cylinder",      &ObjectFactory::makeCylinder}
+	  {"sphere",         &ObjectFactory::makeSphere},
+	  {"plane",          &ObjectFactory::makePlane},
+	  {"cone",           &ObjectFactory::makeCone},
+	  {"semi_cone_bot",  &ObjectFactory::makeSemiConeBot},
+	  {"semi_cone_top",  &ObjectFactory::makeSemiConeTop},
+	  {"parallelepiped", &ObjectFactory::makeParallelepiped},
+	  {"cylinder",       &ObjectFactory::makeCylinder}
   };
 }
 
@@ -137,4 +137,12 @@ std::shared_ptr<Object> ObjectFactory::makeSemiConeBot(rapidjson::GenericValue<r
       cone->setAngle(params["angle"].GetFloat());
     }
   return cone;
+}
+
+std::shared_ptr<Object> ObjectFactory::makeParallelepiped(
+	rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
+{
+  auto vec = getPosRotScal(params);
+
+  return nullptr;
 }

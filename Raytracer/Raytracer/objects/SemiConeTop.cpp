@@ -26,14 +26,9 @@ SemiConeTop::SemiConeTop(const Vector3Float &pos, const Vector3Float &rot, const
 SemiConeTop::~SemiConeTop()
 {}
 
-bool SemiConeTop::Hit(const Ray &ray)
+Object::HitInfo SemiConeTop::Hit(const Ray &ray)
 {
-  return false;
-}
-
-Color SemiConeTop::GetColorHit() const
-{
-  return Color();
+  return HitInfo();
 }
 
 void SemiConeTop::setAngle(const float &angle)

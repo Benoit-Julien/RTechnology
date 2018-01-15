@@ -16,5 +16,6 @@
 #include "Cylinder.hpp"
 #include "SemiConeTop.hpp"
 #include "SemiConeBot.hpp"
+#include "Parallelepiped.hpp"
 
 #endif /* !RTECHNOLOGY_OBJECTS_HPP */

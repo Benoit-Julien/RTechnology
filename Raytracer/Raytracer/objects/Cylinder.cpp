@@ -25,12 +25,7 @@ Cylinder::Cylinder(const Vector3Float &pos, const Vector3Float &rot, const Vecto
 Cylinder::~Cylinder()
 {}
 
-bool Cylinder::Hit(const Ray &ray)
+Object::HitInfo Cylinder::Hit(const Ray &ray)
 {
-  return false;
-}
-
-Color Cylinder::GetColorHit() const
-{
-  return Color();
+  return HitInfo();
 }

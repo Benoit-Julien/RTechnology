@@ -25,17 +25,13 @@ Cone::Cone(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float 
 Cone::~Cone()
 {}
 
-bool Cone::Hit(const Ray &ray)
+Object::HitInfo Cone::Hit(const Ray &ray)
 {
-  return false;
-}
-
-Color Cone::GetColorHit() const
-{
-  return Color();
+  return HitInfo();
 }
 
 void Cone::setAngle(const float &angle)
 {
   this->angle = angle;
 }
+

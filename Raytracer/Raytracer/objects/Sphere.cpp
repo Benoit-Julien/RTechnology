@@ -25,12 +25,7 @@ Sphere::Sphere(const Vector3Float &pos, const Vector3Float &rot, const Vector3Fl
 Sphere::~Sphere()
 {}
 
-bool Sphere::Hit(const Ray &ray)
+Object::HitInfo Sphere::Hit(const Ray &ray)
 {
-  return false;
-}
-
-Color Sphere::GetColorHit() const
-{
-  return Color();
+  return HitInfo();
 }

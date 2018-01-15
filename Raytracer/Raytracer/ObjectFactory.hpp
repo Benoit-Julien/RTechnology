@@ -50,6 +50,8 @@ class ObjectFactory
   static std::shared_ptr<Object> makeCylinder(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
   static std::shared_ptr<Object> makeSemiConeBot(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
   static std::shared_ptr<Object> makeSemiConeTop(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::shared_ptr<Object> makeParallelepiped(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+
 };
 
 #endif /* !RTECHNOLOGY_OBJECTFACTORY_HPP */

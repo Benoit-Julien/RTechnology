@@ -31,9 +31,9 @@ bool SemiConeBot::Hit(const Ray &ray)
   return false;
 }
 
-Color SemiConeBot::GetColorHit() const
+Object::HitInfo SemiConeBot::Hit(const Ray &ray)
 {
-  return Color();
+  return HitInfo();
 }
 
 void SemiConeBot::setAngle(const float &angle)

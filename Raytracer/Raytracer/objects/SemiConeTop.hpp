@@ -18,12 +18,14 @@ class SemiConeTop : public Object
   float angle;
  public:
   explicit SemiConeTop();
-  explicit SemiConeTop(const Vector3Float &pos);
-  SemiConeTop(const Vector3Float &pos, const Vector3Float &rot);
-  SemiConeTop(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal);
+  explicit SemiConeTop(const Vector3F &pos);
+  SemiConeTop(const Vector3F &pos, const Vector3F &rot);
+  SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
   virtual ~SemiConeTop();
 
-  virtual HitInfo Hit(const Ray &ray);
+  virtual HitInfo Hit(const Ray &ray, const SceneSettings &settings);
+  virtual Color getColorHit(const HitInfo &info);
+
   void setAngle(const float &angle);
 };
 

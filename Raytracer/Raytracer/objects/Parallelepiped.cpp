@@ -13,13 +13,13 @@
 Parallelepiped::Parallelepiped()
 {}
 
-Parallelepiped::Parallelepiped(const Vector3Float &pos) : Object(pos)
+Parallelepiped::Parallelepiped(const Vector3F &pos) : Object(pos)
 {}
 
-Parallelepiped::Parallelepiped(const Vector3Float &pos, const Vector3Float &rot) : Object(pos, rot)
+Parallelepiped::Parallelepiped(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
 {}
 
-Parallelepiped::Parallelepiped(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal) : Object(pos,
+Parallelepiped::Parallelepiped(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos,
 														    rot,
 														    scal)
 {}
@@ -27,7 +27,12 @@ Parallelepiped::Parallelepiped(const Vector3Float &pos, const Vector3Float &rot,
 Parallelepiped::~Parallelepiped()
 {}
 
-Object::HitInfo Parallelepiped::Hit(const Ray &ray)
+Object::HitInfo Parallelepiped::Hit(const Ray &ray, const SceneSettings &settings)
 {
   return HitInfo();
+}
+
+Color Parallelepiped::getColorHit(const HitInfo &info)
+{
+  return Color();
 }

@@ -11,18 +11,24 @@
 #include "Color.hpp"
 
 Color::Color(const unsigned char &red)
-	: r(red)
+	: r(red),
+	  g(0),
+	  b(0),
+	  a(255)
 {}
 
 Color::Color(const unsigned char &red, const unsigned char &green)
 	: r(red),
-	  g(green)
+	  g(green),
+	  b(0),
+	  a(255)
 {}
 
 Color::Color(const unsigned char &red, const unsigned char &green, const unsigned char &blue)
 	: r(red),
 	  g(green),
-	  b(blue)
+	  b(blue),
+	  a(255)
 {}
 
 Color::Color(const unsigned char &red, const unsigned char &green, const unsigned char &blue, const unsigned char &alpha)

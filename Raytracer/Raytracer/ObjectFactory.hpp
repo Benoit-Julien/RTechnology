@@ -40,8 +40,8 @@ class ObjectFactory
   static std::shared_ptr<Object> createObject(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
 
  private:
-  static Vector3Float getVector3Of(const std::string &name, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
-  static std::array<Vector3Float, 3> getPosRotScal(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static Vector3F getVector3Of(const std::string &name, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::array<Vector3F, 3> getPosRotScal(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
 
  private:
   static std::shared_ptr<Object> makeSphere(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);

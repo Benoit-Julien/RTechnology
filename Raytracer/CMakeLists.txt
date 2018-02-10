@@ -21,12 +21,19 @@ set(SOURCES_RAYTRACER
         Raytracer/SceneManager.cpp
         Raytracer/math/Vector2.cpp
         Raytracer/math/Vector3.cpp
-        Raytracer/math/Ray.cpp)
+        Raytracer/math/Ray.cpp
+        Raytracer/objects/Cone.cpp
+        Raytracer/objects/Cylinder.cpp
+        Raytracer/objects/Parallelepiped.cpp
+        Raytracer/objects/SemiConeBot.cpp
+        Raytracer/objects/SemiConeTop.cpp
+        Raytracer/objects/Sphere.cpp)
 
 include_directories(${INCLUDE_DIRECTORY_RAPIDJSON})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(raytracer SHARED ${SOURCES_RAYTRACER})
 target_link_libraries(raytracer ${EXTRA_LIBS})
+target_link_libraries(raytracer ${CMAKE_THREAD_LIBS_INIT})
 
 add_subdirectory(Standalone)

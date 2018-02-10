@@ -18,12 +18,13 @@ class Cone : public Object
   float angle;
  public:
   explicit Cone();
-  explicit Cone(const Vector3Float &pos);
-  Cone(const Vector3Float &pos, const Vector3Float &rot);
-  Cone(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal);
+  explicit Cone(const Vector3F &pos);
+  Cone(const Vector3F &pos, const Vector3F &rot);
+  Cone(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
   virtual ~Cone();
 
-  virtual HitInfo Hit(const Ray &ray);
+  virtual HitInfo Hit(const Ray &ray, const SceneSettings &settings);
+  virtual Color getColorHit(const HitInfo &info);
   void setAngle(const float &angle);
 };
 

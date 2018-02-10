@@ -57,12 +57,6 @@ int Vector3<int>::Dot(const Vector3<int> &vec1, const Vector3<int> &vec2)
 }
 
 template<>
-int Vector3<int>::Distance(const Vector3<int> &vec1, const Vector3<int> &vec2)
-{
-  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<int>();
-}
-
-template<>
 float Vector3<int>::Angle(const Vector3<int> &vec1, const Vector3<int> &vec2)
 {
   auto mul = af::sum(vec1._array * vec2._array);
@@ -144,12 +138,6 @@ long long Vector3<long long>::Dot(const Vector3<long long> &vec1, const Vector3<
 }
 
 template<>
-long long Vector3<long long>::Distance(const Vector3<long long> &vec1, const Vector3<long long> &vec2)
-{
-  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<long long>();
-}
-
-template<>
 float Vector3<long long>::Angle(const Vector3<long long> &vec1, const Vector3<long long> &vec2)
 {
   auto mul = af::sum(vec1._array * vec2._array);
@@ -227,12 +215,6 @@ template<>
 unsigned Vector3<unsigned>::Dot(const Vector3<unsigned> &vec1, const Vector3<unsigned> &vec2)
 {
   return af::sum(vec1._array * vec1._array).scalar<unsigned>();
-}
-
-template<>
-unsigned Vector3<unsigned>::Distance(const Vector3<unsigned> &vec1, const Vector3<unsigned> &vec2)
-{
-  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<unsigned>();
 }
 
 template<>
@@ -317,12 +299,6 @@ long long unsigned Vector3<long long unsigned>::Dot(const Vector3<long long unsi
 }
 
 template<>
-long long unsigned Vector3<long long unsigned>::Distance(const Vector3<long long unsigned> &vec1, const Vector3<long long unsigned> &vec2)
-{
-  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<long long unsigned>();
-}
-
-template<>
 float Vector3<long long unsigned>::Angle(const Vector3<long long unsigned> &vec1, const Vector3<long long unsigned> &vec2)
 {
   auto mul = af::sum(vec1._array * vec2._array);
@@ -400,12 +376,6 @@ template<>
 float Vector3<float>::Dot(const Vector3<float> &vec1, const Vector3<float> &vec2)
 {
   return af::sum(vec1._array * vec1._array).scalar<float>();
-}
-
-template<>
-float Vector3<float>::Distance(const Vector3<float> &vec1, const Vector3<float> &vec2)
-{
-  return af::sqrt(af::sum(af::pow(vec1._array * vec2._array, 2))).scalar<float>();
 }
 
 template<>

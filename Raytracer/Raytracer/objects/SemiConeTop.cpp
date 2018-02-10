@@ -13,22 +13,27 @@
 SemiConeTop::SemiConeTop()
 {}
 
-SemiConeTop::SemiConeTop(const Vector3Float &pos) : Object(pos)
+SemiConeTop::SemiConeTop(const Vector3F &pos) : Object(pos)
 {}
 
-SemiConeTop::SemiConeTop(const Vector3Float &pos, const Vector3Float &rot) : Object(pos, rot)
+SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
 {}
 
-SemiConeTop::SemiConeTop(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal) : Object(pos, rot,
+SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot,
 													      scal)
 {}
 
 SemiConeTop::~SemiConeTop()
 {}
 
-Object::HitInfo SemiConeTop::Hit(const Ray &ray)
+Object::HitInfo SemiConeTop::Hit(const Ray &ray, const SceneSettings &settings)
 {
   return HitInfo();
+}
+
+Color SemiConeTop::getColorHit(const HitInfo &info)
+{
+  return Color();
 }
 
 void SemiConeTop::setAngle(const float &angle)

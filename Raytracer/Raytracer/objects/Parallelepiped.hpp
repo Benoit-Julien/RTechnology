@@ -17,12 +17,13 @@ class Parallelepiped : public Object
 {
  public:
   explicit Parallelepiped();
-  explicit Parallelepiped(const Vector3Float &pos);
-  Parallelepiped(const Vector3Float &pos, const Vector3Float &rot);
-  Parallelepiped(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal);
+  explicit Parallelepiped(const Vector3F &pos);
+  Parallelepiped(const Vector3F &pos, const Vector3F &rot);
+  Parallelepiped(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
   virtual ~Parallelepiped();
 
-  virtual HitInfo Hit(const Ray &ray);
+  virtual HitInfo Hit(const Ray &ray, const SceneSettings &settings);
+  virtual Color getColorHit(const HitInfo &info);
 };
 
 

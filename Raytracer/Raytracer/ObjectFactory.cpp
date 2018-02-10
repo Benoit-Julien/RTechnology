@@ -44,25 +44,24 @@ std::shared_ptr<Object> ObjectFactory::createObject(rapidjson::GenericValue<rapi
   return nullptr;
 }
 
-Vector3Float
-ObjectFactory::getVector3Of(const std::string &name, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
+Vector3F ObjectFactory::getVector3Of(const std::string &name, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
 {
   assert(params[name.c_str()].IsObject());
   assert(params[name.c_str()].HasMember("x") && params[name.c_str()]["x"].IsNumber());
   assert(params[name.c_str()].HasMember("y") && params[name.c_str()]["y"].IsNumber());
   assert(params[name.c_str()].HasMember("z") && params[name.c_str()]["z"].IsNumber());
 
-  return Vector3Float(params[name.c_str()]["x"].GetFloat(),
+  return Vector3F(params[name.c_str()]["x"].GetFloat(),
 		      params[name.c_str()]["y"].GetFloat(),
 		      params[name.c_str()]["z"].GetFloat());
 }
 
-std::array<Vector3Float, 3> ObjectFactory::getPosRotScal(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
+std::array<Vector3F, 3> ObjectFactory::getPosRotScal(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
 {
-  std::array<Vector3Float, 3> vec = {
-	  Vector3Float(0, 0, 0),
-	  Vector3Float(0, 0, 0),
-	  Vector3Float(1, 1, 1)
+  std::array<Vector3F, 3> vec = {
+	  Vector3F(0, 0, 0),
+	  Vector3F(0, 0, 0),
+	  Vector3F(1, 1, 1)
   };
 
   if (params.HasMember("position"))
@@ -78,8 +77,15 @@ std::array<Vector3Float, 3> ObjectFactory::getPosRotScal(rapidjson::GenericValue
 std::shared_ptr<Object> ObjectFactory::makeSphere(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
 {
   auto vec = getPosRotScal(params);
+  auto sphere = std::make_shared<Sphere>(vec[0], vec[1], vec[2]);
 
-  return std::make_shared<Sphere>(vec[0], vec[1], vec[2]);
+  if (params.HasMember("radius"))
+    {
+      assert(params["radius"].IsNumber());
+      sphere->setRadius(params["radius"].GetFloat());
+    }
+
+  return sphere;
 }
 
 std::shared_ptr<Object> ObjectFactory::makePlane(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params)
@@ -97,7 +103,7 @@ std::shared_ptr<Object> ObjectFactory::makeCone(rapidjson::GenericValue<rapidjso
 
   if (params.HasMember("angle"))
     {
-      assert(params["angle"].IsFloat());
+      assert(params["angle"].IsNumber());
       cone->setAngle(params["angle"].GetFloat());
     }
 
@@ -119,7 +125,7 @@ std::shared_ptr<Object> ObjectFactory::makeSemiConeTop(rapidjson::GenericValue<r
 
   if (params.HasMember("angle"))
     {
-      assert(params["angle"].IsFloat());
+      assert(params["angle"].IsNumber());
       cone->setAngle(params["angle"].GetFloat());
     }
   return cone;
@@ -133,7 +139,7 @@ std::shared_ptr<Object> ObjectFactory::makeSemiConeBot(rapidjson::GenericValue<r
 
   if (params.HasMember("angle"))
     {
-      assert(params["angle"].IsFloat());
+      assert(params["angle"].IsNumber());
       cone->setAngle(params["angle"].GetFloat());
     }
   return cone;

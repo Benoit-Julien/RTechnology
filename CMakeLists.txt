@@ -15,5 +15,7 @@ else()
 	message("ArrayFire not use graphical card")
 endif()
 
+find_package(Threads REQUIRED)
+
 add_subdirectory(RTechnologyGUI)
 add_subdirectory(Raytracer)

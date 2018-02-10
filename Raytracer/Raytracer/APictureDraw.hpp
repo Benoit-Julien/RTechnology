@@ -37,10 +37,12 @@ class RT_DLL APictureDraw
   const std::size_t &getHeight() const;
   const std::size_t &getWidth() const;
 
-  void setPixel(const Vector2Int &position, const Color &pixColor);
+  void setPixel(const Vector2I &position, const Color &pixColor);
+  void drawPicture(const std::vector<std::vector<Color>> &picture);
 
  protected:
-  virtual void _setPixel(const Vector2Int &position, const Color &pixColor) = 0;
+  virtual void _setPixel(const Vector2I &position, const Color &pixColor) = 0;
+  virtual void _drawPicture(const std::vector<std::vector<Color>> &picture) = 0;
 };
 
 #endif /* !RTECHNOLOGY_APICTUREDRAW_HPP */

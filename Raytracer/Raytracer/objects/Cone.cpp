@@ -13,21 +13,26 @@
 Cone::Cone()
 {}
 
-Cone::Cone(const Vector3Float &pos) : Object(pos)
+Cone::Cone(const Vector3F &pos) : Object(pos)
 {}
 
-Cone::Cone(const Vector3Float &pos, const Vector3Float &rot) : Object(pos, rot)
+Cone::Cone(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
 {}
 
-Cone::Cone(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal) : Object(pos, rot, scal)
+Cone::Cone(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
 {}
 
 Cone::~Cone()
 {}
 
-Object::HitInfo Cone::Hit(const Ray &ray)
+Object::HitInfo Cone::Hit(const Ray &ray, const SceneSettings &settings)
 {
   return HitInfo();
+}
+
+Color Cone::getColorHit(const HitInfo &info)
+{
+  return Color();
 }
 
 void Cone::setAngle(const float &angle)

@@ -233,7 +233,11 @@ class RT_DLL Vector3
     return newvec;
   }
 
-  static T Distance(const Vector3<T> &vec1, const Vector3<T> &vec2);
+  static T Distance(const Vector3<T> &vec1, const Vector3<T> &vec2)
+  {
+    auto vec = vec1 - vec2;
+    return vec.magnitude();
+  }
 
   static float Angle(const Vector3<T> &vec1, const Vector3<T> &vec2);
 
@@ -245,6 +249,12 @@ class RT_DLL Vector3
   bool operator!=(const Vector3<T> &vec) const
   {
     return !this->Equal(vec);
+  }
+
+  float operator^(const float &value) const
+  {
+    af::array tmp = af::sum(af::pow(this->_array, value));
+    return tmp.scalar<float>();
   }
 };
 
@@ -261,10 +271,10 @@ template<typename T>
 const Vector3<T> Vector3<T>::down = Vector3(0, -1, 0);
 
 template<typename T>
-const Vector3<T> Vector3<T>::right = Vector3(1, 0, 0);
+const Vector3<T> Vector3<T>::right = Vector3(-1, 0, 0);
 
 template<typename T>
-const Vector3<T> Vector3<T>::left = Vector3(-1, 0, 0);
+const Vector3<T> Vector3<T>::left = Vector3(1, 0, 0);
 
 template<typename T>
 std::ostream &operator<<(std::ostream &os, const Vector3<T> &vec)
@@ -277,7 +287,7 @@ std::ostream &operator<<(std::ostream &os, const Vector3<T> &vec)
   return os;
 }
 
-typedef Vector3<int> Vector3Int;
-typedef Vector3<float> Vector3Float;
+typedef Vector3<int> Vector3I;
+typedef Vector3<float> Vector3F;
 
 #endif /* !RTECHNOLOGY_VECTOR3_HPP */

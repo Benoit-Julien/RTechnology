@@ -11,7 +11,7 @@
 
 #include "DetecteObject.hpp"
 
-DetecteObject::DetecteObject(const Vector3Float &posObject) {
+DetecteObject::DetecteObject(const Vector3F &posObject) {
     this->_positionObject = posObject;
 }
 
@@ -39,7 +39,7 @@ float DetecteObject::checkDelta(const float &a, const float &b, const float &del
     return -1;
 }
 
-float DetecteObject::detecteSphere(const Vector3Float &posCam, const Vector3Float &vector, const float &radius) {
+float DetecteObject::detecteSphere(const Vector3F &posCam, const Vector3F &vector, const float &radius) {
     float delta;
     float a;
     float b;
@@ -54,7 +54,7 @@ float DetecteObject::detecteSphere(const Vector3Float &posCam, const Vector3Floa
     return k;
 }
 
-float DetecteObject::detecteCylinder(const Vector3Float &posCam, const Vector3Float &vector, const float &radius) {
+float DetecteObject::detecteCylinder(const Vector3F &posCam, const Vector3F &vector, const float &radius) {
     float delta;
     float a;
     float b;
@@ -69,7 +69,7 @@ float DetecteObject::detecteCylinder(const Vector3Float &posCam, const Vector3Fl
     return k;
 }
 
-float DetecteObject::detecteCone(const Vector3Float &posCam, const Vector3Float &vector, const float &angle) {
+float DetecteObject::detecteCone(const Vector3F &posCam, const Vector3F &vector, const float &angle) {
     float delta;
     float a;
     float b;

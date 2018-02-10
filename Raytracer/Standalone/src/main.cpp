@@ -40,11 +40,12 @@ int main()
 
   file.close();
 
-  raytracer.initialiseScene(json);
-  raytracer.renderer();
-
   draw->updateWindow();
-  while (draw->windowIsOpen());
+  raytracer.initialiseScene(json);
+  raytracer.start();
 
+  while (draw->windowIsOpen())
+    draw->updateWindow();
+  raytracer.stop();
   return 0;
 }

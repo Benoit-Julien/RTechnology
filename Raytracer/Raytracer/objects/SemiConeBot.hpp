@@ -18,12 +18,14 @@ class SemiConeBot : public Object
   float angle;
  public:
   explicit SemiConeBot();
-  explicit SemiConeBot(const Vector3Float &pos);
-  SemiConeBot(const Vector3Float &pos, const Vector3Float &rot);
-  SemiConeBot(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal);
+  explicit SemiConeBot(const Vector3F &pos);
+  SemiConeBot(const Vector3F &pos, const Vector3F &rot);
+  SemiConeBot(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
   virtual ~SemiConeBot();
 
-  virtual HitInfo Hit(const Ray &ray);
+  virtual HitInfo Hit(const Ray &ray, const SceneSettings &settings);
+  virtual Color getColorHit(const HitInfo &info);
+
   void setAngle(const float &angle);
 };
 

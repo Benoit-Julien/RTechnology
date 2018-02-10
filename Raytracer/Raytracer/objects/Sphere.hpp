@@ -15,14 +15,22 @@
 
 class Sphere : public Object
 {
+  float _radius;
+
  public:
   explicit Sphere();
-  explicit Sphere(const Vector3Float &pos);
-  Sphere(const Vector3Float &pos, const Vector3Float &rot);
-  Sphere(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal);
+  explicit Sphere(const Vector3F &pos);
+  Sphere(const Vector3F &pos, const Vector3F &rot);
+  Sphere(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
   virtual ~Sphere();
 
-  virtual HitInfo Hit(const Ray &ray);
+  virtual HitInfo Hit(const Ray &ray, const SceneSettings &settings);
+  virtual Color getColorHit(const HitInfo &info);
+
+  void setRadius(const float &radius);
+
+ private:
+  float checkDelta(const float &a, const float &b, const float &delta);
 };
 
 

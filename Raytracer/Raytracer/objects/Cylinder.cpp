@@ -13,19 +13,24 @@
 Cylinder::Cylinder()
 {}
 
-Cylinder::Cylinder(const Vector3Float &pos) : Object(pos)
+Cylinder::Cylinder(const Vector3F &pos) : Object(pos)
 {}
 
-Cylinder::Cylinder(const Vector3Float &pos, const Vector3Float &rot) : Object(pos, rot)
+Cylinder::Cylinder(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
 {}
 
-Cylinder::Cylinder(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal) : Object(pos, rot, scal)
+Cylinder::Cylinder(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
 {}
 
 Cylinder::~Cylinder()
 {}
 
-Object::HitInfo Cylinder::Hit(const Ray &ray)
+Object::HitInfo Cylinder::Hit(const Ray &ray, const SceneSettings &settings)
 {
   return HitInfo();
+}
+
+Color Cylinder::getColorHit(const HitInfo &info)
+{
+  return Color();
 }

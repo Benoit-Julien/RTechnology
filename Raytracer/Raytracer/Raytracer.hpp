@@ -13,6 +13,8 @@
 
 #include <memory>
 #include <string>
+#include <thread>
+#include <array>
 
 #include "APictureDraw.hpp"
 #include "SceneManager.hpp"
@@ -21,6 +23,8 @@ class RT_DLL Raytracer
 {
   SceneManager _manager;
   std::shared_ptr<APictureDraw> _drawer;
+  bool _stop;
+  std::array<std::thread, 4> _threads;
 
  public:
   Raytracer(std::shared_ptr<APictureDraw> drawer);
@@ -30,8 +34,12 @@ class RT_DLL Raytracer
   Raytracer &operator=(Raytracer &&raytracer) noexcept = delete;
   ~Raytracer() = default;
 
-  void renderer();
+  void start();
   void initialiseScene(const std::string &json);
+  void stop();
+
+ private:
+  void handleThreadFunction(const Vector2I &begin, const Vector2I &end);
 };
 
 

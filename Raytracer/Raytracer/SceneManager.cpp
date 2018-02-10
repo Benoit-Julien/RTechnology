@@ -34,11 +34,16 @@ Color SceneManager::checkHitAndGetColor(const Ray &ray) const
 
   for (auto &it : this->_objects)
     {
-      auto tmp = it->Hit(ray);
-      if (!objectHit.haveHit || (tmp.distance > 0 && tmp.distance < objectHit.distance))
-	objectHit = tmp;
+      auto tmp = it->Hit(ray, this->_settings);
+      if (tmp.haveHit)
+	{
+	  if (!objectHit.haveHit || (tmp.distance > 0 && tmp.distance < objectHit.distance))
+	    objectHit = tmp;
+	}
     }
-  return objectHit.color;
+  if (!objectHit.hitObject)
+    return Color(255, 0, 0);
+  return objectHit.hitObject->getColorHit(objectHit);
 }
 
 void SceneManager::parseSceneJson(const rapidjson::Document &document)
@@ -49,6 +54,7 @@ void SceneManager::parseSceneJson(const rapidjson::Document &document)
 
   for (auto &m : document.GetObject())
     {
+      std::cout << m.name.GetString() << std::endl;
       if (std::string(m.name.GetString()) == "objects")
 	this->parseObjects(m.value.GetArray());
       else
@@ -62,12 +68,18 @@ void SceneManager::parseObjects(rapidjson::GenericValue<rapidjson::UTF8<>>::Cons
     {
       assert(o.IsObject());
       auto object = ObjectFactory::createObject(o.GetObject());
-
+      if (object == nullptr)
+	{
+	  std::cout << "Object " << o["type"].GetString() << " not implemented" << std::endl;
+	  continue;
+	}
+      /*
       if (o.HasMember("attr"))
 	{
 	  assert(o["attr"].IsArray());
 	  this->parseAttributeObject(object, o["attr"].GetArray());
-	}
+	}*/
+      this->_objects.push_back(object);
     }
 }
 

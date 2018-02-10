@@ -13,27 +13,27 @@
 SemiConeBot::SemiConeBot()
 {}
 
-SemiConeBot::SemiConeBot(const Vector3Float &pos) : Object(pos)
+SemiConeBot::SemiConeBot(const Vector3F &pos) : Object(pos)
 {}
 
-SemiConeBot::SemiConeBot(const Vector3Float &pos, const Vector3Float &rot) : Object(pos, rot)
+SemiConeBot::SemiConeBot(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
 {}
 
-SemiConeBot::SemiConeBot(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal) : Object(pos, rot,
+SemiConeBot::SemiConeBot(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot,
 													      scal)
 {}
 
 SemiConeBot::~SemiConeBot()
 {}
 
-bool SemiConeBot::Hit(const Ray &ray)
-{
-  return false;
-}
-
-Object::HitInfo SemiConeBot::Hit(const Ray &ray)
+Object::HitInfo SemiConeBot::Hit(const Ray &ray, const SceneSettings &settings)
 {
   return HitInfo();
+}
+
+Color SemiConeBot::getColorHit(const HitInfo &info)
+{
+  return Color();
 }
 
 void SemiConeBot::setAngle(const float &angle)

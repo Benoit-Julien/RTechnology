@@ -14,13 +14,13 @@
 #include "Vector3.hpp"
 
 class DetecteObject {
-    Vector3Float _positionObject;
+    Vector3F _positionObject;
 public:
-    DetecteObject(const Vector3Float &posObject);
+    DetecteObject(const Vector3F &posObject);
     ~DetecteObject();
-    float detecteSphere(const Vector3Float &posCam, const Vector3Float &vector, const float &radius);
-    float detecteCylinder(const Vector3Float &posCam, const Vector3Float &vector, const float &radius);
-    float detecteCone(const Vector3Float &posCam, const Vector3Float &vector, const float &angle);
+    float detecteSphere(const Vector3F &posCam, const Vector3F &vector, const float &radius);
+    float detecteCylinder(const Vector3F &posCam, const Vector3F &vector, const float &radius);
+    float detecteCone(const Vector3F &posCam, const Vector3F &vector, const float &angle);
     float checkDelta(const float &a, const float &b, const float &delta);
 };
 

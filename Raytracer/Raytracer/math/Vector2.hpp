@@ -252,7 +252,7 @@ std::ostream &operator<<(std::ostream &os, const Vector2<T> &vec)
   return os;
 }
 
-typedef Vector2<int> Vector2Int;
-typedef Vector2<float> Vector2Float;
+typedef Vector2<int> Vector2I;
+typedef Vector2<float> Vector2F;
 
 #endif /* !RTECHNOLOGY_VECTOR2_HPP */

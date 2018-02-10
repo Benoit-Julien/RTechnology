@@ -11,7 +11,6 @@
 #include "SFMLPictureDraw.hpp"
 #include <Raytracer/Raytracer.hpp>
 
-
 #include <fstream>
 #include <rapidjson/document.h>
 #include <rapidjson/filereadstream.h>
@@ -28,11 +27,15 @@ int main()
   Raytracer raytracer(draw);
 
   std::string filename = "scene.json";
-  std::ifstream file(std::string(SCENES_PATH) + "/" + filename);
+  std::string filepath = filename;//std::string(SCENES_PATH) + "/" + filename;
+  std::ifstream file(filepath);
   std::string json;
 
   if (!file)
-    return -1;
+  {
+	  std::cerr << filepath << ": not found" << std::endl;
+	  return -1;
+  }
 
   std::string tmp;
   while (std::getline(file, tmp))
@@ -43,9 +46,10 @@ int main()
   draw->updateWindow();
   raytracer.initialiseScene(json);
   raytracer.start();
-
+  
   while (draw->windowIsOpen())
     draw->updateWindow();
   raytracer.stop();
+
   return 0;
 }

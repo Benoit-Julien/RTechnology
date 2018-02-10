@@ -13,7 +13,6 @@
 
 #include <cmath>
 #include <af/array.h>
-#include <af/arith.h>
 #include <arrayfire.h>
 
 #include "../config.h"

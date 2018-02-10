@@ -32,7 +32,7 @@ class RT_DLL Raytracer
   Raytracer(Raytracer &&raytracer) noexcept = delete;
   Raytracer &operator=(const Raytracer &raytracer) = delete;
   Raytracer &operator=(Raytracer &&raytracer) noexcept = delete;
-  ~Raytracer() = default;
+  ~Raytracer();
 
   void start();
   void initialiseScene(const std::string &json);

@@ -11,6 +11,7 @@
 #include "SceneManager.hpp"
 #include "ObjectFactory.hpp"
 #include "AttributeFactory.hpp"
+#undef GetObject
 
 SceneManager::SceneManager()
 {}

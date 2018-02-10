@@ -19,16 +19,42 @@ SceneSettings::Settings::Settings()
 {}
 
 SceneSettings::Settings::Settings(const Settings &settings)
+	: defaultLight(settings.defaultLight),
+	viewPlaneDistance(settings.viewPlaneDistance),
+	viewPlaneWidth(settings.viewPlaneWidth),
+	viewPlaneHeight(settings.viewPlaneHeight)
 {}
 
 SceneSettings::Settings::Settings(Settings &&settings) noexcept
+	: defaultLight(settings.defaultLight),
+	viewPlaneDistance(settings.viewPlaneDistance),
+	viewPlaneWidth(settings.viewPlaneWidth),
+	viewPlaneHeight(settings.viewPlaneHeight)
 {}
 
 SceneSettings::Settings &SceneSettings::Settings::operator=(const Settings &settings)
-{}
+{
+	this->cameraPosition = settings.cameraPosition;
+	this->cameraRotation = settings.cameraRotation;
+	this->defaultLight = settings.defaultLight;
+	this->viewPlaneDistance = settings.viewPlaneDistance;
+	this->viewPlaneWidth = settings.viewPlaneWidth;
+	this->viewPlaneHeight = settings.viewPlaneHeight;
+
+	return *this;
+}
 
 SceneSettings::Settings &SceneSettings::Settings::operator=(Settings &&settings) noexcept
-{}
+{
+	this->cameraPosition = settings.cameraPosition;
+	this->cameraRotation = settings.cameraRotation;
+	this->defaultLight = settings.defaultLight;
+	this->viewPlaneDistance = settings.viewPlaneDistance;
+	this->viewPlaneWidth = settings.viewPlaneWidth;
+	this->viewPlaneHeight = settings.viewPlaneHeight;
+
+	return *this;
+}
 
 SceneSettings::Settings::~Settings()
 {}

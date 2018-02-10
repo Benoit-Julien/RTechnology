@@ -30,6 +30,9 @@ Raytracer::Raytracer(std::shared_ptr<APictureDraw> drawer)
 	: _drawer(drawer), _stop(false)
 {}
 
+Raytracer::~Raytracer()
+{}
+
 void Raytracer::start()
 {
   auto back = af::getActiveBackend();
@@ -146,8 +149,8 @@ bool Raytracer::testArrayFire()
 }
 #endif
 */
-
+/*
 void __attribute__ ((constructor)) setup()
 {
   //af::setBackend(af::Backend::AF_BACKEND_CPU);
-}
+}*/

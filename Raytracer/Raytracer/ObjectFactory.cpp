@@ -52,35 +52,35 @@ Vector3F ObjectFactory::getVector3Of(const std::string &name, rapidjson::Value::
   assert(params[name.c_str()].HasMember("z") && params[name.c_str()]["z"].IsNumber());
 
   return Vector3F(params[name.c_str()]["x"].GetFloat(),
-		      params[name.c_str()]["y"].GetFloat(),
-		      params[name.c_str()]["z"].GetFloat());
+		  params[name.c_str()]["y"].GetFloat(),
+		  params[name.c_str()]["z"].GetFloat());
 }
 
 Vector3F ObjectFactory::getPosition(rapidjson::Value::ConstObject params)
 {
-	Vector3F vec(0, 0, 0);
+  Vector3F vec(0, 0, 0);
 
-	if (params.HasMember("position"))
-		vec = getVector3Of("position", params);
-	return vec;
+  if (params.HasMember("position"))
+    vec = getVector3Of("position", params);
+  return vec;
 }
 
 Vector3F ObjectFactory::getRotation(rapidjson::Value::ConstObject params)
 {
-	Vector3F vec(0, 0, 0);
+  Vector3F vec(0, 0, 0);
 
-	if (params.HasMember("rotation"))
-		vec = getVector3Of("rotation", params);
-	return vec;
+  if (params.HasMember("rotation"))
+    vec = getVector3Of("rotation", params);
+  return vec;
 }
 
 Vector3F ObjectFactory::getScale(rapidjson::Value::ConstObject params)
 {
-	Vector3F vec(1, 1, 1);
+  Vector3F vec(1, 1, 1);
 
-	if (params.HasMember("scale"))
-		vec = getVector3Of("scale", params);
-	return vec;
+  if (params.HasMember("scale"))
+    vec = getVector3Of("scale", params);
+  return vec;
 }
 
 std::shared_ptr<Object> ObjectFactory::makeSphere(rapidjson::Value::ConstObject params)
@@ -101,18 +101,17 @@ std::shared_ptr<Object> ObjectFactory::makeSphere(rapidjson::Value::ConstObject 
 
 std::shared_ptr<Object> ObjectFactory::makePlane(rapidjson::Value::ConstObject params)
 {
-	auto pos = getPosition(params);
-	auto rot = getRotation(params);
-	auto scal = getScale(params);
+  auto pos = getPosition(params);
+  auto rot = getRotation(params);
 
-  return nullptr;
+  return std::make_shared<Plan>(pos, rot);
 }
 
 std::shared_ptr<Object> ObjectFactory::makeCone(rapidjson::Value::ConstObject params)
 {
-	auto pos = getPosition(params);
-	auto rot = getRotation(params);
-	auto scal = getScale(params);
+  auto pos = getPosition(params);
+  auto rot = getRotation(params);
+  auto scal = getScale(params);
 
   auto cone = std::make_shared<Cone>(pos, rot, scal);
 
@@ -127,18 +126,18 @@ std::shared_ptr<Object> ObjectFactory::makeCone(rapidjson::Value::ConstObject pa
 
 std::shared_ptr<Object> ObjectFactory::makeCylinder(rapidjson::Value::ConstObject params)
 {
-	auto pos = getPosition(params);
-	auto rot = getRotation(params);
-	auto scal = getScale(params);
+  auto pos = getPosition(params);
+  auto rot = getRotation(params);
+  auto scal = getScale(params);
 
   return std::make_shared<Cylinder>(pos, rot, scal);
 }
 
 std::shared_ptr<Object> ObjectFactory::makeSemiConeTop(rapidjson::Value::ConstObject params)
 {
-	auto pos = getPosition(params);
-	auto rot = getRotation(params);
-	auto scal = getScale(params);
+  auto pos = getPosition(params);
+  auto rot = getRotation(params);
+  auto scal = getScale(params);
 
   auto cone = std::make_shared<SemiConeTop>(pos, rot, scal);
 
@@ -152,9 +151,9 @@ std::shared_ptr<Object> ObjectFactory::makeSemiConeTop(rapidjson::Value::ConstOb
 
 std::shared_ptr<Object> ObjectFactory::makeSemiConeBot(rapidjson::Value::ConstObject params)
 {
-	auto pos = getPosition(params);
-	auto rot = getRotation(params);
-	auto scal = getScale(params);
+  auto pos = getPosition(params);
+  auto rot = getRotation(params);
+  auto scal = getScale(params);
 
   auto cone = std::make_shared<SemiConeBot>(pos, rot, scal);
 
@@ -168,9 +167,9 @@ std::shared_ptr<Object> ObjectFactory::makeSemiConeBot(rapidjson::Value::ConstOb
 
 std::shared_ptr<Object> ObjectFactory::makeParallelepiped(rapidjson::Value::ConstObject params)
 {
-	auto pos = getPosition(params);
-	auto rot = getRotation(params);
-	auto scal = getScale(params);
+  auto pos = getPosition(params);
+  auto rot = getRotation(params);
+  auto scal = getScale(params);
 
-	return nullptr;
+  return nullptr;
 }

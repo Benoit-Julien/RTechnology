@@ -49,45 +49,18 @@ Object::HitInfo Sphere::Hit(const Ray &ray, const SceneSettings &settings)
     det = b * b - 4*a*c;
 
   HitInfo info;
-  if (det >= 0)
+  float k = this->checkDelta(a, b, det);
+  if (k != -1)
     {
       info.haveHit = true;
       info.hitObject = this;
+      info.distance = k;
+      info.hitPosition = C + V * k;
     }
   else
     info.haveHit = false;
 
   return info;
-/*
-
-  float delta;
-  float k;
-
-  auto vec = ray.getDirection();
-  auto O = ray.getOrigin();
-
-  float a = vec.magnitude();
-  float b = 2 * (vec.x() * (O.x() - this->position.x()) + vec.y() * (O.y() - this->position.y()) + vec.z() * (O.z() - this->position.z()));
-  float c = ((O - this->position)^2) - this->_radius * this->_radius;
-
-  delta = (b * b) - (4 * (a * c));
-  k = checkDelta(a, b, delta);
-
-  HitInfo hitInfo;
-
-  if (k == -1)
-    hitInfo.haveHit = false;
-  else
-    {
-      hitInfo.haveHit = true;
-      hitInfo.hitObject = this;
-      hitInfo.nbRepeatRay = k;
-      //hitInfo.hitPosition =
-      hitInfo.distance = k * ray.getDirection().magnitude();
-    }
-
-  return hitInfo;
-  */
 }
 
 Color Sphere::getColorHit(const HitInfo &info)

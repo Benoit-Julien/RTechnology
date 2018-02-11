@@ -12,6 +12,7 @@
 #define RTECHNOLOGY_OBJECTS_HPP
 
 #include "Sphere.hpp"
+#include "Plan.hpp"
 #include "Cone.hpp"
 #include "Cylinder.hpp"
 #include "SemiConeTop.hpp"

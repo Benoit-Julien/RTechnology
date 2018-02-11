@@ -20,6 +20,7 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 #else
+
 int main()
 #endif
 {
@@ -27,15 +28,15 @@ int main()
   Raytracer raytracer(draw);
 
   std::string filename = "scene.json";
-  std::string filepath = filename;//std::string(SCENES_PATH) + "/" + filename;
+  std::string filepath = std::string(SCENES_PATH) + "/" + filename;
   std::ifstream file(filepath);
   std::string json;
 
   if (!file)
-  {
-	  std::cerr << filepath << ": not found" << std::endl;
-	  return -1;
-  }
+    {
+      std::cerr << filepath << ": not found" << std::endl;
+      return -1;
+    }
 
   std::string tmp;
   while (std::getline(file, tmp))
@@ -46,7 +47,7 @@ int main()
   draw->updateWindow();
   raytracer.initialiseScene(json);
   raytracer.start();
-  
+
   while (draw->windowIsOpen())
     draw->updateWindow();
   raytracer.stop();

@@ -74,7 +74,7 @@ void Raytracer::stop()
 
 void Raytracer::handleThreadFunction(const Vector2I &begin, const Vector2I &end)
 {
-  //af::setBackend(af::Backend::AF_BACKEND_CPU);
+  af::setBackend(af::Backend::AF_BACKEND_CPU);
   const auto &settings = this->_manager.getSceneSettings().getSettings();
   auto &camPos = settings.cameraPosition;
   Vector3F PtLook = Vector3F::forward;
@@ -149,8 +149,8 @@ bool Raytracer::testArrayFire()
 }
 #endif
 */
-/*
+
 void __attribute__ ((constructor)) setup()
 {
-  //af::setBackend(af::Backend::AF_BACKEND_CPU);
-}*/
+  af::setBackend(af::Backend::AF_BACKEND_CPU);
+}

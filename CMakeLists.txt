@@ -7,14 +7,6 @@ set(INCLUDE_DIRECTORY_RAPIDJSON ${CMAKE_CURRENT_SOURCE_DIR}/RapidJSON)
 set(INCLUDE_DIRECTORY_RAYTRACER ${CMAKE_CURRENT_SOURCE_DIR}/Raytracer/include)
 set(LIBRARY_DIRECTORY_RAYTRACER ${CMAKE_CURRENT_BINARY_DIR}/Raytracer)
 
-option(USE_GRAPHICS "Use graphical card" OFF)
-
-if (USE_GRAPHICS)
-	message("ArrayFire use graphical card")
-else()
-	message("ArrayFire not use graphical card")
-endif()
-
 find_package(Threads REQUIRED)
 
 add_subdirectory(RTechnologyGUI)

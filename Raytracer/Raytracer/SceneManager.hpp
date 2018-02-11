@@ -14,12 +14,14 @@
 #include <rapidjson/document.h>
 
 #include "Object.hpp"
+#include "Light.hpp"
 #include "SceneSettings.hpp"
 
 class SceneManager
 {
  private:
   std::vector<std::shared_ptr<Object>> _objects;
+  std::vector<std::shared_ptr<Light>> _lights;
   SceneSettings _settings;
 
  public:
@@ -32,14 +34,20 @@ class SceneManager
 
   const SceneSettings &getSceneSettings() const;
   const std::vector<std::shared_ptr<Object>> &getObjects() const;
+  const std::vector<std::shared_ptr<Light>> &getLights() const;
 
   Color checkHitAndGetColor(const Ray &ray) const;
 
   void parseSceneJson(const rapidjson::Document &document);
 
  private:
-  void parseObjects(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstArray objects);
-  void parseAttributeObject(std::shared_ptr<Object> obj, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstArray attributes);
+  void parseLights(rapidjson::Value::ConstArray lights);
+  void parseObjects(rapidjson::Value::ConstArray objects);
+  void parseAttributeObject(std::shared_ptr<Object> obj, rapidjson::Value::ConstArray attributes);
+
+  static Vector3F getVector3Of(const std::string &name, rapidjson::Value::ConstObject params);
+  static Color getColorOf(const std::string &name, rapidjson::Value::ConstObject params);
+  static Light::Type getLightType(const std::string &name, rapidjson::Value::ConstObject params);
 };
 
 

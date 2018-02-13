@@ -15,6 +15,8 @@
 
 class Plan : public Object
 {
+  Vector3F _normal;
+
  public:
   explicit Plan();
   explicit Plan(const Vector3F &pos);

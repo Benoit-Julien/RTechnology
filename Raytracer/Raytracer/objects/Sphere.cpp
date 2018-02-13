@@ -11,6 +11,12 @@
 #include "../SceneManager.hpp"
 #include "Sphere.hpp"
 
+static double m1 = -1;
+static double m2 = -1;
+static double m3 = -1;
+static double m4 = -1;
+static double m5 = -1;
+
 Sphere::Sphere()
 	: _radius(1)
 {}
@@ -31,18 +37,26 @@ Sphere::Sphere(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal)
 {}
 
 Sphere::~Sphere()
-{}
+{
+  printf("m1 = %.5f\n", m1);
+  printf("m2 = %.5f\n", m2);
+  printf("m3 = %.5f\n", m3);
+  printf("m4 = %.5f\n", m4);
+  printf("m5 = %.5f\n", m5);
+}
+#include <ctime>
 
 Object::HitInfo Sphere::Hit(const Ray &ray, const SceneManager &manager)
 {
+  static float r2 = this->_radius * this->_radius;
   const auto &V = ray.getDirection();
   const auto &C = ray.getOrigin();
   const auto &O = this->position;
-
+  const auto OmC = O - C;
 
   float a = V.magnitude();
-  float b = 2 * (V.x() * (O.x() - C.x()) + V.y() * (O.y() - C.y()) + V.z() * (O.z() - C.z()));
-  float c = ((O - C) ^ 2) - this->_radius * this->_radius;
+  float b = 2 * (V.x() * (OmC.x()) + V.y() * (OmC.y()) + V.z() * (OmC.z()));
+  float c = (OmC^2) - r2;
 
   float det;
   /*if (a == 0.25f)
@@ -57,7 +71,7 @@ Object::HitInfo Sphere::Hit(const Ray &ray, const SceneManager &manager)
       info.haveHit = true;
       info.hitObject = this;
       info.distance = k;
-      info.hitPosition = C + V * k;
+      info.hitPosition = C + (V * k);
     }
   else
     info.haveHit = false;
@@ -78,18 +92,23 @@ Color Sphere::getColorHit(const HitInfo &info, const SceneManager &manager)
 
   for (auto &l : manager.getLights())
     {
-      Ray my_ray(info.hitPosition, info.hitPosition - l->getPosition());
+      Ray my_ray(info.hitPosition, l->getPosition() - info.hitPosition);
       auto objectHit = manager.checkHit(my_ray);
       if (objectHit.haveHit && objectHit.hitObject != this)
 	return Color();
-      Vector3F normal = info.hitPosition - this->position;
+      Vector3F normal = info.hitPosition + this->position;
+      //std::cout << "pos = " << this->position << std::endl;
+      //std::cout << "hitpos = " << info.hitPosition << std::endl;
+      //std::cout << "normal = " << normal << std::endl;
+      //std::cout << "dir = " << my_ray.getDirection() << std::endl;
       auto angle = Vector3F::Angle(normal, my_ray.getDirection());
-      std::cout << "angle = " << angle << std::endl;
+      //std::cout << "angle = " << angle * 180 / af::Pi << std::endl;
       if (angle >= af::Pi / 2)
 	return Color();
-      color.r = color.r - (color.r * angle / (af::Pi / 2));
-      color.g = color.g - (color.g * angle / (af::Pi / 2));
-      color.b = color.b - (color.b * angle / (af::Pi / 2));
+      float coeff = angle / (af::Pi / 2);
+      color.r = color.r - (color.r * coeff);
+      color.g = color.g - (color.g * coeff);
+      color.b = color.b - (color.b * coeff);
     }
   return color;
 }
@@ -101,8 +120,10 @@ float Sphere::checkDelta(const float &a, const float &b, const float &delta)
 
   if (delta > 0)
     {
-      s1 = (-b + std::sqrt(delta)) / (2 * a);
-      s2 = (-b - std::sqrt(delta)) / (2 * a);
+      float a2 = 2 * a;
+      float sqrt_delta = std::sqrt(delta);
+      s1 = (-b + sqrt_delta) / a2;
+      s2 = (-b - sqrt_delta) / a2;
       if (s2 > s1)
 	{
 	  if (s1 > 0)

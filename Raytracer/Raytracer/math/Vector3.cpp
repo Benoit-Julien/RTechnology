@@ -13,7 +13,7 @@
 /*
  * int specialization
  */
-
+/*
 template<>
 Vector3<int>::Vector3() : _array(af::constant(0, 3, s32))
 {}
@@ -92,7 +92,7 @@ bool Vector3<int>::operator>=(const Vector3<int> &vec) const
 /*
  * long long specialization
  */
-
+/*
 #ifdef ENVIRONMENT64
 
 template<>
@@ -174,7 +174,7 @@ bool Vector3<long long>::operator>=(const Vector3<long long> &vec) const
 /*
  * unsigned specialization
  */
-
+/*
 template<>
 Vector3<unsigned>::Vector3() : _array(af::constant(0, 3, u32))
 {}
@@ -253,7 +253,7 @@ bool Vector3<unsigned>::operator>=(const Vector3<unsigned> &vec) const
 /*
  * long long unsigned specialization
  */
-
+/*
 #ifdef ENVIRONMENT64
 
 template<>
@@ -335,7 +335,7 @@ bool Vector3<long long unsigned>::operator>=(const Vector3<long long unsigned> &
 /*
  * float specialization
  */
-
+/*
 template<>
 Vector3<float>::Vector3() : _array(af::constant(0, 3, f32))
 {}
@@ -381,10 +381,15 @@ float Vector3<float>::Dot(const Vector3<float> &vec1, const Vector3<float> &vec2
 template<>
 float Vector3<float>::Angle(const Vector3<float> &vec1, const Vector3<float> &vec2)
 {
-  auto mul = af::sum(vec1._array * vec2._array);
-  auto norm = vec1.getNormArray() * vec2.getNormArray();
+  auto newVec1 = vec1.nomalized();
+  auto newVec2 = vec2.nomalized();
 
-  return af::acos(mul / norm).scalar<float>();
+
+  auto mul = af::sum(newVec1._array * newVec2._array);
+//  auto norm = newVec1.getNormArray() * newVec1.getNormArray();
+
+  //return af::acos(mul / norm).scalar<float>();
+  return af::acos(mul).scalar<float>();
 }
 
 template<>
@@ -409,4 +414,4 @@ template<>
 bool Vector3<float>::operator>=(const Vector3<float> &vec) const
 {
   return this->getNormArray().scalar<float>() >= vec.getNormArray().scalar<float>();
-}
+}*/

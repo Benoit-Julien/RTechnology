@@ -41,6 +41,7 @@ Object::HitInfo SceneManager::checkHit(const Ray &ray) const
   for (auto &it : this->_objects)
     {
       auto tmp = it->Hit(ray, *this);
+
       if (tmp.haveHit)
 	{
 	  if (!objectHit.haveHit || (tmp.distance < objectHit.distance))
@@ -55,7 +56,7 @@ Color SceneManager::checkHitAndGetColor(const Ray &ray) const
   auto objectHit = this->checkHit(ray);
 
   if (!objectHit.hitObject)
-    return Color(0, 255);
+    return Color();
   return objectHit.hitObject->getColorHit(objectHit, *this);
 }
 

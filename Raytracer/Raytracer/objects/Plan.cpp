@@ -22,12 +22,12 @@ Plan::Plan(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
 Plan::~Plan()
 {}
 
-Object::HitInfo Plan::Hit(const Ray &ray, const SceneSettings &settings)
+Object::HitInfo Plan::Hit(const Ray &ray, const SceneManager &manager)
 {
 
 }
 
-Color Plan::getColorHit(const HitInfo &info)
+Color Plan::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
   return Color(0, 255);
 }

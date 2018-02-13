@@ -5,6 +5,8 @@ if (ArrayFire_FOUND)
     set(EXTRA_LIBS ${ArrayFire_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
+find_package(OpenGL REQUIRED)
+
 set(SOURCES_RAYTRACER
         Raytracer/Color.cpp
         Raytracer/Light.cpp
@@ -31,5 +33,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(raytracer SHARED ${SOURCES_RAYTRACER})
 target_link_libraries(raytracer ${EXTRA_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(raytracer ${OPENGL_LIBRARIES})
+
 
 add_subdirectory(Standalone)

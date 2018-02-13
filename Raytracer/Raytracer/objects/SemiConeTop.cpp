@@ -19,19 +19,18 @@ SemiConeTop::SemiConeTop(const Vector3F &pos) : Object(pos)
 SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
 {}
 
-SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot,
-													      scal)
+SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
 {}
 
 SemiConeTop::~SemiConeTop()
 {}
 
-Object::HitInfo SemiConeTop::Hit(const Ray &ray, const SceneSettings &settings)
+Object::HitInfo SemiConeTop::Hit(const Ray &ray, const SceneManager &manager)
 {
   return HitInfo();
 }
 
-Color SemiConeTop::getColorHit(const HitInfo &info)
+Color SemiConeTop::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
   return Color();
 }

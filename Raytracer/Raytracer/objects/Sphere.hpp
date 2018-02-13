@@ -24,8 +24,8 @@ class Sphere : public Object
   Sphere(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
   virtual ~Sphere();
 
-  virtual HitInfo Hit(const Ray &ray, const SceneSettings &settings);
-  virtual Color getColorHit(const HitInfo &info);
+  virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
+  virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
 
   void setRadius(const float &radius);
 

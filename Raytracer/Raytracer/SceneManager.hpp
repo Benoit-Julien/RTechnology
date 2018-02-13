@@ -39,6 +39,7 @@ class SceneManager
   Color checkHitAndGetColor(const Ray &ray) const;
 
   void parseSceneJson(const rapidjson::Document &document);
+  Object::HitInfo checkHit(const Ray &ray) const;
 
  private:
   void parseLights(rapidjson::Value::ConstArray lights);

@@ -26,12 +26,12 @@ SemiConeBot::SemiConeBot(const Vector3F &pos, const Vector3F &rot, const Vector3
 SemiConeBot::~SemiConeBot()
 {}
 
-Object::HitInfo SemiConeBot::Hit(const Ray &ray, const SceneSettings &settings)
+Object::HitInfo SemiConeBot::Hit(const Ray &ray, const SceneManager &manager)
 {
   return HitInfo();
 }
 
-Color SemiConeBot::getColorHit(const HitInfo &info)
+Color SemiConeBot::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
   return Color();
 }

@@ -9,5 +9,5 @@ set(LIBRARY_DIRECTORY_RAYTRACER ${CMAKE_CURRENT_BINARY_DIR}/Raytracer)
 
 find_package(Threads REQUIRED)
 
-add_subdirectory(RTechnologyGUI)
+#add_subdirectory(RTechnologyGUI)
 add_subdirectory(Raytracer)

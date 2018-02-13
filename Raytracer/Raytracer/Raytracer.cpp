@@ -77,7 +77,7 @@ void Raytracer::handleThreadFunction(const Vector2I &begin, const Vector2I &end)
   af::setBackend(af::Backend::AF_BACKEND_CPU);
   const auto &settings = this->_manager.getSceneSettings().getSettings();
   auto &camPos = settings.cameraPosition;
-  Vector3F PtLook = Vector3F::forward;
+  Vector3F PtLook = camPos + Vector3F::forward;
   Vector3F H = Vector3F::up;
   auto ResX = this->_drawer->getHeight();
   auto ResY = this->_drawer->getWidth();

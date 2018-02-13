@@ -13,6 +13,7 @@
 
 #include <vector>
 #include <memory>
+#include <cmath>
 
 #include "config.h"
 #include "math/Vector3.hpp"
@@ -20,6 +21,8 @@
 #include "Color.hpp"
 #include "IAttribute.hpp"
 #include "SceneSettings.hpp"
+
+class SceneManager;
 
 class Object
 {
@@ -60,8 +63,8 @@ class Object
 
   void registerAttribute(std::shared_ptr<IAttribute> attribute);
 
-  virtual HitInfo Hit(const Ray &ray, const SceneSettings &settings) = 0;
-  virtual Color getColorHit(const HitInfo &info) = 0;
+  virtual HitInfo Hit(const Ray &ray, const SceneManager &manager) = 0;
+  virtual Color getColorHit(const HitInfo &info, const SceneManager &manager) = 0;
 };
 
 #endif /* !RTECHNOLOGY_OBJECT_HPP */

@@ -25,12 +25,12 @@ Cone::Cone(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Obj
 Cone::~Cone()
 {}
 
-Object::HitInfo Cone::Hit(const Ray &ray, const SceneSettings &settings)
+Object::HitInfo Cone::Hit(const Ray &ray, const SceneManager &manager)
 {
   return HitInfo();
 }
 
-Color Cone::getColorHit(const HitInfo &info)
+Color Cone::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
   return Color();
 }

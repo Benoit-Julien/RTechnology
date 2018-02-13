@@ -25,12 +25,12 @@ Cylinder::Cylinder(const Vector3F &pos, const Vector3F &rot, const Vector3F &sca
 Cylinder::~Cylinder()
 {}
 
-Object::HitInfo Cylinder::Hit(const Ray &ray, const SceneSettings &settings)
+Object::HitInfo Cylinder::Hit(const Ray &ray, const SceneManager &manager)
 {
   return HitInfo();
 }
 
-Color Cylinder::getColorHit(const HitInfo &info)
+Color Cylinder::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
   return Color();
 }

@@ -29,22 +29,34 @@ const std::vector<std::shared_ptr<Object>> &SceneManager::getObjects() const
   return this->_objects;
 }
 
-Color SceneManager::checkHitAndGetColor(const Ray &ray) const
+const std::vector<std::shared_ptr<Light>>& SceneManager::getLights() const
+{
+  return this->_lights;
+}
+
+Object::HitInfo SceneManager::checkHit(const Ray &ray) const
 {
   Object::HitInfo objectHit;
 
   for (auto &it : this->_objects)
     {
-      auto tmp = it->Hit(ray, this->_settings);
+      auto tmp = it->Hit(ray, *this);
       if (tmp.haveHit)
 	{
-	  if (!objectHit.haveHit || (tmp.distance > 0 && tmp.distance < objectHit.distance))
+	  if (!objectHit.haveHit || (tmp.distance < objectHit.distance))
 	    objectHit = tmp;
 	}
     }
+  return objectHit;
+}
+
+Color SceneManager::checkHitAndGetColor(const Ray &ray) const
+{
+  auto objectHit = this->checkHit(ray);
+
   if (!objectHit.hitObject)
-    return Color(255, 0, 0);
-  return objectHit.hitObject->getColorHit(objectHit);
+    return Color(0, 255);
+  return objectHit.hitObject->getColorHit(objectHit, *this);
 }
 
 void SceneManager::parseSceneJson(const rapidjson::Document &document)

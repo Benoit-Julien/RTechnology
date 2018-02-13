@@ -80,3 +80,13 @@ const Color& Light::getColor() const
 {
   return this->_color;
 }
+
+const Vector3F& Light::getPosition() const
+{
+  return this->_position;
+}
+
+const Vector3F& Light::getRotation() const
+{
+  return this->_rotation;
+}

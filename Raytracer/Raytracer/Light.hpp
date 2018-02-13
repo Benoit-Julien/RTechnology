@@ -43,6 +43,9 @@ class Light
 
   void setColor(const Color &color);
   const Color &getColor() const;
+
+  const Vector3F &getPosition() const;
+  const Vector3F &getRotation() const;
 };
 
 

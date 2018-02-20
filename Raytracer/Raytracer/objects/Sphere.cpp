@@ -11,12 +11,6 @@
 #include "../SceneManager.hpp"
 #include "Sphere.hpp"
 
-static double m1 = -1;
-static double m2 = -1;
-static double m3 = -1;
-static double m4 = -1;
-static double m5 = -1;
-
 Sphere::Sphere()
 	: _radius(1)
 {}
@@ -37,14 +31,7 @@ Sphere::Sphere(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal)
 {}
 
 Sphere::~Sphere()
-{
-  printf("m1 = %.5f\n", m1);
-  printf("m2 = %.5f\n", m2);
-  printf("m3 = %.5f\n", m3);
-  printf("m4 = %.5f\n", m4);
-  printf("m5 = %.5f\n", m5);
-}
-#include <ctime>
+{}
 
 Object::HitInfo Sphere::Hit(const Ray &ray, const SceneManager &manager)
 {

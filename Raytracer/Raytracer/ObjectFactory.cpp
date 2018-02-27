@@ -9,7 +9,8 @@
 */
 
 #include "ObjectFactory.hpp"
-#include "objects/Objects.hpp"
+#include "Objects/Objects.hpp"
+#include "ModelParcer/ModelParcer.hpp"
 
 ObjectFactory::ObjectFactory()
 {
@@ -20,7 +21,8 @@ ObjectFactory::ObjectFactory()
 	  {"semi_cone_bot",  &ObjectFactory::makeSemiConeBot},
 	  {"semi_cone_top",  &ObjectFactory::makeSemiConeTop},
 	  {"parallelepiped", &ObjectFactory::makeParallelepiped},
-	  {"cylinder",       &ObjectFactory::makeCylinder}
+	  {"cylinder",       &ObjectFactory::makeCylinder},
+	  {"model",          &ObjectFactory::makeModel}
   };
 }
 
@@ -172,4 +174,20 @@ std::shared_ptr<Object> ObjectFactory::makeParallelepiped(rapidjson::Value::Cons
   auto scal = getScale(params);
 
   return nullptr;
+}
+
+std::shared_ptr<Object> ObjectFactory::makeModel(rapidjson::Value::ConstObject params)
+{
+  auto pos = getPosition(params);
+  auto rot = getRotation(params);
+  auto scal = getScale(params);
+
+  auto model = std::make_shared<Model>(pos, rot, scal);
+
+  assert(params.HasMember("3DModel") && params["3DModel"].IsString());
+
+  if (!ModelParcer::getSingleton().compute(params["3DModel"].GetString(), model))
+    return nullptr;
+
+  return model;
 }

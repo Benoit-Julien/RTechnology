@@ -39,4 +39,6 @@
 # endif
 #endif
 
+RT_DLL extern bool useGraphics;
+
 #endif /* !RTECHNOLOGY_CONFIG_H */

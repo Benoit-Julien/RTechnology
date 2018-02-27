@@ -12,8 +12,8 @@
   },
   "objects": [
     {
-      "radius": 10,
-      "type": "sphere",
+      "type": "model",
+      "3DModel": "capsule.obj",
       "position": {
         "x": 0,
         "y": 0,

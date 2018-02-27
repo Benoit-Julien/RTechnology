@@ -53,7 +53,7 @@ class ObjectFactory
   static std::shared_ptr<Object> makeSemiConeBot(rapidjson::Value::ConstObject params);
   static std::shared_ptr<Object> makeSemiConeTop(rapidjson::Value::ConstObject params);
   static std::shared_ptr<Object> makeParallelepiped(rapidjson::Value::ConstObject params);
-
+  static std::shared_ptr<Object> makeModel(rapidjson::Value::ConstObject params);
 };
 
 #endif /* !RTECHNOLOGY_OBJECTFACTORY_HPP */

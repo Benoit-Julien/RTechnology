@@ -8,29 +8,18 @@
 ** Last update mar. nov. 21:05 2017 benoit_g
 */
 
-#include <SFML/Graphics.hpp>
-#include <Raytracer/Raytracer.h>
+#include "SFMLPictureDraw.hpp"
+#include <Raytracer/Raytracer.hpp>
 
-//TODO: Mettre ça dans un config.h
+#include <fstream>
+#include <rapidjson/document.h>
+#include <rapidjson/filereadstream.h>
 
-#if _WIN32 || _WIN64
-# if _WIN64
-#  define ENVIRONMENT64
-# else
-#  define ENVIRONMENT32
-# endif
+#ifndef SCENES_PATH
+  #define SCENE_PATH "."
 #endif
 
-// Check GCC
-#if __GNUC__
-# if __x86_64__ || __ppc64__
-#  define ENVIRONMENT64
-# else
-#  define ENVIRONMENT32
-# endif
-#endif
-
-#if _WIN64 && !_DEBUG
+#if defined(WINDOWS) && !defined(_DEBUG)
 # include <Windows.h>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -38,24 +27,34 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 int main()
 #endif
 {
-  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-  sf::CircleShape shape(100.f);
-  shape.setFillColor(sf::Color::Green);
-  entry_point();
+  auto draw = std::make_shared<SFMLPictureDraw>(1280, 720);
+  Raytracer raytracer(draw);
 
-  while (window.isOpen())
+  std::string filename = "scene.json";
+  std::string filepath = std::string(SCENES_PATH) + "/" + filename;
+  std::ifstream file(filepath);
+  std::string json;
+
+  if (!file)
     {
-      sf::Event event;
-      while (window.pollEvent(event))
-	{
-	  if (event.type == sf::Event::Closed)
-	    window.close();
-	}
-
-      window.clear();
-      window.draw(shape);
-      window.display();
+      std::cerr << filepath << ": not found" << std::endl;
+      return -1;
     }
+
+  std::string tmp;
+  while (std::getline(file, tmp))
+    json.append(tmp + "\n");
+
+  file.close();
+
+  draw->updateWindow();
+  raytracer.setScenePath(SCENES_PATH);
+  raytracer.initialiseScene(json);
+  raytracer.start();
+
+  while (draw->windowIsOpen())
+    draw->updateWindow();
+  raytracer.stop();
 
   return 0;
 }

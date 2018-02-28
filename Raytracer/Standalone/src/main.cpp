@@ -11,10 +11,13 @@
 #include "SFMLPictureDraw.hpp"
 #include <Raytracer/Raytracer.hpp>
 
-
 #include <fstream>
 #include <rapidjson/document.h>
 #include <rapidjson/filereadstream.h>
+
+#ifndef SCENES_PATH
+  #define SCENE_PATH "."
+#endif
 
 #if defined(WINDOWS) && !defined(_DEBUG)
 # include <Windows.h>
@@ -28,11 +31,15 @@ int main()
   Raytracer raytracer(draw);
 
   std::string filename = "scene.json";
-  std::ifstream file(std::string(SCENES_PATH) + "/" + filename);
+  std::string filepath = std::string(SCENES_PATH) + "/" + filename;
+  std::ifstream file(filepath);
   std::string json;
 
   if (!file)
-    return -1;
+    {
+      std::cerr << filepath << ": not found" << std::endl;
+      return -1;
+    }
 
   std::string tmp;
   while (std::getline(file, tmp))
@@ -40,11 +47,14 @@ int main()
 
   file.close();
 
-  raytracer.initialiseScene(json);
-  raytracer.renderer();
-
   draw->updateWindow();
-  while (draw->windowIsOpen());
+  raytracer.setScenePath(SCENES_PATH);
+  raytracer.initialiseScene(json);
+  raytracer.start();
+
+  while (draw->windowIsOpen())
+    draw->updateWindow();
+  raytracer.stop();
 
   return 0;
 }

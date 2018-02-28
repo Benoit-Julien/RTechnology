@@ -10,7 +10,11 @@
 
 #include "Object.hpp"
 
-Object::HitInfo::HitInfo() : haveHit(false), color(), distance(0)
+Object::HitInfo::HitInfo()
+	: haveHit(false),
+	  nbRepeatRay(0),
+	  distance(0),
+	  hitObject(nullptr)
 {}
 
 Object::Object()
@@ -19,19 +23,19 @@ Object::Object()
 	  scale(1, 1, 1)
 {}
 
-Object::Object(const Vector3Float &pos)
+Object::Object(const Vector3F &pos)
 	: position(pos),
 	  rotation(0, 0, 0),
 	  scale(1, 1, 1)
 {}
 
-Object::Object(const Vector3Float &pos, const Vector3Float &rot)
+Object::Object(const Vector3F &pos, const Vector3F &rot)
 	: position(pos),
 	  rotation(rot),
 	  scale(1, 1, 1)
 {}
 
-Object::Object(const Vector3Float &pos, const Vector3Float &rot, const Vector3Float &scal)
+Object::Object(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal)
 	: position(pos),
 	  rotation(rot),
 	  scale(scal)
@@ -59,17 +63,17 @@ Object &Object::operator=(Object &&obj) noexcept
   return *this;
 }
 
-const Vector3Float &Object::getPosition() const
+const Vector3F &Object::getPosition() const
 {
   return this->position;
 }
 
-const Vector3Float &Object::getRotation() const
+const Vector3F &Object::getRotation() const
 {
   return this->rotation;
 }
 
-const Vector3Float &Object::getScale() const
+const Vector3F &Object::getScale() const
 {
   return this->scale;
 }

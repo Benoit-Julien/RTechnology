@@ -27,7 +27,8 @@ class SFMLPictureDraw : public APictureDraw
   void updateWindow();
 
  protected:
-  virtual void _setPixel(const Vector2Int &position, const Color &pixColor);
+  virtual void _setPixel(const Vector2I &position, const Color &pixColor);
+  virtual void _drawPicture(const std::vector<std::vector<Color>> &picture);
 };
 
 

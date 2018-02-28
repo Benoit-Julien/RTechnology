@@ -15,22 +15,22 @@
 
 class Ray
 {
-  Vector3Float _origin;
-  Vector3Float _direction;
+  Vector3F _origin;
+  Vector3F _direction;
 
  public:
-  Ray(const Vector3Float &origin, const Vector3Float &direction);
+  Ray(const Vector3F &origin, const Vector3F &direction);
   Ray(const Ray &ray);
   Ray(Ray &&ray) noexcept;
   Ray &operator=(const Ray &ray);
   Ray &operator=(Ray &&ray) noexcept;
   ~Ray() = default;
 
-  const Vector3Float &getOrigin() const;
-  const Vector3Float &getDirection() const;
+  const Vector3F &getOrigin() const;
+  const Vector3F &getDirection() const;
 
-  void setOrigin(const Vector3Float &origin);
-  void setDirection(const Vector3Float &direction);
+  void setOrigin(const Vector3F &origin);
+  void setDirection(const Vector3F &direction);
 };
 
 

@@ -22,9 +22,12 @@ class SceneSettings
  public:
   struct Settings
   {
-    Vector3Float cameraPosition;
-    Vector3Float cameraRotation;
+    Vector3F cameraPosition;
+    Vector3F cameraRotation;
     int defaultLight;
+    float viewPlaneDistance;
+    float viewPlaneWidth;
+    float viewPlaneHeight;
 
     explicit Settings();
     Settings(const Settings &settings);
@@ -35,7 +38,7 @@ class SceneSettings
   };
 
  private:
-  typedef void (SceneSettings::*SetSettingFuncType)(const rapidjson::GenericValue<rapidjson::UTF8<char>> &);
+  typedef void (SceneSettings::*SetSettingFuncType)(const rapidjson::Value &);
 
   Settings _settings;
   std::unordered_map<std::string, SetSettingFuncType> _map;
@@ -49,12 +52,14 @@ class SceneSettings
   ~SceneSettings();
 
   const Settings &getSettings() const;
-  void setSetting(const std::string &name, const rapidjson::GenericValue<rapidjson::UTF8<>> &value);
+  void setSetting(const std::string &name, const rapidjson::Value &value);
 
  private:
-  void setDefaultLight(const rapidjson::GenericValue<rapidjson::UTF8<>> &value);
-  void setCameraPosition(const rapidjson::GenericValue<rapidjson::UTF8<>> &value);
-  void setCameraRotation(const rapidjson::GenericValue<rapidjson::UTF8<>> &value);
+  void setDefaultLight(const rapidjson::Value &value);
+  void setCamera(const rapidjson::Value &value);
+  void setViewPlaneDistance(const rapidjson::Value &value);
+  void setViewPlaneWidth(const rapidjson::Value &value);
+  void setViewPlaneHeight(const rapidjson::Value &value);
 };
 
 #endif /* !RTECHNOLOGY_SCENESETTINGS_HPP */

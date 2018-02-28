@@ -11,4 +11,13 @@
 #ifndef RTECHNOLOGY_OBJECTS_HPP
 #define RTECHNOLOGY_OBJECTS_HPP
 
+#include "Sphere.hpp"
+#include "Plan.hpp"
+#include "Cone.hpp"
+#include "Cylinder.hpp"
+#include "SemiConeTop.hpp"
+#include "SemiConeBot.hpp"
+#include "Parallelepiped.hpp"
+#include "Model.hpp"
+
 #endif /* !RTECHNOLOGY_OBJECTS_HPP */

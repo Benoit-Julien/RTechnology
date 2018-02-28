@@ -1,4 +1,38 @@
 {
   "defaultLight": 2,
-  "objects": []
+  "viewPlaneDistance": 1,
+  "viewPlaneWidth": 0.5,
+  "viewPlaneHeight": 0.35,
+  "camera": {
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "objects": [
+    {
+      "type": "model",
+      "3DModel": "capsule.obj",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": -100
+      }
+    }
+  ],
+  "lights": [
+    {
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255
+      },
+      "position": {
+        "x": 100,
+        "y": 100,
+        "z": 0
+      }
+    }
+  ]
 }

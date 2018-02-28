@@ -4,16 +4,11 @@ project(RTechnology)
 set(CMAKE_CXX_STANDARD 17)
 
 set(INCLUDE_DIRECTORY_RAPIDJSON ${CMAKE_CURRENT_SOURCE_DIR}/RapidJSON)
-set(INCLUDE_DIRECTORY_RAYTRACER ${CMAKE_CURRENT_SOURCE_DIR}/Raytracer/include)
+set(INCLUDE_DIRECTORY_RAYTRACER ${CMAKE_CURRENT_SOURCE_DIR}/Raytracer/)
 set(LIBRARY_DIRECTORY_RAYTRACER ${CMAKE_CURRENT_BINARY_DIR}/Raytracer)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
-option(USE_GRAPHICS "Use graphical card" OFF)
-
-if (USE_GRAPHICS)
-	message("ArrayFire use graphical card")
-else()
-	message("ArrayFire not use graphical card")
-endif()
+find_package(Threads REQUIRED)
 
 add_subdirectory(RTechnologyGUI)
 add_subdirectory(Raytracer)

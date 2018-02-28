@@ -10,7 +10,7 @@
 
 #include "Ray.hpp"
 
-Ray::Ray(const Vector3Float &origin, const Vector3Float &direction)
+Ray::Ray(const Vector3F &origin, const Vector3F &direction)
 	: _origin(origin),
 	  _direction(direction)
 {}
@@ -41,22 +41,22 @@ Ray &Ray::operator=(Ray &&ray) noexcept
   return *this;
 }
 
-const Vector3Float &Ray::getOrigin() const
+const Vector3F &Ray::getOrigin() const
 {
   return this->_origin;
 }
 
-const Vector3Float &Ray::getDirection() const
+const Vector3F &Ray::getDirection() const
 {
   return this->_direction;
 }
 
-void Ray::setOrigin(const Vector3Float &origin)
+void Ray::setOrigin(const Vector3F &origin)
 {
   this->_origin = origin;
 }
 
-void Ray::setDirection(const Vector3Float &direction)
+void Ray::setDirection(const Vector3F &direction)
 {
   this->_direction = direction;
 }

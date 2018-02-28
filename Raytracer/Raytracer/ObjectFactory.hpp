@@ -23,7 +23,7 @@
 class ObjectFactory
 {
  private:
-  typedef std::function<std::shared_ptr<Object>(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject)> MakeFuncType;
+  typedef std::function<std::shared_ptr<Object>(rapidjson::Value::ConstObject)> MakeFuncType;
 
   std::unordered_map<std::string, MakeFuncType> _map;
 
@@ -37,15 +37,23 @@ class ObjectFactory
   ObjectFactory &operator=(ObjectFactory &&factory) = delete;
   ~ObjectFactory() = default;
 
-  static std::shared_ptr<Object> createObject(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::shared_ptr<Object> createObject(rapidjson::Value::ConstObject params);
 
  private:
-  static Vector3Float getVector3Of(const std::string &name, rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
-  static std::array<Vector3Float, 3> getPosRotScal(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static Vector3F getVector3Of(const std::string &name, rapidjson::Value::ConstObject params);
+  static Vector3F getPosition(rapidjson::Value::ConstObject params);
+  static Vector3F getRotation(rapidjson::Value::ConstObject params);
+  static Vector3F getScale(rapidjson::Value::ConstObject params);
 
  private:
-  static std::shared_ptr<Object> makeSphere(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
-  static std::shared_ptr<Object> makePlane(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject params);
+  static std::shared_ptr<Object> makeSphere(rapidjson::Value::ConstObject params);
+  static std::shared_ptr<Object> makePlane(rapidjson::Value::ConstObject params);
+  static std::shared_ptr<Object> makeCone(rapidjson::Value::ConstObject params);
+  static std::shared_ptr<Object> makeCylinder(rapidjson::Value::ConstObject params);
+  static std::shared_ptr<Object> makeSemiConeBot(rapidjson::Value::ConstObject params);
+  static std::shared_ptr<Object> makeSemiConeTop(rapidjson::Value::ConstObject params);
+  static std::shared_ptr<Object> makeParallelepiped(rapidjson::Value::ConstObject params);
+  static std::shared_ptr<Object> makeModel(rapidjson::Value::ConstObject params);
 };
 
 #endif /* !RTECHNOLOGY_OBJECTFACTORY_HPP */

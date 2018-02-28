@@ -44,7 +44,17 @@ void SFMLPictureDraw::updateWindow()
   this->_window.display();
 }
 
-void SFMLPictureDraw::_setPixel(const Vector2Int &position, const Color &pixColor)
+void SFMLPictureDraw::_setPixel(const Vector2I &position, const Color &pixColor)
 {
   this->_array[position.y() * this->height + position.x()].color = sf::Color(pixColor.r, pixColor.g, pixColor.b);
+}
+
+void SFMLPictureDraw::_drawPicture(const std::vector<std::vector<Color>> &picture)
+{
+  for (auto y = 0; y < this->height; y++)
+    for (auto x = 0; x < this->width; x++)
+      {
+	auto color = picture[y][x];
+	this->_array[y * this->height + x].color = sf::Color(color.r, color.g, color.b);
+      }
 }

@@ -13,7 +13,7 @@
 /*
  * int specialization
  */
-
+/*
 template<>
 Vector2<int>::Vector2() : _array(af::constant(0, 2, s32))
 {}
@@ -87,11 +87,11 @@ bool Vector2<int>::operator>=(const Vector2<int> &vec) const
 {
   return this->getNormArray().scalar<int>() >= vec.getNormArray().scalar<int>();
 }
-
+*/
 /*
  * long long specialization
  */
-
+/*
 #ifdef ENVIRONMENT64
 
 template<>
@@ -168,11 +168,11 @@ bool Vector2<long long>::operator>=(const Vector2<long long> &vec) const
   return this->getNormArray().scalar<long long>() >= vec.getNormArray().scalar<long long>();
 }
 #endif
-
+*/
 /*
  * unsigned specialization
  */
-
+/*
 template<>
 Vector2<unsigned>::Vector2() : _array(af::constant(0, 2, u32))
 {}
@@ -246,11 +246,11 @@ bool Vector2<unsigned>::operator>=(const Vector2<unsigned> &vec) const
 {
   return this->getNormArray().scalar<unsigned>() >= vec.getNormArray().scalar<unsigned>();
 }
-
+*/
 /*
  * long long unsigned specialization
  */
-
+/*
 #ifdef ENVIRONMENT64
 
 template<>
@@ -327,11 +327,11 @@ bool Vector2<long long unsigned>::operator>=(const Vector2<long long unsigned> &
   return this->getNormArray().scalar<long long unsigned>() >= vec.getNormArray().scalar<long long unsigned>();
 }
 #endif
-
+*/
 /*
  * float specialization
  */
-
+/*
 template<>
 Vector2<float>::Vector2() : _array(af::constant(0, 2, f32))
 {}
@@ -405,3 +405,4 @@ bool Vector2<float>::operator>=(const Vector2<float> &vec) const
 {
   return this->getNormArray().scalar<float>() >= vec.getNormArray().scalar<float>();
 }
+*/

@@ -242,7 +242,7 @@ class RT_DLL Vector3
     return *this;
   }
 
-  Vector3<float> nomalized() const
+  Vector3<float> normalized() const
   {
     float norm = this->magnitude();
     float x = this->_x / norm;
@@ -347,8 +347,8 @@ class RT_DLL Vector3
   //return af::acos(mul / norm).scalar<float>();
   return af::acos(mul).scalar<float>();
      */
-    auto newVec1 = vec1.nomalized();
-    auto newVec2 = vec2.nomalized();
+    auto newVec1 = vec1.normalized();
+    auto newVec2 = vec2.normalized();
 
     auto v = newVec1 * newVec2;
     return std::acos(v._x + v._y + v._z);

@@ -381,8 +381,8 @@ float Vector3<float>::Dot(const Vector3<float> &vec1, const Vector3<float> &vec2
 template<>
 float Vector3<float>::Angle(const Vector3<float> &vec1, const Vector3<float> &vec2)
 {
-  auto newVec1 = vec1.nomalized();
-  auto newVec2 = vec2.nomalized();
+  auto newVec1 = vec1.normalized();
+  auto newVec2 = vec2.normalized();
 
 
   auto mul = af::sum(newVec1._array * newVec2._array);

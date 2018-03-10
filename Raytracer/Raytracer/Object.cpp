@@ -111,3 +111,22 @@ float Object::checkDelta(const float &a, const float &b, const float &delta)
     }
   return -1;
 }
+
+Vector3F Object::calculateReflect(const Ray &ray, const Vector3F &normal)
+{
+  Vector3F ray2;
+  Vector3F normal2;
+
+  double prod_scal;
+
+  ray2 = ray.getDirection().normalized();
+  normal2 = normal.normalized();
+
+  prod_scal = ray2.x() * normal2.x() + ray2.y() * normal2.y() + ray2.z() * normal2.z();
+
+  Vector3F reflect = Vector3F(((ray2.x() - 2 * prod_scal * normal2.x()) * 100),
+			      ((ray2.y() - 2 * prod_scal * normal2.y()) * 100),
+			      ((ray2.z() - 2 * prod_scal * normal2.z()) * 100));
+
+  return reflect;
+}

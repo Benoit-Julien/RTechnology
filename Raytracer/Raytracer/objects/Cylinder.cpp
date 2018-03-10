@@ -50,8 +50,10 @@ Object::HitInfo Cylinder::Hit(const Ray &ray, const SceneManager &manager)
       info.haveHit = true;
       info.hitObject = this;
       info.distance = k;
-      //A MODIFIER
       info.hitPosition = C + (V * k);
+      info.normal = info.hitPosition + this->position;
+      info.normal *=  Vector3F(1, 0, 1);
+      info.reflect = calculateReflect(ray, info.normal);
     }
   else
     info.haveHit = false;
@@ -61,8 +63,6 @@ Object::HitInfo Cylinder::Hit(const Ray &ray, const SceneManager &manager)
 
 Color Cylinder::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
-  Vector3F normal = info.hitPosition + this->position;
-  normal = normal * Vector3F(1, 0, 1);
   Color color(255, 0, 0);
 
   for (auto &l : manager.getLights())
@@ -71,14 +71,22 @@ Color Cylinder::getColorHit(const HitInfo &info, const SceneManager &manager)
       auto objectHit = manager.checkHit(my_ray);
       if (objectHit.haveHit && objectHit.hitObject != this)
 	return Color();
-      auto angle = Vector3F::Angle(normal, my_ray.getDirection());
-      std::cout << angle * 180 / af::Pi << std::endl;
+      auto angle = Vector3F::Angle(info.normal, my_ray.getDirection());
       if (angle >= af::Pi / 2)
 	return Color();
       float coeff = angle / (af::Pi / 2);
       color.r = color.r - (color.r * coeff);
       color.g = color.g - (color.g * coeff);
       color.b = color.b - (color.b * coeff);
+
+      auto angleSpec = Vector3F::Angle(info.reflect, my_ray.getDirection());
+      if (angleSpec < af::Pi / 20)
+	{
+	  float coeffSpec = angleSpec / (af::Pi / 20);
+	  color.r = 255 - (255 - color.r) * coeffSpec;
+	  color.g = 255 - (255 - color.g) * coeffSpec;
+	  color.b = 255 - (255 - color.b) * coeffSpec;
+	}
     }
   return color;
 }

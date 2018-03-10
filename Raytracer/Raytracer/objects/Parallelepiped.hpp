@@ -15,6 +15,9 @@
 
 class Parallelepiped : public Object
 {
+  float _length;
+  float _width;
+  float _height;
  public:
   explicit Parallelepiped();
   explicit Parallelepiped(const Vector3F &pos);
@@ -24,6 +27,10 @@ class Parallelepiped : public Object
 
   virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
   virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
+
+  void setLength(const float &length);
+  void setWidth(const float &width);
+  void setHeight(const float &height);
 };
 
 

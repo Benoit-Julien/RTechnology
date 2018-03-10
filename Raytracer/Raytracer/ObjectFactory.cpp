@@ -178,5 +178,25 @@ std::shared_ptr<Object> ObjectFactory::makeParallelepiped(rapidjson::Value::Cons
   auto rot = getRotation(params);
   auto scal = getScale(params);
 
-  return nullptr;
+  auto parallelepiped = std::make_shared<Parallelepiped>(pos, rot, scal);
+
+  if (params.HasMember("length"))
+    {
+      assert(params["length"].IsNumber());
+      parallelepiped->setAngle(params["length"].GetFloat());
+    }
+
+  if (params.HasMember("width"))
+    {
+      assert(params["width"].IsNumber());
+      parallelepiped->setAngle(params["width"].GetFloat());
+    }
+
+  if (params.HasMember("height"))
+    {
+      assert(params["height"].IsNumber());
+      parallelepiped->setAngle(params["height"].GetFloat());
+    }
+
+  return parallelepiped;
 }

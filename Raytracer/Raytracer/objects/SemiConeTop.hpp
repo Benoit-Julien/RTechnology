@@ -15,7 +15,7 @@
 
 class SemiConeTop : public Object
 {
-  float angle;
+  float _angle;
  public:
   explicit SemiConeTop();
   explicit SemiConeTop(const Vector3F &pos);

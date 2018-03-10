@@ -65,6 +65,9 @@ class Object
 
   virtual HitInfo Hit(const Ray &ray, const SceneManager &manager) = 0;
   virtual Color getColorHit(const HitInfo &info, const SceneManager &manager) = 0;
+
+ protected:
+  float checkDelta(const float &a, const float &b, const float &delta);
 };
 
 #endif /* !RTECHNOLOGY_OBJECT_HPP */

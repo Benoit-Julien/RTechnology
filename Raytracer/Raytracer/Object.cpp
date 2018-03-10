@@ -82,3 +82,32 @@ void Object::registerAttribute(std::shared_ptr<IAttribute> attribute)
 {
   this->attributes.push_back(attribute);
 }
+
+float Object::checkDelta(const float &a, const float &b, const float &delta)
+{
+  float s1;
+  float s2;
+
+  if (delta > 0)
+    {
+      float a2 = 2 * a;
+      float sqrt_delta = std::sqrt(delta);
+      s1 = (-b + sqrt_delta) / a2;
+      s2 = (-b - sqrt_delta) / a2;
+      if (s2 > s1)
+	{
+	  if (s1 > 0)
+	    return s1;
+	  else
+	    return s2;
+	}
+      else
+	{
+	  if (s2 > 0)
+	    return s2;
+	  else
+	    return s1;
+	}
+    }
+  return -1;
+}

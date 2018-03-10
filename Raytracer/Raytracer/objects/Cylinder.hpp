@@ -15,6 +15,7 @@
 
 class Cylinder : public Object
 {
+  float _radius;
  public:
   explicit Cylinder();
   explicit Cylinder(const Vector3F &pos);
@@ -24,6 +25,8 @@ class Cylinder : public Object
 
   virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
   virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
+
+  void setRadius(const float &radius);
 };
 
 

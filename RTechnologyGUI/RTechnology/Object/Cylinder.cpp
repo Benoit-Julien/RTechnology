@@ -10,7 +10,7 @@
 
 #include "Cylinder.hpp"
 
-Cylinder::Cylinder(QWidget *parent) : Object("cylinder", parent)
+Cylinder::Cylinder(QWidget *parent) : Object("cylinder", "cylinder", parent)
 {}
 
 Cylinder::~Cylinder()

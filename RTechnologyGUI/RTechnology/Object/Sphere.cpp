@@ -10,7 +10,7 @@
 
 #include "Sphere.hpp"
 
-Sphere::Sphere(QWidget *parent) : Object("sphere", parent)
+Sphere::Sphere(QWidget *parent) : Object("sphere", "sphere", parent)
 {}
 
 Sphere::~Sphere()

@@ -32,6 +32,12 @@ class Ui_MainWindow
 public:
     QAction *actionSphere;
     QAction *actionCylinder;
+    QAction *actionOuvrir;
+    QAction *actionEnregistrer;
+    QAction *actionEnregistrer_sous;
+    QAction *actionOptions;
+    QAction *actionNouveau;
+    QAction *actionOptions_Scene;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -41,6 +47,8 @@ public:
     QVBoxLayout *verticalLayout;
     QMenuBar *menuBar;
     QMenu *menuObjects;
+    QMenu *menuFichier;
+    QMenu *menuScene;
     QStatusBar *statusBar;
     QToolBar *mainToolBar;
 
@@ -53,6 +61,18 @@ public:
         actionSphere->setObjectName(QStringLiteral("actionSphere"));
         actionCylinder = new QAction(MainWindow);
         actionCylinder->setObjectName(QStringLiteral("actionCylinder"));
+        actionOuvrir = new QAction(MainWindow);
+        actionOuvrir->setObjectName(QStringLiteral("actionOuvrir"));
+        actionEnregistrer = new QAction(MainWindow);
+        actionEnregistrer->setObjectName(QStringLiteral("actionEnregistrer"));
+        actionEnregistrer_sous = new QAction(MainWindow);
+        actionEnregistrer_sous->setObjectName(QStringLiteral("actionEnregistrer_sous"));
+        actionOptions = new QAction(MainWindow);
+        actionOptions->setObjectName(QStringLiteral("actionOptions"));
+        actionNouveau = new QAction(MainWindow);
+        actionNouveau->setObjectName(QStringLiteral("actionNouveau"));
+        actionOptions_Scene = new QAction(MainWindow);
+        actionOptions_Scene->setObjectName(QStringLiteral("actionOptions_Scene"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -104,6 +124,10 @@ public:
         menuBar->setGeometry(QRect(0, 0, 1132, 22));
         menuObjects = new QMenu(menuBar);
         menuObjects->setObjectName(QStringLiteral("menuObjects"));
+        menuFichier = new QMenu(menuBar);
+        menuFichier->setObjectName(QStringLiteral("menuFichier"));
+        menuScene = new QMenu(menuBar);
+        menuScene->setObjectName(QStringLiteral("menuScene"));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -112,9 +136,17 @@ public:
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
 
+        menuBar->addAction(menuFichier->menuAction());
+        menuBar->addAction(menuScene->menuAction());
         menuBar->addAction(menuObjects->menuAction());
         menuObjects->addAction(actionSphere);
         menuObjects->addAction(actionCylinder);
+        menuFichier->addAction(actionNouveau);
+        menuFichier->addAction(actionOuvrir);
+        menuFichier->addAction(actionEnregistrer);
+        menuFichier->addAction(actionEnregistrer_sous);
+        menuFichier->addAction(actionOptions);
+        menuScene->addAction(actionOptions_Scene);
 
         retranslateUi(MainWindow);
 
@@ -126,7 +158,15 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
         actionSphere->setText(QApplication::translate("MainWindow", "Sphere", Q_NULLPTR));
         actionCylinder->setText(QApplication::translate("MainWindow", "Cylinder", Q_NULLPTR));
+        actionOuvrir->setText(QApplication::translate("MainWindow", "Ouvrir", Q_NULLPTR));
+        actionEnregistrer->setText(QApplication::translate("MainWindow", "Enregistrer", Q_NULLPTR));
+        actionEnregistrer_sous->setText(QApplication::translate("MainWindow", "Enregistrer sous", Q_NULLPTR));
+        actionOptions->setText(QApplication::translate("MainWindow", "Options", Q_NULLPTR));
+        actionNouveau->setText(QApplication::translate("MainWindow", "Nouveau", Q_NULLPTR));
+        actionOptions_Scene->setText(QApplication::translate("MainWindow", "Scene Options", Q_NULLPTR));
         menuObjects->setTitle(QApplication::translate("MainWindow", "Objects", Q_NULLPTR));
+        menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", Q_NULLPTR));
+        menuScene->setTitle(QApplication::translate("MainWindow", "Scene", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -15,17 +15,20 @@
 #include <memory>
 #include <Raytracer/math/Vector3.hpp>
 #include <QWidget>
+#include <rapidjson/document.h>
 
 #include "AttributesUi/DefaultAttribute.hpp"
 
 class Object
 {
  protected:
+  const std::string type;
+
   QWidget *parent;
   std::shared_ptr<DefaultAttribute> defaultAttribute;
 
  public:
-  explicit Object(const std::string &name, QWidget *parent);
+  explicit Object(const std::string &name, const std::string &type, QWidget *parent);
   virtual ~Object();
 
   void show();
@@ -33,6 +36,10 @@ class Object
 
   inline const std::string getName() const
   { return this->defaultAttribute->getName(); }
+
+  rapidjson::Value serialize(rapidjson::Document::AllocatorType &allocator) const;
+ private:
+  static rapidjson::Value serializeVector(const Vector3F &vec, rapidjson::Document::AllocatorType &allocator);
 };
 
 #endif /* !RTECHNOLOGY_OBJECT_HPP */

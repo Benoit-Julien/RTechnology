@@ -27,6 +27,7 @@ endif()
 set(SOURCES_GUI
         RTechnology/main.cpp
         RTechnology/mainwindow.cpp
+        RTechnology/scenesettings.cpp
         RTechnology/Object/Object.cpp
         RTechnology/Object/Sphere.cpp
         RTechnology/Object/Cylinder.cpp

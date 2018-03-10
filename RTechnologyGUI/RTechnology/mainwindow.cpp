@@ -10,8 +10,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), _previousClick(-1
 
   ui->attributes->layout()->setAlignment(Qt::AlignTop);
 
+  this->_sceneSettings = std::make_shared<SceneSettings>(this);
+
   connect(ui->actionSphere, SIGNAL(triggered()), this, SLOT(addSphere()));
   connect(ui->actionCylinder, SIGNAL(triggered()), this, SLOT(addCylinder()));
+  connect(ui->actionOptions_Scene, SIGNAL(triggered()), this, SLOT(openSceneSettings()));
 
   connect(ui->object_list_view, SIGNAL(clicked(QModelIndex)), this, SLOT(itemClicked(QModelIndex)));
 }
@@ -32,6 +35,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
   delete seletedItem;
 
   this->_previousClick = -1;
+}
+
+void MainWindow::openSceneSettings()
+{
+  this->_sceneSettings->open();
 }
 
 void MainWindow::addSphere()

@@ -216,7 +216,7 @@ TARGET        = RTechnology
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_defaultattribute.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_defaultattribute.h ui_scenesettings.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../RTechnology/RTechnology.pro ../../../../Qt/5.9.2/gcc_64/mkspecs/linux-g++/qmake.conf ../../../../Qt/5.9.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -556,7 +556,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.9.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../RTechnology/main.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../RTechnology/mainwindow.ui ../RTechnology/AttributesUi/defaultattribute.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../RTechnology/mainwindow.ui ../RTechnology/AttributesUi/defaultattribute.ui ../RTechnology/scenesettings.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -592,9 +592,9 @@ compiler_moc_header_make_all:
 compiler_moc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_defaultattribute.h
+compiler_uic_make_all: ui_mainwindow.h ui_defaultattribute.h ui_scenesettings.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_defaultattribute.h
+	-$(DEL_FILE) ui_mainwindow.h ui_defaultattribute.h ui_scenesettings.h
 ui_mainwindow.h: ../RTechnology/mainwindow.ui \
 		../../../../Qt/5.9.2/gcc_64/bin/uic
 	/home/benoit_g/Qt/5.9.2/gcc_64/bin/uic ../RTechnology/mainwindow.ui -o ui_mainwindow.h
@@ -602,6 +602,10 @@ ui_mainwindow.h: ../RTechnology/mainwindow.ui \
 ui_defaultattribute.h: ../RTechnology/AttributesUi/defaultattribute.ui \
 		../../../../Qt/5.9.2/gcc_64/bin/uic
 	/home/benoit_g/Qt/5.9.2/gcc_64/bin/uic ../RTechnology/AttributesUi/defaultattribute.ui -o ui_defaultattribute.h
+
+ui_scenesettings.h: ../RTechnology/scenesettings.ui \
+		../../../../Qt/5.9.2/gcc_64/bin/uic
+	/home/benoit_g/Qt/5.9.2/gcc_64/bin/uic ../RTechnology/scenesettings.ui -o ui_scenesettings.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -613,7 +617,8 @@ compiler_clean: compiler_moc_predefs_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../RTechnology/main.cpp ../RTechnology/mainwindow.h \
+main.o: ../RTechnology/main.cpp ../RTechnology/Global.hpp \
+		../RTechnology/mainwindow.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -717,7 +722,10 @@ main.o: ../RTechnology/main.cpp ../RTechnology/mainwindow.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtGui/qtouchdevice.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h \
+		../RTechnology/scenesettings.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QDialog \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qdialog.h \
+		ui_scenesettings.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtCore/QVariant \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QAction \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qaction.h \
@@ -731,11 +739,8 @@ main.o: ../RTechnology/main.cpp ../RTechnology/mainwindow.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtGui/qinputmethod.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QButtonGroup \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QDialogButtonBox \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QHeaderView \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qheaderview.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qabstractitemview.h \
@@ -753,6 +758,27 @@ main.o: ../RTechnology/main.cpp ../RTechnology/mainwindow.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../RTechnology/Object/Object.hpp \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QWidget \
+		../RTechnology/AttributesUi/DefaultAttribute.hpp \
+		ui_defaultattribute.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QDoubleSpinBox \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qspinbox.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QLineEdit \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QVBoxLayout \
+		ui_mainwindow.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QListWidget \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlistwidget.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlistview.h \
@@ -762,7 +788,6 @@ main.o: ../RTechnology/main.cpp ../RTechnology/mainwindow.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qmenubar.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QOpenGLWidget \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qopenglwidget.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QWidget \
 		../../../../Qt/5.9.2/gcc_64/include/QtGui/QSurfaceFormat \
 		../../../../Qt/5.9.2/gcc_64/include/QtGui/qsurfaceformat.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtGui/qopengl.h \
@@ -772,20 +797,7 @@ main.o: ../RTechnology/main.cpp ../RTechnology/mainwindow.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QStatusBar \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qstatusbar.h \
 		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QToolBar \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qtoolbar.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QVBoxLayout \
-		../RTechnology/Object/Object.hpp \
-		ui_defaultattribute.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QDoubleSpinBox \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qspinbox.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QLabel \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlabel.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/QLineEdit \
-		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qlineedit.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtGui/qtextcursor.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtGui/qtextformat.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtGui/qpen.h \
-		../../../../Qt/5.9.2/gcc_64/include/QtGui/qtextoption.h
+		../../../../Qt/5.9.2/gcc_64/include/QtWidgets/qtoolbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../RTechnology/main.cpp
 
 ####### Install

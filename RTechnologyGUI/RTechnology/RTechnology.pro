@@ -26,9 +26,7 @@ DEFINES += COMPILE_WITH_QT
 
 SOURCES += \
         main.cpp
-
 FORMS += \
         mainwindow.ui \
-        AttributesUi/defaultattribute.ui
-
-HEADERS +=
+        AttributesUi/defaultattribute.ui \
+    scenesettings.ui

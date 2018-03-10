@@ -99,6 +99,24 @@
     <addaction name="actionSphere"/>
     <addaction name="actionCylinder"/>
    </widget>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionNouveau"/>
+    <addaction name="actionOuvrir"/>
+    <addaction name="actionEnregistrer"/>
+    <addaction name="actionEnregistrer_sous"/>
+    <addaction name="actionOptions"/>
+   </widget>
+   <widget class="QMenu" name="menuScene">
+    <property name="title">
+     <string>Scene</string>
+    </property>
+    <addaction name="actionOptions_Scene"/>
+   </widget>
+   <addaction name="menuFichier"/>
+   <addaction name="menuScene"/>
    <addaction name="menuObjects"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -118,6 +136,36 @@
   <action name="actionCylinder">
    <property name="text">
     <string>Cylinder</string>
+   </property>
+  </action>
+  <action name="actionOuvrir">
+   <property name="text">
+    <string>Ouvrir</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer">
+   <property name="text">
+    <string>Enregistrer</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer_sous">
+   <property name="text">
+    <string>Enregistrer sous</string>
+   </property>
+  </action>
+  <action name="actionOptions">
+   <property name="text">
+    <string>Options</string>
+   </property>
+  </action>
+  <action name="actionNouveau">
+   <property name="text">
+    <string>Nouveau</string>
+   </property>
+  </action>
+  <action name="actionOptions_Scene">
+   <property name="text">
+    <string>Scene Options</string>
    </property>
   </action>
  </widget>

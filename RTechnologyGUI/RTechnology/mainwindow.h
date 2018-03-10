@@ -3,14 +3,17 @@
 
 #include <QMainWindow>
 #include <memory>
-#include "ui_mainwindow.h"
+
+#include "scenesettings.h"
 #include "Object/Object.hpp"
+#include "ui_mainwindow.h"
 
 class MainWindow : public QMainWindow
 {
  Q_OBJECT
 
   std::shared_ptr<Ui::MainWindow> ui;
+  std::shared_ptr<SceneSettings> _sceneSettings;
   std::vector<std::shared_ptr<Object>> _objects;
   int _previousClick;
 
@@ -19,6 +22,8 @@ class MainWindow : public QMainWindow
   ~MainWindow();
 
  private slots:
+  void openSceneSettings();
+
   void addSphere();
   void addCylinder();
   void itemClicked(const QModelIndex &index);

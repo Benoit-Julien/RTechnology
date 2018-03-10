@@ -218,7 +218,7 @@ class RT_DLL Vector2
     return *this;
   }
 
-  Vector2<float> nomalized() const
+  Vector2<float> normalized() const
   {
     //Vector2<float> norm;
     //norm._array = this->_array / this->getNormArray();
@@ -286,8 +286,8 @@ class RT_DLL Vector2
 
   static float Angle(const Vector2<T> &vec1, const Vector2<T> &vec2)
   {
-    auto newVec1 = vec1.nomalized();
-    auto newVec2 = vec2.nomalized();
+    auto newVec1 = vec1.normalized();
+    auto newVec2 = vec2.normalized();
 
     auto v = newVec1 * newVec2;
     return std::acos(v._x + v._y);

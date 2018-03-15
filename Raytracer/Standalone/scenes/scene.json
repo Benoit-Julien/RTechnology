@@ -12,10 +12,19 @@
   },
   "objects": [
     {
-      "type": "cone",
-      "angle": 45,
+      "type": "cylinder",
+      "radius": 5,
       "position": {
         "x": 0,
+        "y": 0,
+        "z": -200
+      }
+    },
+    {
+      "type": "sphere",
+      "radius": 10,
+      "position": {
+        "x": 20,
         "y": 0,
         "z": -200
       }
@@ -29,8 +38,8 @@
         "b": 255
       },
       "position": {
-        "x": 3000,
-        "y": 2000,
+        "x": 0,
+        "y": 50,
         "z": -5000
       }
     }

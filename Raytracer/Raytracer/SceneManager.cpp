@@ -53,11 +53,14 @@ Object::HitInfo SceneManager::checkHit(const Ray &ray) const
 
 Color SceneManager::checkHitAndGetColor(const Ray &ray) const
 {
+ // Color color = raytracer(ray, 5);
   auto objectHit = this->checkHit(ray);
 
   if (!objectHit.hitObject)
     return Color();
   return objectHit.hitObject->getColorHit(objectHit, *this);
+
+ // return  color;
 }
 
 void SceneManager::parseSceneJson(const rapidjson::Document &document)
@@ -169,4 +172,47 @@ Light::Type SceneManager::getLightType(const std::string &name, rapidjson::Value
   if (t == map.end())
     return Light::Type::POINT;
   return t->second;
+}
+
+Color SceneManager::raytracer(const Ray &ray, int depth) const
+{
+  if (depth > 10)
+    return Color();
+
+  auto objectHit = this->checkHit(ray);
+  if (!objectHit.hitObject)
+    return Color();
+
+  /*
+   * Color ambient() = Color Object * Coeff;
+   */
+
+  /*
+   * Color object() =
+   *
+   * Equivalent de getColorHit à faire de façon générale et à ne pas limiter aux object (le faire ici quoi)
+   */
+
+  /*
+   * Color specular() = ce qui est présent dans getColorHit #
+   *
+   *  auto angleSpec = Vector3F::Angle(objectHit.reflect, my_ray.getDirection());
+      if (angleSpec < af::Pi / 20)
+	{
+	  float coeffSpec = angleSpec / (af::Pi / 20);
+	  specular.r = 255 - (255 - color.r) * coeffSpec;
+	  specular.g = 255 - (255 - color.g) * coeffSpec;
+	  specular.b = 255 - (255 - color.b) * coeffSpec;
+	}
+   */
+
+  /*
+   * Color reflect() = raytracer(ray, depth + 1);
+   */
+
+  /*
+   * Color final() = final.r = maxi(ambient.r(), object.r(), specular.r(), reflect.r());
+   */
+
+  return Color();
 }

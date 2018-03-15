@@ -129,7 +129,7 @@ RT_NAMESPACE_BEGIN
   Vector3F V = PosHGView_PosC + Dxvpwd2 * x - Hxvphd2 * y;
 	V = V.normalized();
 	Ray ray(camPos, V);
-	Color color = this->_manager.checkHitAndGetColor(ray);
+	Color color = this->_manager->checkHitAndGetColor(ray);
 	this->_drawer->setPixel(Vector2I(x, y), color);
 	  //std::cout << "x: " << x << " y: " << y << std::endl;
 	}

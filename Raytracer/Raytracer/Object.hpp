@@ -33,14 +33,14 @@ RT_NAMESPACE_BEGIN
     {
       explicit HitInfo();
 
-    bool haveHit;
-    float nbRepeatRay;
-    float distance;
-    Vector3F normal;
-    Vector3F reflect;
-    Vector3F hitPosition;
-    Object *hitObject;
-  };
+      bool haveHit;
+      float nbRepeatRay;
+      float distance;
+      Vector3F normal;
+      Vector3F reflect;
+      Vector3F hitPosition;
+      Object *hitObject;
+    };
 
    protected:
     const Vector3F position;
@@ -68,15 +68,10 @@ RT_NAMESPACE_BEGIN
 
     virtual HitInfo Hit(const Ray &ray, const SceneManager &manager) = 0;
     virtual Color getColorHit(const HitInfo &info, const SceneManager &manager) = 0;
+   protected:
+    float checkDelta(const float &a, const float &b, const float &delta);
+    Vector3F calculateReflect(const Ray &ray, const Vector3F &normal);
   };
-
-  virtual HitInfo Hit(const Ray &ray, const SceneManager &manager) = 0;
-  virtual Color getColorHit(const HitInfo &info, const SceneManager &manager) = 0;
-
- protected:
-  float checkDelta(const float &a, const float &b, const float &delta);
-  Vector3F calculateReflect(const Ray &ray, const Vector3F &normal);
-};
 
 RT_NAMESPACE_END
 

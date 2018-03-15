@@ -15,3 +15,10 @@ Sphere::Sphere(QWidget *parent) : Object("sphere", "sphere", parent)
 
 Sphere::~Sphere()
 {}
+
+rapidjson::Value Sphere::serialize(rapidjson::Document::AllocatorType &allocator) const
+{
+  auto value = Object::serialize(allocator);
+  value.AddMember("radius", rapidjson::Value(10), allocator);
+  return value;
+}

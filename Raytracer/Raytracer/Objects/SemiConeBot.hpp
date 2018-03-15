@@ -17,7 +17,7 @@ RT_NAMESPACE_BEGIN
 
 class SemiConeBot : public Object
 {
-  float angle;
+  float _angle;
  public:
   explicit SemiConeBot();
   explicit SemiConeBot(const Vector3F &pos);

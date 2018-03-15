@@ -14,16 +14,15 @@
 #include "../Object.hpp"
 
 RT_NAMESPACE_BEGIN
-
-  class SemiConeTop : public Object
-  {
-    float angle;
-   public:
-    explicit SemiConeTop();
-    explicit SemiConeTop(const Vector3F &pos);
-    SemiConeTop(const Vector3F &pos, const Vector3F &rot);
-    SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
-    virtual ~SemiConeTop();
+class SemiConeTop : public Object
+{
+  float _angle;
+ public:
+  explicit SemiConeTop();
+  explicit SemiConeTop(const Vector3F &pos);
+  SemiConeTop(const Vector3F &pos, const Vector3F &rot);
+  SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
+  virtual ~SemiConeTop();
 
     virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
     virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);

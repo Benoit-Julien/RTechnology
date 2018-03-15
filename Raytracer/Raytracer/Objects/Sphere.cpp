@@ -45,7 +45,7 @@ Object::HitInfo Sphere::Hit(const Ray &ray, const SceneManager &manager)
 
   float a = V.magnitude();
   float b = 2 * (V.x() * (OmC.x()) + V.y() * (OmC.y()) + V.z() * (OmC.z()));
-  float c = (OmC^2) - r2;
+  float c = (OmC ^ 2) - r2;
 
   float det;
   /*if (a == 0.25f)
@@ -61,6 +61,8 @@ Object::HitInfo Sphere::Hit(const Ray &ray, const SceneManager &manager)
       info.hitObject = this;
       info.distance = k;
       info.hitPosition = C + (V * k);
+      info.normal = info.hitPosition + this->position;
+      info.reflect = calculateReflect(ray, info.normal);
     }
   else
     info.haveHit = false;
@@ -78,57 +80,32 @@ Object::HitInfo Sphere::Hit(const Ray &ray, const SceneManager &manager)
 Color Sphere::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
   Color color(255, 0, 0);
-
   for (auto &l : manager.getLights())
     {
       Ray my_ray(info.hitPosition, l->getPosition() - info.hitPosition);
       auto objectHit = manager.checkHit(my_ray);
       if (objectHit.haveHit && objectHit.hitObject != this)
 	return Color();
-      Vector3F normal = info.hitPosition + this->position;
-      //std::cout << "pos = " << this->position << std::endl;
-      //std::cout << "hitpos = " << info.hitPosition << std::endl;
-      //std::cout << "normal = " << normal << std::endl;
-      //std::cout << "dir = " << my_ray.getDirection() << std::endl;
-      auto angle = Vector3F::Angle(normal, my_ray.getDirection());
-      //std::cout << "angle = " << angle * 180 / af::Pi << std::endl;
+
+      auto angle = Vector3F::Angle(info.normal, my_ray.getDirection());
       if (angle >= af::Pi / 2)
 	return Color();
       float coeff = angle / (af::Pi / 2);
       color.r = color.r - (color.r * coeff);
       color.g = color.g - (color.g * coeff);
       color.b = color.b - (color.b * coeff);
+
+      auto angleSpec = Vector3F::Angle(info.reflect, my_ray.getDirection());
+      if (angleSpec < af::Pi / 20)
+	{
+	  float coeffSpec = angleSpec / (af::Pi / 20);
+	  color.r = 255 - (255 - color.r) * coeffSpec;
+	  color.g = 255 - (255 - color.g) * coeffSpec;
+	  color.b = 255 - (255 - color.b) * coeffSpec;
+	}
     }
+
   return color;
-}
-
-float Sphere::checkDelta(const float &a, const float &b, const float &delta)
-{
-  float s1;
-  float s2;
-
-  if (delta > 0)
-    {
-      float a2 = 2 * a;
-      float sqrt_delta = std::sqrt(delta);
-      s1 = (-b + sqrt_delta) / a2;
-      s2 = (-b - sqrt_delta) / a2;
-      if (s2 > s1)
-	{
-	  if (s1 > 0)
-	    return s1;
-	  else
-	    return s2;
-	}
-      else
-	{
-	  if (s2 > 0)
-	    return s2;
-	  else
-	    return s1;
-	}
-    }
-  return -1;
 }
 
 void Sphere::setRadius(const float &radius)

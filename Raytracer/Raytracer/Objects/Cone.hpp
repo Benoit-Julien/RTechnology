@@ -15,21 +15,21 @@
 
 RT_NAMESPACE_BEGIN
 
-  class Cone : public Object
-  {
-    float angle;
-   public:
-    explicit Cone();
-    explicit Cone(const Vector3F &pos);
-    Cone(const Vector3F &pos, const Vector3F &rot);
-    Cone(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
-    virtual ~Cone();
+class Cone : public Object
+{
+  float _angle;
+ public:
+  explicit Cone();
+  explicit Cone(const Vector3F &pos);
+  Cone(const Vector3F &pos, const Vector3F &rot);
+  Cone(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
+  virtual ~Cone();
 
-    virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
-    virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
-    void setAngle(const float &angle);
-  };
+  virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
+  virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
 
+  void setAngle(const float &angle);
+};
 RT_NAMESPACE_END
 
 #endif /* !RTECHNOLOGY_RT_CONE_HPP */

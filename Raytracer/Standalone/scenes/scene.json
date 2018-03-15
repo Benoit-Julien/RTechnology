@@ -5,11 +5,21 @@
   "camera": {},
   "objects": [
     {
-      "type": "sphere",
+      "type": "cylinder",
+      "radius": 5,
       "position": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": -50.0
+        "x": 0,
+        "y": 0,
+        "z": -200
+      }
+    },
+    {
+      "type": "sphere",
+      "radius": 10,
+      "position": {
+        "x": 20,
+        "y": 0,
+        "z": -200
       }
     }
   ],
@@ -17,9 +27,9 @@
     {
       "type": "pointLight",
       "position": {
-        "x": 100.0,
-        "y": 100.0,
-        "z": 0.0
+        "x": 0,
+        "y": 50,
+        "z": -5000
       },
       "attributes": [
         {

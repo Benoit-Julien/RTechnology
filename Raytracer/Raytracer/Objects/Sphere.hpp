@@ -30,9 +30,6 @@ class Sphere : public Object
   virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
 
   void setRadius(const float &radius);
-
- private:
-  float checkDelta(const float &a, const float &b, const float &delta);
 };
 
 RT_NAMESPACE_END

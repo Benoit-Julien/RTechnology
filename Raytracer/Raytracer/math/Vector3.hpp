@@ -350,11 +350,20 @@ RT_NAMESPACE_BEGIN
       return vec.magnitude();
     }
 
+     Vector3<float> normalized() const
+  {
+    float norm = this->magnitude();
+    float x = this->_x / norm;
+    float y = this->_y / norm;
+    float z = this->_z / norm;
+    //return Vector3<float>(this->_array / this->magnitude());
+    return Vector3<float>(x, y, z);
+  }
+    
     static float Angle(const Vector3<T> &vec1, const Vector3<T> &vec2)
     {
       /*
        *
-
 
     auto mul = af::sum(newVec1._array * newVec2._array);
   //  auto norm = newVec1.getNormArray() * newVec1.getNormArray();

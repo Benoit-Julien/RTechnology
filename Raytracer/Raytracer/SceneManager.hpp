@@ -37,11 +37,10 @@ RT_NAMESPACE_BEGIN
     const SceneSettings &getSceneSettings() const;
     const std::vector<std::shared_ptr<Object>> &getObjects() const;
     const std::vector<std::shared_ptr<Light>> &getLights() const;
-
-    Color checkHitAndGetColor(const Ray &ray) const;
-
+  Color raytracer(const Ray &ray, int depth) const;
     void parseSceneJson(const rapidjson::Document &document);
     Object::HitInfo checkHit(const Ray &ray) const;
+    Color checkHitAndGetColor(const Ray &ray) const;
 
    private:
     void parseLights(rapidjson::Value::ConstArray lights);

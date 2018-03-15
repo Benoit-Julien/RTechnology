@@ -25,6 +25,9 @@ RT_NAMESPACE_BEGIN
   Cone::Cone(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
   {}
 
+  Cone::~Cone()
+  {}
+
 Object::HitInfo Cone::Hit(const Ray &ray, const SceneManager &manager)
 {
   const auto &V = ray.getDirection();
@@ -100,10 +103,5 @@ void Cone::setAngle(const float &angle)
 {
   this->_angle = angle;
 }
-
-  void Cone::setAngle(const float &angle)
-  {
-    this->angle = angle;
-  }
 
 RT_NAMESPACE_END

@@ -15,3 +15,10 @@ Cylinder::Cylinder(QWidget *parent) : Object("cylinder", "cylinder", parent)
 
 Cylinder::~Cylinder()
 {}
+
+rapidjson::Value Cylinder::serialize(rapidjson::Document::AllocatorType &allocator) const
+{
+  auto value = Object::serialize(allocator);
+  value.AddMember("radius", rapidjson::Value(10), allocator);
+  return value;
+}

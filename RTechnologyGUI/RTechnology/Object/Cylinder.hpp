@@ -20,6 +20,8 @@ class Cylinder : public Object
  public:
   explicit Cylinder(QWidget *parent);
   virtual ~Cylinder();
+
+  virtual rapidjson::Value serialize(rapidjson::Document::AllocatorType &allocator) const;
 };
 
 

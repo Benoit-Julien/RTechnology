@@ -21,6 +21,8 @@ class Sphere : public Object
  public:
   explicit Sphere(QWidget *parent);
   virtual ~Sphere();
+
+  virtual rapidjson::Value serialize(rapidjson::Document::AllocatorType &allocator) const;
 };
 
 

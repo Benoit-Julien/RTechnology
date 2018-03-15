@@ -25,6 +25,9 @@ RT_NAMESPACE_BEGIN
   SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
   {}
 
+  SemiConeTop::~SemiConeTop()
+  {}
+
 Object::HitInfo SemiConeTop::Hit(const Ray &ray, const SceneManager &manager)
 {
   const auto &V = ray.getDirection();

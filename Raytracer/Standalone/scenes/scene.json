@@ -12,12 +12,21 @@
   },
   "objects": [
     {
-      "type": "model",
-      "3DModel": "capsule.obj",
+      "type": "cylinder",
+      "radius": 5,
       "position": {
         "x": 0,
         "y": 0,
-        "z": -100
+        "z": -200
+      }
+    },
+    {
+      "type": "sphere",
+      "radius": 10,
+      "position": {
+        "x": 20,
+        "y": 0,
+        "z": -200
       }
     }
   ],
@@ -29,9 +38,9 @@
         "b": 255
       },
       "position": {
-        "x": 100,
-        "y": 100,
-        "z": 0
+        "x": 0,
+        "y": 50,
+        "z": -5000
       }
     }
   ]

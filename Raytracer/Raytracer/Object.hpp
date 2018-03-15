@@ -35,6 +35,7 @@ class Object
     float nbRepeatRay;
     float distance;
     Vector3F normal;
+    Vector3F reflect;
     Vector3F hitPosition;
     Object *hitObject;
   };
@@ -65,6 +66,10 @@ class Object
 
   virtual HitInfo Hit(const Ray &ray, const SceneManager &manager) = 0;
   virtual Color getColorHit(const HitInfo &info, const SceneManager &manager) = 0;
+
+ protected:
+  float checkDelta(const float &a, const float &b, const float &delta);
+  Vector3F calculateReflect(const Ray &ray, const Vector3F &normal);
 };
 
 #endif /* !RTECHNOLOGY_OBJECT_HPP */

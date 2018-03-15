@@ -132,7 +132,14 @@ std::shared_ptr<Object> ObjectFactory::makeCylinder(rapidjson::Value::ConstObjec
   auto rot = getRotation(params);
   auto scal = getScale(params);
 
-  return std::make_shared<Cylinder>(pos, rot, scal);
+  auto cylinder = std::make_shared<Cylinder>(pos, rot, scal);
+
+  if (params.HasMember("radius"))
+    {
+      assert(params["radius"].IsNumber());
+      cylinder->setRadius(params["radius"].GetFloat());
+    }
+  return cylinder;
 }
 
 std::shared_ptr<Object> ObjectFactory::makeSemiConeTop(rapidjson::Value::ConstObject params)

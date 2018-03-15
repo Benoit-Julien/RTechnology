@@ -72,28 +72,29 @@ void Raytracer::stop()
 void Raytracer::handleThreadFunction(const Vector2I &begin, const Vector2I &end)
 {
   af::setBackend(af::Backend::AF_BACKEND_CPU);
-  static const auto &settings = this->_manager.getSceneSettings().getSettings();
-  static auto &camPos = settings.cameraPosition;
-  static Vector3F PtLook = camPos + Vector3F::forward;
-  static Vector3F H = Vector3F::up;
+  const auto &settings = this->_manager.getSceneSettings().getSettings();
+  auto &camPos = settings.cameraPosition;
+  Vector3F PtLook = camPos + Vector3F::forward;
+  Vector3F H = Vector3F::up;
 
-  static Vector3F U = PtLook - camPos;
-  static Vector3F D = Vector3F::Cross(U, H);
+  Vector3F U = PtLook - camPos;
+  Vector3F D = Vector3F::Cross(U, H);
 
-  static Vector3F PosHGView_PosC = U * settings.viewPlaneDistance
-				   + H * (settings.viewPlaneHeight / 2)
-				   - D * (settings.viewPlaneWidth / 2);
+  Vector3F PosHGView_PosC = U * settings.viewPlaneDistance
+			    + H * (settings.viewPlaneHeight / 2)
+			    - D * (settings.viewPlaneWidth / 2);
 
-  static Vector3F Dxvpwd2 = D * (settings.viewPlaneWidth / this->_drawer->getHeight());
-  static Vector3F Hxvphd2 = H * (settings.viewPlaneHeight / this->_drawer->getWidth());
+  Vector3F Dxvpwd2 = D * (settings.viewPlaneWidth / this->_drawer->getHeight());
+  Vector3F Hxvphd2 = H * (settings.viewPlaneHeight / this->_drawer->getWidth());
 
   for (auto y = begin.y(); y < end.y(); y++)
     for (auto x = begin.x(); x < end.x(); x++)
       {
 	if (this->_stop)
-	    return;
+	  return;
 
 	Vector3F V = PosHGView_PosC + Dxvpwd2 * x - Hxvphd2 * y;
+	V = V.normalized();
 	Ray ray(camPos, V);
 	Color color = this->_manager.checkHitAndGetColor(ray);
 	this->_drawer->setPixel(Vector2I(x, y), color);

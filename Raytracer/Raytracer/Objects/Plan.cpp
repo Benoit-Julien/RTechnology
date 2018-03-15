@@ -9,6 +9,7 @@
 */
 
 #include "Plan.hpp"
+#include "../SceneManager.hpp"
 
 Plan::Plan()
 {
@@ -32,9 +33,11 @@ Object::HitInfo Plan::Hit(const Ray &ray, const SceneManager &manager)
 {
   HitInfo info;
 
-  if (ray.getDirection().y() != 0)
+  if (std::abs(ray.getOrigin().y() - this->position.y()) > 0.001)
     {
-      float k = (-ray.getOrigin().y() / ray.getDirection().y());
+      Vector3F my_vector = ray.getDirection().normalized();
+
+      float k = (ray.getOrigin().y() - this->position.y()) / my_vector.y();
 
       if (k > 0)
 	{
@@ -42,6 +45,7 @@ Object::HitInfo Plan::Hit(const Ray &ray, const SceneManager &manager)
 	  info.hitObject = this;
 	  info.distance = k;
 	  info.hitPosition = ray.getOrigin() + ray.getDirection() * k;
+	  info.normal = Vector3F(0, 1, 0);
 	}
       else
 	info.haveHit = false;
@@ -54,5 +58,21 @@ Object::HitInfo Plan::Hit(const Ray &ray, const SceneManager &manager)
 
 Color Plan::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
-  return Color(0, 0, 255);
+  Color color(255, 255, 255);
+
+  for (auto &l : manager.getLights())
+    {
+      Ray my_ray(info.hitPosition, l->getPosition() - info.hitPosition);
+      auto objectHit = manager.checkHit(my_ray);
+      if (objectHit.haveHit && objectHit.hitObject != this)
+	return Color();
+      auto angle = Vector3F::Angle(info.normal, my_ray.getDirection());
+      if (angle >= af::Pi / 2)
+	return Color();
+      float coeff = angle / (af::Pi / 2);
+      color.r = color.r - (color.r * coeff);
+      color.g = color.g - (color.g * coeff);
+      color.b = color.b - (color.b * coeff);
+    }
+  return color;
 }

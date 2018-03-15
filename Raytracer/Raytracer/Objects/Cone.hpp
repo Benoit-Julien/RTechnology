@@ -15,7 +15,7 @@
 
 class Cone : public Object
 {
-  float angle;
+  float _angle;
  public:
   explicit Cone();
   explicit Cone(const Vector3F &pos);
@@ -25,6 +25,7 @@ class Cone : public Object
 
   virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
   virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
+
   void setAngle(const float &angle);
 };
 

@@ -38,6 +38,8 @@ class SceneManager
 
   Color checkHitAndGetColor(const Ray &ray) const;
 
+  Color raytracer(const Ray &ray, int depth) const;
+
   void parseSceneJson(const rapidjson::Document &document);
   Object::HitInfo checkHit(const Ray &ray) const;
 

@@ -8,40 +8,44 @@
 ** Last update mar. déc. 11:10 2017 benoit_g
 */
 
-#ifndef RTECHNOLOGY_COLOR_HPP
-#define RTECHNOLOGY_COLOR_HPP
+#ifndef RTECHNOLOGY_RT_COLOR_HPP
+#define RTECHNOLOGY_RT_COLOR_HPP
 
 #include <string>
 #include "config.h"
 
-class RT_DLL Color
-{
- public:
-  uint8_t r;
-  uint8_t g;
-  uint8_t b;
-  uint8_t a;
+RT_NAMESPACE_BEGIN
 
-  Color() = default;
-  explicit Color(const uint8_t &red);
-  Color(const uint8_t &red, const uint8_t &green);
-  Color(const uint8_t &red, const uint8_t &green, const uint8_t &blue);
-  Color(const uint8_t &red, const uint8_t &green, const uint8_t &blue, const uint8_t &alpha);
-  Color(const Color &col);
-  Color(Color &&col) noexcept;
-  ~Color() = default;
+  class RT_DLL Color
+  {
+   public:
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
 
-  Color &operator=(const Color &col);
-  Color &operator=(Color &&col) noexcept;
+    Color() = default;
+    explicit Color(const uint8_t &red);
+    Color(const uint8_t &red, const uint8_t &green);
+    Color(const uint8_t &red, const uint8_t &green, const uint8_t &blue);
+    Color(const uint8_t &red, const uint8_t &green, const uint8_t &blue, const uint8_t &alpha);
+    Color(const Color &col);
+    Color(Color &&col) noexcept;
+    ~Color() = default;
 
-  static const Color Black;
-  static const Color White;
-  static const Color Red;
-  static const Color Green;
-  static const Color Blue;
-  static const Color Yellow;
-  static const Color Purple;
-  static const Color Orange;
-};
+    Color &operator=(const Color &col);
+    Color &operator=(Color &&col) noexcept;
 
-#endif /* !RTECHNOLOGY_COLOR_HPP */
+    static const Color Black;
+    static const Color White;
+    static const Color Red;
+    static const Color Green;
+    static const Color Blue;
+    static const Color Yellow;
+    static const Color Purple;
+    static const Color Orange;
+  };
+
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_COLOR_HPP */

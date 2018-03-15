@@ -8,8 +8,8 @@
 ** Last update mar. déc. 18:06 2017 benoit_g
 */
 
-#ifndef RTECHNOLOGY_ATTRIBUTEFACTORY_HPP
-#define RTECHNOLOGY_ATTRIBUTEFACTORY_HPP
+#ifndef RTECHNOLOGY_RT_ATTRIBUTEFACTORY_HPP
+#define RTECHNOLOGY_RT_ATTRIBUTEFACTORY_HPP
 
 #include <unordered_map>
 #include <memory>
@@ -20,26 +20,29 @@
 #include "IAttribute.hpp"
 #include "EnumClassHash.hh"
 
-class AttributeFactory
-{
- private:
-  std::unordered_map<std::string, std::function<std::shared_ptr<IAttribute>(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject)>> _map;
+RT_NAMESPACE_BEGIN
 
-  AttributeFactory();
-  static AttributeFactory &getSingleton();
+  class AttributeFactory
+  {
+   private:
+    std::unordered_map<std::string, std::function<std::shared_ptr<IAttribute>(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject)>> _map;
 
- public:
-  AttributeFactory(const AttributeFactory &factory) = delete;
-  AttributeFactory(AttributeFactory &&factory) = delete;
-  AttributeFactory &operator=(const AttributeFactory &factory) = delete;
-  AttributeFactory &operator=(AttributeFactory &&factory) = delete;
-  ~AttributeFactory() = default;
+    AttributeFactory();
+    static AttributeFactory &getSingleton();
 
-  static std::shared_ptr<IAttribute> createAttribute(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr);
+   public:
+    AttributeFactory(const AttributeFactory &factory) = delete;
+    AttributeFactory(AttributeFactory &&factory) = delete;
+    AttributeFactory &operator=(const AttributeFactory &factory) = delete;
+    AttributeFactory &operator=(AttributeFactory &&factory) = delete;
+    ~AttributeFactory() = default;
 
- private:
-  static std::shared_ptr<IAttribute> makeColor(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr);
-};
+    static std::shared_ptr<IAttribute> createAttribute(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr);
 
+   private:
+    static std::shared_ptr<IAttribute> makeColor(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr);
+  };
 
-#endif /* !RTECHNOLOGY_ATTRIBUTEFACTORY_HPP */
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_ATTRIBUTEFACTORY_HPP */

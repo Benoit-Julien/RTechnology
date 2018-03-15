@@ -10,32 +10,36 @@
 
 #include "SemiConeTop.hpp"
 
-SemiConeTop::SemiConeTop()
-{}
+RT_NAMESPACE_BEGIN
 
-SemiConeTop::SemiConeTop(const Vector3F &pos) : Object(pos)
-{}
+  SemiConeTop::SemiConeTop()
+  {}
 
-SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
-{}
+  SemiConeTop::SemiConeTop(const Vector3F &pos) : Object(pos)
+  {}
 
-SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
-{}
+  SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
+  {}
 
-SemiConeTop::~SemiConeTop()
-{}
+  SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
+  {}
 
-Object::HitInfo SemiConeTop::Hit(const Ray &ray, const SceneManager &manager)
-{
-  return HitInfo();
-}
+  SemiConeTop::~SemiConeTop()
+  {}
 
-Color SemiConeTop::getColorHit(const HitInfo &info, const SceneManager &manager)
-{
-  return Color();
-}
+  Object::HitInfo SemiConeTop::Hit(const Ray &ray, const SceneManager &manager)
+  {
+    return HitInfo();
+  }
 
-void SemiConeTop::setAngle(const float &angle)
-{
-  this->angle = angle;
-}
+  Color SemiConeTop::getColorHit(const HitInfo &info, const SceneManager &manager)
+  {
+    return Color();
+  }
+
+  void SemiConeTop::setAngle(const float &angle)
+  {
+    this->angle = angle;
+  }
+
+RT_NAMESPACE_END

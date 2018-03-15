@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QListWidget>
@@ -38,17 +39,26 @@ public:
     QAction *actionOptions;
     QAction *actionNouveau;
     QAction *actionOptions_Scene;
+    QAction *actionPointLight;
+    QAction *actionRendering;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_2;
+    QGroupBox *objectGroupBox;
+    QVBoxLayout *verticalLayout_3;
     QListWidget *object_list_view;
-    QOpenGLWidget *openGLPreview;
+    QGroupBox *lightGroupBox;
+    QVBoxLayout *verticalLayout_4;
+    QListWidget *light_list_view;
+    QOpenGLWidget *openGlPreview;
     QWidget *attributes;
     QVBoxLayout *verticalLayout;
     QMenuBar *menuBar;
     QMenu *menuObjects;
     QMenu *menuFichier;
     QMenu *menuScene;
+    QMenu *menuLights;
     QStatusBar *statusBar;
     QToolBar *mainToolBar;
 
@@ -56,7 +66,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1132, 659);
+        MainWindow->resize(1134, 659);
         actionSphere = new QAction(MainWindow);
         actionSphere->setObjectName(QStringLiteral("actionSphere"));
         actionCylinder = new QAction(MainWindow);
@@ -73,6 +83,10 @@ public:
         actionNouveau->setObjectName(QStringLiteral("actionNouveau"));
         actionOptions_Scene = new QAction(MainWindow);
         actionOptions_Scene->setObjectName(QStringLiteral("actionOptions_Scene"));
+        actionPointLight = new QAction(MainWindow);
+        actionPointLight->setObjectName(QStringLiteral("actionPointLight"));
+        actionRendering = new QAction(MainWindow);
+        actionRendering->setObjectName(QStringLiteral("actionRendering"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -83,26 +97,70 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setSizeConstraint(QLayout::SetMaximumSize);
-        object_list_view = new QListWidget(centralWidget);
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        objectGroupBox = new QGroupBox(centralWidget);
+        objectGroupBox->setObjectName(QStringLiteral("objectGroupBox"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(objectGroupBox->sizePolicy().hasHeightForWidth());
+        objectGroupBox->setSizePolicy(sizePolicy);
+        objectGroupBox->setMinimumSize(QSize(300, 0));
+        objectGroupBox->setMaximumSize(QSize(300, 16777215));
+        verticalLayout_3 = new QVBoxLayout(objectGroupBox);
+        verticalLayout_3->setSpacing(0);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        object_list_view = new QListWidget(objectGroupBox);
         object_list_view->setObjectName(QStringLiteral("object_list_view"));
         object_list_view->setMinimumSize(QSize(300, 0));
         object_list_view->setMaximumSize(QSize(300, 16777215));
 
-        horizontalLayout->addWidget(object_list_view);
+        verticalLayout_3->addWidget(object_list_view);
 
-        openGLPreview = new QOpenGLWidget(centralWidget);
-        openGLPreview->setObjectName(QStringLiteral("openGLPreview"));
-        openGLPreview->setMinimumSize(QSize(400, 0));
 
-        horizontalLayout->addWidget(openGLPreview);
+        verticalLayout_2->addWidget(objectGroupBox);
+
+        lightGroupBox = new QGroupBox(centralWidget);
+        lightGroupBox->setObjectName(QStringLiteral("lightGroupBox"));
+        sizePolicy.setHeightForWidth(lightGroupBox->sizePolicy().hasHeightForWidth());
+        lightGroupBox->setSizePolicy(sizePolicy);
+        lightGroupBox->setMinimumSize(QSize(300, 0));
+        lightGroupBox->setMaximumSize(QSize(300, 16777215));
+        verticalLayout_4 = new QVBoxLayout(lightGroupBox);
+        verticalLayout_4->setSpacing(0);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        light_list_view = new QListWidget(lightGroupBox);
+        light_list_view->setObjectName(QStringLiteral("light_list_view"));
+        light_list_view->setMinimumSize(QSize(300, 0));
+        light_list_view->setMaximumSize(QSize(300, 16777215));
+
+        verticalLayout_4->addWidget(light_list_view);
+
+
+        verticalLayout_2->addWidget(lightGroupBox);
+
+
+        horizontalLayout->addLayout(verticalLayout_2);
+
+        openGlPreview = new QOpenGLWidget(centralWidget);
+        openGlPreview->setObjectName(QStringLiteral("openGlPreview"));
+        openGlPreview->setMinimumSize(QSize(400, 0));
+
+        horizontalLayout->addWidget(openGlPreview);
 
         attributes = new QWidget(centralWidget);
         attributes->setObjectName(QStringLiteral("attributes"));
-        QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(attributes->sizePolicy().hasHeightForWidth());
-        attributes->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(attributes->sizePolicy().hasHeightForWidth());
+        attributes->setSizePolicy(sizePolicy1);
         attributes->setMinimumSize(QSize(400, 0));
         attributes->setMaximumSize(QSize(400, 16777215));
         attributes->setLayoutDirection(Qt::LeftToRight);
@@ -121,13 +179,15 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1132, 22));
+        menuBar->setGeometry(QRect(0, 0, 1134, 22));
         menuObjects = new QMenu(menuBar);
         menuObjects->setObjectName(QStringLiteral("menuObjects"));
         menuFichier = new QMenu(menuBar);
         menuFichier->setObjectName(QStringLiteral("menuFichier"));
         menuScene = new QMenu(menuBar);
         menuScene->setObjectName(QStringLiteral("menuScene"));
+        menuLights = new QMenu(menuBar);
+        menuLights->setObjectName(QStringLiteral("menuLights"));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -139,6 +199,7 @@ public:
         menuBar->addAction(menuFichier->menuAction());
         menuBar->addAction(menuScene->menuAction());
         menuBar->addAction(menuObjects->menuAction());
+        menuBar->addAction(menuLights->menuAction());
         menuObjects->addAction(actionSphere);
         menuObjects->addAction(actionCylinder);
         menuFichier->addAction(actionNouveau);
@@ -147,6 +208,8 @@ public:
         menuFichier->addAction(actionEnregistrer_sous);
         menuFichier->addAction(actionOptions);
         menuScene->addAction(actionOptions_Scene);
+        menuScene->addAction(actionRendering);
+        menuLights->addAction(actionPointLight);
 
         retranslateUi(MainWindow);
 
@@ -164,9 +227,14 @@ public:
         actionOptions->setText(QApplication::translate("MainWindow", "Options", Q_NULLPTR));
         actionNouveau->setText(QApplication::translate("MainWindow", "Nouveau", Q_NULLPTR));
         actionOptions_Scene->setText(QApplication::translate("MainWindow", "Scene Options", Q_NULLPTR));
+        actionPointLight->setText(QApplication::translate("MainWindow", "Point Light", Q_NULLPTR));
+        actionRendering->setText(QApplication::translate("MainWindow", "Start Rendering", Q_NULLPTR));
+        objectGroupBox->setTitle(QApplication::translate("MainWindow", "Objects :", Q_NULLPTR));
+        lightGroupBox->setTitle(QApplication::translate("MainWindow", "Lights :", Q_NULLPTR));
         menuObjects->setTitle(QApplication::translate("MainWindow", "Objects", Q_NULLPTR));
         menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", Q_NULLPTR));
         menuScene->setTitle(QApplication::translate("MainWindow", "Scene", Q_NULLPTR));
+        menuLights->setTitle(QApplication::translate("MainWindow", "Lights", Q_NULLPTR));
     } // retranslateUi
 
 };

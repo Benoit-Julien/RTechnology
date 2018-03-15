@@ -16,6 +16,8 @@
 
 class Sphere : public Object
 {
+ Q_OBJECT
+
  public:
   explicit Sphere(QWidget *parent);
   virtual ~Sphere();

@@ -10,83 +10,87 @@
 
 #include "Light.hpp"
 
-Light::Light()
-	: _type(Type::POINT),
-	  _color(Color::White)
-{}
+RT_NAMESPACE_BEGIN
 
-Light::Light(const Vector3F &position)
-	: _type(Type::POINT),
-	  _position(position),
-	  _color(Color::White)
-{}
+  Light::Light()
+	  : _type(Type::POINT),
+	    _color(Color::White)
+  {}
 
-Light::Light(const Vector3F &position, const Vector3F &rotation)
-	: _type(Type::POINT),
-	  _position(position),
-	  _rotation(rotation),
-	  _color(Color::White)
-{}
+  Light::Light(const Vector3F &position)
+	  : _type(Type::POINT),
+	    _position(position),
+	    _color(Color::White)
+  {}
 
-Light::Light(const Light &light)
-	: _type(light._type),
-	  _position(light._position),
-	  _rotation(light._rotation),
-	  _color(light._color)
-{}
+  Light::Light(const Vector3F &position, const Vector3F &rotation)
+	  : _type(Type::POINT),
+	    _position(position),
+	    _rotation(rotation),
+	    _color(Color::White)
+  {}
 
-Light::Light(Light &&light) noexcept
-	: _type(light._type),
-	  _position(light._position),
-	  _rotation(light._rotation),
-	  _color(light._color)
-{}
+  Light::Light(const Light &light)
+	  : _type(light._type),
+	    _position(light._position),
+	    _rotation(light._rotation),
+	    _color(light._color)
+  {}
 
-Light& Light::operator=(const Light &light)
-{
-  this->_color = light._color;
-  this->_type = light._type;
+  Light::Light(Light &&light) noexcept
+	  : _type(light._type),
+	    _position(light._position),
+	    _rotation(light._rotation),
+	    _color(light._color)
+  {}
 
-  return *this;
-}
+  Light &Light::operator=(const Light &light)
+  {
+    this->_color = light._color;
+    this->_type = light._type;
 
-Light& Light::operator=(Light &&light) noexcept
-{
-  this->_color = light._color;
-  this->_type = light._type;
+    return *this;
+  }
 
-  return *this;
-}
+  Light &Light::operator=(Light &&light) noexcept
+  {
+    this->_color = light._color;
+    this->_type = light._type;
 
-Light::~Light()
-{}
+    return *this;
+  }
 
-void Light::setType(const Type &type)
-{
-  this->_type = type;
-}
+  Light::~Light()
+  {}
 
-const Light::Type& Light::getType() const
-{
-  return this->_type;
-}
+  void Light::setType(const Type &type)
+  {
+    this->_type = type;
+  }
 
-void Light::setColor(const Color &color)
-{
-  this->_color = color;
-}
+  const Light::Type &Light::getType() const
+  {
+    return this->_type;
+  }
 
-const Color& Light::getColor() const
-{
-  return this->_color;
-}
+  void Light::setColor(const Color &color)
+  {
+    this->_color = color;
+  }
 
-const Vector3F& Light::getPosition() const
-{
-  return this->_position;
-}
+  const Color &Light::getColor() const
+  {
+    return this->_color;
+  }
 
-const Vector3F& Light::getRotation() const
-{
-  return this->_rotation;
-}
+  const Vector3F &Light::getPosition() const
+  {
+    return this->_position;
+  }
+
+  const Vector3F &Light::getRotation() const
+  {
+    return this->_rotation;
+  }
+
+RT_NAMESPACE_END

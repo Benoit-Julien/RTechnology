@@ -8,8 +8,8 @@
 ** Last update mer. janv. 15:25 2018 benoit_g
 */
 
-#ifndef RTECHNOLOGY_OBJECTS_HPP
-#define RTECHNOLOGY_OBJECTS_HPP
+#ifndef RTECHNOLOGY_RT_OBJECTS_HPP
+#define RTECHNOLOGY_RT_OBJECTS_HPP
 
 #include "Sphere.hpp"
 #include "Plan.hpp"
@@ -20,4 +20,4 @@
 #include "Parallelepiped.hpp"
 #include "Model.hpp"
 
-#endif /* !RTECHNOLOGY_OBJECTS_HPP */
+#endif /* !RTECHNOLOGY_RT_OBJECTS_HPP */

@@ -11,128 +11,131 @@
 #include <Raytracer/math/Vector3.hpp>
 #include "SceneSettings.hpp"
 
-SceneSettings::Settings::Settings()
-	: defaultLight(10),
-	  viewPlaneDistance(1),
-	  viewPlaneWidth(0.5),
-	  viewPlaneHeight(0.35)
-{}
+RT_NAMESPACE_BEGIN
 
-SceneSettings::Settings::Settings(const Settings &settings)
-	: defaultLight(settings.defaultLight),
-	viewPlaneDistance(settings.viewPlaneDistance),
-	viewPlaneWidth(settings.viewPlaneWidth),
-	viewPlaneHeight(settings.viewPlaneHeight)
-{}
+  SceneSettings::Settings::Settings()
+	  : defaultLight(10),
+	    viewPlaneDistance(1),
+	    viewPlaneWidth(0.5),
+	    viewPlaneHeight(0.35)
+  {}
 
-SceneSettings::Settings::Settings(Settings &&settings) noexcept
-	: defaultLight(settings.defaultLight),
-	viewPlaneDistance(settings.viewPlaneDistance),
-	viewPlaneWidth(settings.viewPlaneWidth),
-	viewPlaneHeight(settings.viewPlaneHeight)
-{}
+  SceneSettings::Settings::Settings(const Settings &settings)
+	  : defaultLight(settings.defaultLight),
+	    viewPlaneDistance(settings.viewPlaneDistance),
+	    viewPlaneWidth(settings.viewPlaneWidth),
+	    viewPlaneHeight(settings.viewPlaneHeight)
+  {}
 
-SceneSettings::Settings &SceneSettings::Settings::operator=(const Settings &settings)
-{
-	this->cameraPosition = settings.cameraPosition;
-	this->cameraRotation = settings.cameraRotation;
-	this->defaultLight = settings.defaultLight;
-	this->viewPlaneDistance = settings.viewPlaneDistance;
-	this->viewPlaneWidth = settings.viewPlaneWidth;
-	this->viewPlaneHeight = settings.viewPlaneHeight;
+  SceneSettings::Settings::Settings(Settings &&settings) noexcept
+	  : defaultLight(settings.defaultLight),
+	    viewPlaneDistance(settings.viewPlaneDistance),
+	    viewPlaneWidth(settings.viewPlaneWidth),
+	    viewPlaneHeight(settings.viewPlaneHeight)
+  {}
 
-	return *this;
-}
+  SceneSettings::Settings &SceneSettings::Settings::operator=(const Settings &settings)
+  {
+    this->cameraPosition = settings.cameraPosition;
+    this->cameraRotation = settings.cameraRotation;
+    this->defaultLight = settings.defaultLight;
+    this->viewPlaneDistance = settings.viewPlaneDistance;
+    this->viewPlaneWidth = settings.viewPlaneWidth;
+    this->viewPlaneHeight = settings.viewPlaneHeight;
 
-SceneSettings::Settings &SceneSettings::Settings::operator=(Settings &&settings) noexcept
-{
-	this->cameraPosition = settings.cameraPosition;
-	this->cameraRotation = settings.cameraRotation;
-	this->defaultLight = settings.defaultLight;
-	this->viewPlaneDistance = settings.viewPlaneDistance;
-	this->viewPlaneWidth = settings.viewPlaneWidth;
-	this->viewPlaneHeight = settings.viewPlaneHeight;
+    return *this;
+  }
 
-	return *this;
-}
+  SceneSettings::Settings &SceneSettings::Settings::operator=(Settings &&settings) noexcept
+  {
+    this->cameraPosition = settings.cameraPosition;
+    this->cameraRotation = settings.cameraRotation;
+    this->defaultLight = settings.defaultLight;
+    this->viewPlaneDistance = settings.viewPlaneDistance;
+    this->viewPlaneWidth = settings.viewPlaneWidth;
+    this->viewPlaneHeight = settings.viewPlaneHeight;
 
-SceneSettings::Settings::~Settings()
-{}
+    return *this;
+  }
+
+  SceneSettings::Settings::~Settings()
+  {}
 
 
-SceneSettings::SceneSettings()
-{
-  this->_map = {
-	  {"defaultLight", &SceneSettings::setDefaultLight},
-	  {"camera", &SceneSettings::setCamera},
-	  {"viewPlaneDistance", &SceneSettings::setViewPlaneDistance},
-	  {"viewPlaneWidth", &SceneSettings::setViewPlaneWidth},
-	  {"viewPlaneHeight", &SceneSettings::setViewPlaneHeight}
-  };
-}
+  SceneSettings::SceneSettings()
+  {
+    this->_map = {
+	    {"defaultLight",      &SceneSettings::setDefaultLight},
+	    {"camera",            &SceneSettings::setCamera},
+	    {"viewPlaneDistance", &SceneSettings::setViewPlaneDistance},
+	    {"viewPlaneWidth",    &SceneSettings::setViewPlaneWidth},
+	    {"viewPlaneHeight",   &SceneSettings::setViewPlaneHeight}
+    };
+  }
 
-SceneSettings::~SceneSettings()
-{}
+  SceneSettings::~SceneSettings()
+  {}
 
-const SceneSettings::Settings &SceneSettings::getSettings() const
-{
-  return this->_settings;
-}
+  const SceneSettings::Settings &SceneSettings::getSettings() const
+  {
+    return this->_settings;
+  }
 
-void SceneSettings::setSetting(const std::string &name, const rapidjson::Value &value)
-{
-  auto it = this->_map.find(name);
+  void SceneSettings::setSetting(const std::string &name, const rapidjson::Value &value)
+  {
+    auto it = this->_map.find(name);
 
- if (it != this->_map.end())
-   (this->*it->second)(value);
-}
+    if (it != this->_map.end())
+      (this->*it->second)(value);
+  }
 
-void SceneSettings::setDefaultLight(const rapidjson::Value &value)
-{
-  assert(value.IsInt());
-  this->_settings.defaultLight = value.GetInt();
-}
+  void SceneSettings::setDefaultLight(const rapidjson::Value &value)
+  {
+    assert(value.IsInt());
+    this->_settings.defaultLight = value.GetInt();
+  }
 
-void SceneSettings::setCamera(const rapidjson::Value &value)
-{
-  assert(value.IsObject());
-  if (value.HasMember("position"))
-    {
-      assert(value["position"].IsObject());
-      assert(value["position"].HasMember("x") && value["position"]["x"].IsNumber());
-      assert(value["position"].HasMember("y") && value["position"]["y"].IsNumber());
-      assert(value["position"].HasMember("z") && value["position"]["z"].IsNumber());
-      this->_settings.cameraPosition = Vector3F(value["position"]["x"].GetFloat(),
-						    value["position"]["y"].GetFloat(),
-						    value["position"]["z"].GetFloat());
-      std::cout << "set position" << std::endl;
-    }
-  else if (value.HasMember("rotation"))
-    {
-      assert(value["rotation"].IsObject());
-      assert(value["rotation"].HasMember("x") && value["rotation"]["x"].IsNumber());
-      assert(value["rotation"].HasMember("y") && value["rotation"]["y"].IsNumber());
-      assert(value["rotation"].HasMember("z") && value["rotation"]["z"].IsNumber());
-      this->_settings.cameraRotation = Vector3F(value["rotation"]["x"].GetFloat(),
-						    value["rotation"]["y"].GetFloat(),
-						    value["rotation"]["z"].GetFloat());
-    }
-}
+  void SceneSettings::setCamera(const rapidjson::Value &value)
+  {
+    assert(value.IsObject());
+    if (value.HasMember("position"))
+      {
+	assert(value["position"].IsObject());
+	assert(value["position"].HasMember("x") && value["position"]["x"].IsNumber());
+	assert(value["position"].HasMember("y") && value["position"]["y"].IsNumber());
+	assert(value["position"].HasMember("z") && value["position"]["z"].IsNumber());
+	this->_settings.cameraPosition = Vector3F(value["position"]["x"].GetFloat(),
+						  value["position"]["y"].GetFloat(),
+						  value["position"]["z"].GetFloat());
+      }
+    else if (value.HasMember("rotation"))
+      {
+	assert(value["rotation"].IsObject());
+	assert(value["rotation"].HasMember("x") && value["rotation"]["x"].IsNumber());
+	assert(value["rotation"].HasMember("y") && value["rotation"]["y"].IsNumber());
+	assert(value["rotation"].HasMember("z") && value["rotation"]["z"].IsNumber());
+	this->_settings.cameraRotation = Vector3F(value["rotation"]["x"].GetFloat(),
+						  value["rotation"]["y"].GetFloat(),
+						  value["rotation"]["z"].GetFloat());
+      }
+  }
 
-void SceneSettings::setViewPlaneDistance(const rapidjson::Value &value)
-{
-  assert(value.IsNumber());
-  this->_settings.viewPlaneDistance = value.GetFloat();
-}
+  void SceneSettings::setViewPlaneDistance(const rapidjson::Value &value)
+  {
+    assert(value.IsNumber());
+    this->_settings.viewPlaneDistance = value.GetFloat();
+  }
 
-void SceneSettings::setViewPlaneWidth(const rapidjson::Value &value)
-{
-  assert(value.IsNumber());
-  this->_settings.viewPlaneWidth = value.GetFloat();
-}
+  void SceneSettings::setViewPlaneWidth(const rapidjson::Value &value)
+  {
+    assert(value.IsNumber());
+    this->_settings.viewPlaneWidth = value.GetFloat();
+  }
 
-void SceneSettings::setViewPlaneHeight(const rapidjson::Value &value)
-{
-  assert(value.IsNumber());
-  this->_settings.viewPlaneHeight = value.GetFloat();
-}
+  void SceneSettings::setViewPlaneHeight(const rapidjson::Value &value)
+  {
+    assert(value.IsNumber());
+    this->_settings.viewPlaneHeight = value.GetFloat();
+  }
+
+RT_NAMESPACE_END

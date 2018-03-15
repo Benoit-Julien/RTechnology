@@ -26,12 +26,19 @@ endif()
 
 set(SOURCES_GUI
         RTechnology/main.cpp
+        #RTechnology/Test.cpp
         RTechnology/mainwindow.cpp
         RTechnology/scenesettings.cpp
+        #RTechnology/MyGLWidget.cpp
+        RTechnology/QOpenGLPictureDraw.cpp
         RTechnology/Object/Object.cpp
         RTechnology/Object/Sphere.cpp
         RTechnology/Object/Cylinder.cpp
-        RTechnology/AttributesUi/DefaultAttribute.cpp)
+        RTechnology/Light/Light.cpp
+        RTechnology/Light/PointLight.cpp
+        RTechnology/AttributesUi/Attribute.cpp
+        RTechnology/AttributesUi/DefaultAttribute.cpp
+        RTechnology/AttributesUi/ColorAttribute.cpp)
 
 include_directories(./RTechnology)
 

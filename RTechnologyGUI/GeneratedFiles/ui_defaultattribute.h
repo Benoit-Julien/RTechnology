@@ -98,6 +98,7 @@ public:
         Position_X->setObjectName(QStringLiteral("Position_X"));
         position_x_label = new QLabel(DefaultAttribute);
         position_x_label->setObjectName(QStringLiteral("position_x_label"));
+        position_x_label->setAlignment(Qt::AlignCenter);
 
         Position_X->addWidget(position_x_label);
 
@@ -115,6 +116,7 @@ public:
         Position_Y->setObjectName(QStringLiteral("Position_Y"));
         position_y_label = new QLabel(DefaultAttribute);
         position_y_label->setObjectName(QStringLiteral("position_y_label"));
+        position_y_label->setAlignment(Qt::AlignCenter);
 
         Position_Y->addWidget(position_y_label);
 
@@ -132,6 +134,7 @@ public:
         Position_Z->setObjectName(QStringLiteral("Position_Z"));
         position_z_label = new QLabel(DefaultAttribute);
         position_z_label->setObjectName(QStringLiteral("position_z_label"));
+        position_z_label->setAlignment(Qt::AlignCenter);
 
         Position_Z->addWidget(position_z_label);
 
@@ -161,6 +164,7 @@ public:
         Rotation_X->setObjectName(QStringLiteral("Rotation_X"));
         rotation_x_label = new QLabel(DefaultAttribute);
         rotation_x_label->setObjectName(QStringLiteral("rotation_x_label"));
+        rotation_x_label->setAlignment(Qt::AlignCenter);
 
         Rotation_X->addWidget(rotation_x_label);
 
@@ -179,6 +183,7 @@ public:
         Rotation_Y->setObjectName(QStringLiteral("Rotation_Y"));
         rotation_y_label = new QLabel(DefaultAttribute);
         rotation_y_label->setObjectName(QStringLiteral("rotation_y_label"));
+        rotation_y_label->setAlignment(Qt::AlignCenter);
 
         Rotation_Y->addWidget(rotation_y_label);
 
@@ -196,6 +201,7 @@ public:
         Rotation_Z->setObjectName(QStringLiteral("Rotation_Z"));
         rotation_z_label = new QLabel(DefaultAttribute);
         rotation_z_label->setObjectName(QStringLiteral("rotation_z_label"));
+        rotation_z_label->setAlignment(Qt::AlignCenter);
 
         Rotation_Z->addWidget(rotation_z_label);
 
@@ -225,6 +231,8 @@ public:
         Scale_X->setObjectName(QStringLiteral("Scale_X"));
         scale_x_label = new QLabel(DefaultAttribute);
         scale_x_label->setObjectName(QStringLiteral("scale_x_label"));
+        scale_x_label->setEnabled(true);
+        scale_x_label->setAlignment(Qt::AlignCenter);
 
         Scale_X->addWidget(scale_x_label);
 
@@ -242,6 +250,7 @@ public:
         Scale_Y->setObjectName(QStringLiteral("Scale_Y"));
         scale_y_label = new QLabel(DefaultAttribute);
         scale_y_label->setObjectName(QStringLiteral("scale_y_label"));
+        scale_y_label->setAlignment(Qt::AlignCenter);
 
         Scale_Y->addWidget(scale_y_label);
 
@@ -259,6 +268,7 @@ public:
         Scale_Z->setObjectName(QStringLiteral("Scale_Z"));
         scale_z_label = new QLabel(DefaultAttribute);
         scale_z_label->setObjectName(QStringLiteral("scale_z_label"));
+        scale_z_label->setAlignment(Qt::AlignCenter);
 
         Scale_Z->addWidget(scale_z_label);
 

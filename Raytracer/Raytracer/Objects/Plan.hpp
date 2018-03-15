@@ -8,24 +8,27 @@
 ** Last update sam. févr. 15:18 2018 benoit_g
 */
 
-#ifndef RTECHNOLOGY_PLAN_HPP
-#define RTECHNOLOGY_PLAN_HPP
+#ifndef RTECHNOLOGY_RT_PLAN_HPP
+#define RTECHNOLOGY_RT_PLAN_HPP
 
 #include "../Object.hpp"
 
-class Plan : public Object
-{
-  Vector3F _normal;
+RT_NAMESPACE_BEGIN
 
- public:
-  explicit Plan();
-  explicit Plan(const Vector3F &pos);
-  Plan(const Vector3F &pos, const Vector3F &rot);
-  virtual ~Plan();
+  class Plan : public Object
+  {
+    Vector3F _normal;
 
-  virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
-  virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
-};
+   public:
+    explicit Plan();
+    explicit Plan(const Vector3F &pos);
+    Plan(const Vector3F &pos, const Vector3F &rot);
+    virtual ~Plan();
 
+    virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
+    virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
+  };
 
-#endif /* !RTECHNOLOGY_PLAN_HPP */
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_PLAN_HPP */

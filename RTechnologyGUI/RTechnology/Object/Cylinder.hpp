@@ -15,6 +15,8 @@
 
 class Cylinder : public Object
 {
+ Q_OBJECT
+
  public:
   explicit Cylinder(QWidget *parent);
   virtual ~Cylinder();

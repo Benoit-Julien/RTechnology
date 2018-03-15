@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1132</width>
+    <width>1134</width>
     <height>659</height>
    </rect>
   </property>
@@ -21,23 +21,127 @@
        <enum>QLayout::SetMaximumSize</enum>
       </property>
       <item>
-       <widget class="QListWidget" name="object_list_view">
-        <property name="minimumSize">
-         <size>
-          <width>300</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>300</width>
-          <height>16777215</height>
-         </size>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="objectGroupBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Objects :</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QListWidget" name="object_list_view">
+             <property name="minimumSize">
+              <size>
+               <width>300</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="lightGroupBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Lights :</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QListWidget" name="light_list_view">
+             <property name="minimumSize">
+              <size>
+               <width>300</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QOpenGLWidget" name="openGLPreview">
+       <widget class="QOpenGLWidget" name="openGlPreview">
         <property name="minimumSize">
          <size>
           <width>400</width>
@@ -49,7 +153,7 @@
       <item>
        <widget class="QWidget" name="attributes" native="true">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -88,7 +192,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1132</width>
+     <width>1134</width>
      <height>22</height>
     </rect>
    </property>
@@ -114,10 +218,18 @@
      <string>Scene</string>
     </property>
     <addaction name="actionOptions_Scene"/>
+    <addaction name="actionRendering"/>
+   </widget>
+   <widget class="QMenu" name="menuLights">
+    <property name="title">
+     <string>Lights</string>
+    </property>
+    <addaction name="actionPointLight"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuScene"/>
    <addaction name="menuObjects"/>
+   <addaction name="menuLights"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="mainToolBar">
@@ -166,6 +278,16 @@
   <action name="actionOptions_Scene">
    <property name="text">
     <string>Scene Options</string>
+   </property>
+  </action>
+  <action name="actionPointLight">
+   <property name="text">
+    <string>Point Light</string>
+   </property>
+  </action>
+  <action name="actionRendering">
+   <property name="text">
+    <string>Start Rendering</string>
    </property>
   </action>
  </widget>

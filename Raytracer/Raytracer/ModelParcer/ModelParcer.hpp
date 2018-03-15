@@ -8,12 +8,14 @@
 ** Last update mer. févr. 14:00 2018 benoit_g
 */
 
-#ifndef RTECHNOLOGY_MODELPARCER_HPP
-#define RTECHNOLOGY_MODELPARCER_HPP
+#ifndef RTECHNOLOGY_RT_MODELPARCER_HPP
+#define RTECHNOLOGY_RT_MODELPARCER_HPP
 
 #include <unordered_map>
 #include "A3DModel.hpp"
 #include "../config.h"
+
+RT_NAMESPACE_BEGIN
 
 class RT_DLL ModelParcer
 {
@@ -45,4 +47,6 @@ class RT_DLL ModelParcer
   bool loadObj(const std::string &filename);
 };
 
-#endif /* !RTECHNOLOGY_MODELPARCER_HPP */
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_MODELPARCER_HPP */

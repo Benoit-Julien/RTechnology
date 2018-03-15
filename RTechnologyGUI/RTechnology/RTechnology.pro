@@ -29,4 +29,5 @@ SOURCES += \
 FORMS += \
         mainwindow.ui \
         AttributesUi/defaultattribute.ui \
-    scenesettings.ui
+    scenesettings.ui \
+    AttributesUi/colorattribute.ui

@@ -85,6 +85,9 @@
          <property name="text">
           <string>X</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
@@ -106,6 +109,9 @@
          <property name="text">
           <string>Y</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
@@ -126,6 +132,9 @@
         <widget class="QLabel" name="position_z_label">
          <property name="text">
           <string>Z</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -171,6 +180,9 @@
          <property name="text">
           <string>X</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
@@ -195,6 +207,9 @@
          <property name="text">
           <string>Y</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
@@ -215,6 +230,9 @@
         <widget class="QLabel" name="rotation_z_label">
          <property name="text">
           <string>Z</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -257,8 +275,14 @@
       <layout class="QHBoxLayout" name="Scale_X">
        <item>
         <widget class="QLabel" name="scale_x_label">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>X</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -281,6 +305,9 @@
          <property name="text">
           <string>Y</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
@@ -301,6 +328,9 @@
         <widget class="QLabel" name="scale_z_label">
          <property name="text">
           <string>Z</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>

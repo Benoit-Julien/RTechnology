@@ -8,30 +8,33 @@
 ** Last update mar. déc. 11:30 2017 benoit_g
 */
 
-#ifndef RTECHNOLOGY_RAY_HPP
-#define RTECHNOLOGY_RAY_HPP
+#ifndef RTECHNOLOGY_RT_RAY_HPP
+#define RTECHNOLOGY_RT_RAY_HPP
 
 #include "Vector3.hpp"
 
-class Ray
-{
-  Vector3F _origin;
-  Vector3F _direction;
+RT_NAMESPACE_BEGIN
 
- public:
-  Ray(const Vector3F &origin, const Vector3F &direction);
-  Ray(const Ray &ray);
-  Ray(Ray &&ray) noexcept;
-  Ray &operator=(const Ray &ray);
-  Ray &operator=(Ray &&ray) noexcept;
-  ~Ray() = default;
+  class Ray
+  {
+    Vector3F _origin;
+    Vector3F _direction;
 
-  const Vector3F &getOrigin() const;
-  const Vector3F &getDirection() const;
+   public:
+    Ray(const Vector3F &origin, const Vector3F &direction);
+    Ray(const Ray &ray);
+    Ray(Ray &&ray) noexcept;
+    Ray &operator=(const Ray &ray);
+    Ray &operator=(Ray &&ray) noexcept;
+    ~Ray() = default;
 
-  void setOrigin(const Vector3F &origin);
-  void setDirection(const Vector3F &direction);
-};
+    const Vector3F &getOrigin() const;
+    const Vector3F &getDirection() const;
 
+    void setOrigin(const Vector3F &origin);
+    void setDirection(const Vector3F &direction);
+  };
 
-#endif /* !RTECHNOLOGY_RAY_HPP */
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_RAY_HPP */

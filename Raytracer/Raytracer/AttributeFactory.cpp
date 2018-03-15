@@ -11,34 +11,38 @@
 #include "AttributeFactory.hpp"
 #include "attributes/Attributes.hpp"
 
-AttributeFactory::AttributeFactory()
-{
-  this->_map = {
-	  {"color", &AttributeFactory::makeColor}
-  };
-}
+RT_NAMESPACE_BEGIN
 
-AttributeFactory &AttributeFactory::getSingleton()
-{
-  static AttributeFactory factory;
+  AttributeFactory::AttributeFactory()
+  {
+    this->_map = {
+	    {"color", &AttributeFactory::makeColor}
+    };
+  }
 
-  return factory;
-}
+  AttributeFactory &AttributeFactory::getSingleton()
+  {
+    static AttributeFactory factory;
 
-std::shared_ptr<IAttribute> AttributeFactory::createAttribute(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr)
-{
-  auto &factory = AttributeFactory::getSingleton();
+    return factory;
+  }
 
-  assert(attr.HasMember("type") && attr["type"].IsString());
+  std::shared_ptr<IAttribute> AttributeFactory::createAttribute(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr)
+  {
+    auto &factory = AttributeFactory::getSingleton();
 
-  auto it = factory._map.find(attr["type"].GetString());
-  if (it != factory._map.end())
-    return it->second(attr);
+    assert(attr.HasMember("type") && attr["type"].IsString());
 
-  return nullptr;
-}
+    auto it = factory._map.find(attr["type"].GetString());
+    if (it != factory._map.end())
+      return it->second(attr);
 
-std::shared_ptr<IAttribute> AttributeFactory::makeColor(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr)
-{
-  return nullptr;
-}
+    return nullptr;
+  }
+
+  std::shared_ptr<IAttribute> AttributeFactory::makeColor(rapidjson::GenericValue<rapidjson::UTF8<>>::ConstObject attr)
+  {
+    return nullptr;
+  }
+
+RT_NAMESPACE_END

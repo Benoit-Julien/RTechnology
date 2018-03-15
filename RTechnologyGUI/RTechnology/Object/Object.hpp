@@ -19,8 +19,12 @@
 
 #include "AttributesUi/DefaultAttribute.hpp"
 
-class Object
+class Object : public QObject
 {
+  Q_OBJECT
+
+  std::vector<std::shared_ptr<Attribute>> _attributes;
+
  protected:
   const std::string type;
 
@@ -37,9 +41,20 @@ class Object
   inline const std::string getName() const
   { return this->defaultAttribute->getName(); }
 
-  rapidjson::Value serialize(rapidjson::Document::AllocatorType &allocator) const;
+  virtual rapidjson::Value serialize(rapidjson::Document::AllocatorType &allocator) const;
+
+  void addAttribute(std::shared_ptr<Attribute> attr);
+  const std::vector<std::shared_ptr<Attribute>> &getAttributes() const;
+
+  inline std::shared_ptr<DefaultAttribute> getDefaultAttribute() const
+  { return this->defaultAttribute; }
+
  private:
-  static rapidjson::Value serializeVector(const Vector3F &vec, rapidjson::Document::AllocatorType &allocator);
+  static rapidjson::Value serializeVector(const rt::Vector3F &vec, rapidjson::Document::AllocatorType &allocator);
+  rapidjson::Value serializeAttributes(rapidjson::Document::AllocatorType &allocator) const;
+
+ private slots:
+  void updatePreview();
 };
 
 #endif /* !RTECHNOLOGY_OBJECT_HPP */

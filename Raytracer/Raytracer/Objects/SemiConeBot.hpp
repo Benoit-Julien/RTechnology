@@ -8,10 +8,12 @@
 ** Last update mer. janv. 17:11 2018 each
 */
 
-#ifndef RTECHNOLOGY_SEMICONEBOT_HPP
-#define RTECHNOLOGY_SEMICONEBOT_HPP
+#ifndef RTECHNOLOGY_RT_SEMICONEBOT_HPP
+#define RTECHNOLOGY_RT_SEMICONEBOT_HPP
 
 #include "../Object.hpp"
+
+RT_NAMESPACE_BEGIN
 
 class SemiConeBot : public Object
 {
@@ -29,5 +31,6 @@ class SemiConeBot : public Object
   void setAngle(const float &angle);
 };
 
+RT_NAMESPACE_END
 
-#endif /* !RTECHNOLOGY_SEMICONEBOT_HPP */
+#endif /* !RTECHNOLOGY_RT_SEMICONEBOT_HPP */

@@ -8,8 +8,8 @@
 ** Last update mar. déc. 17:25 2017 benoit_g
 */
 
-#ifndef RTECHNOLOGY_OBJECTFACTORY_HPP
-#define RTECHNOLOGY_OBJECTFACTORY_HPP
+#ifndef RTECHNOLOGY_RT_OBJECTFACTORY_HPP
+#define RTECHNOLOGY_RT_OBJECTFACTORY_HPP
 
 #include <unordered_map>
 #include <memory>
@@ -20,40 +20,44 @@
 #include "Object.hpp"
 #include "EnumClassHash.hh"
 
-class ObjectFactory
-{
- private:
-  typedef std::function<std::shared_ptr<Object>(rapidjson::Value::ConstObject)> MakeFuncType;
+RT_NAMESPACE_BEGIN
 
-  std::unordered_map<std::string, MakeFuncType> _map;
+  class ObjectFactory
+  {
+   private:
+    typedef std::function<std::shared_ptr<Object>(rapidjson::Value::ConstObject)> MakeFuncType;
 
-  ObjectFactory();
-  static ObjectFactory &getSingleton();
+    std::unordered_map<std::string, MakeFuncType> _map;
 
- public:
-  ObjectFactory(const ObjectFactory &factory) = delete;
-  ObjectFactory(ObjectFactory &&factory) = delete;
-  ObjectFactory &operator=(const ObjectFactory &factory) = delete;
-  ObjectFactory &operator=(ObjectFactory &&factory) = delete;
-  ~ObjectFactory() = default;
+    ObjectFactory();
+    static ObjectFactory &getSingleton();
 
-  static std::shared_ptr<Object> createObject(rapidjson::Value::ConstObject params);
+   public:
+    ObjectFactory(const ObjectFactory &factory) = delete;
+    ObjectFactory(ObjectFactory &&factory) = delete;
+    ObjectFactory &operator=(const ObjectFactory &factory) = delete;
+    ObjectFactory &operator=(ObjectFactory &&factory) = delete;
+    ~ObjectFactory() = default;
 
- private:
-  static Vector3F getVector3Of(const std::string &name, rapidjson::Value::ConstObject params);
-  static Vector3F getPosition(rapidjson::Value::ConstObject params);
-  static Vector3F getRotation(rapidjson::Value::ConstObject params);
-  static Vector3F getScale(rapidjson::Value::ConstObject params);
+    static std::shared_ptr<Object> createObject(rapidjson::Value::ConstObject params);
 
- private:
-  static std::shared_ptr<Object> makeSphere(rapidjson::Value::ConstObject params);
-  static std::shared_ptr<Object> makePlane(rapidjson::Value::ConstObject params);
-  static std::shared_ptr<Object> makeCone(rapidjson::Value::ConstObject params);
-  static std::shared_ptr<Object> makeCylinder(rapidjson::Value::ConstObject params);
-  static std::shared_ptr<Object> makeSemiConeBot(rapidjson::Value::ConstObject params);
-  static std::shared_ptr<Object> makeSemiConeTop(rapidjson::Value::ConstObject params);
-  static std::shared_ptr<Object> makeParallelepiped(rapidjson::Value::ConstObject params);
-  static std::shared_ptr<Object> makeModel(rapidjson::Value::ConstObject params);
-};
+   private:
+    static Vector3F getVector3Of(const std::string &name, rapidjson::Value::ConstObject params);
+    static Vector3F getPosition(rapidjson::Value::ConstObject params);
+    static Vector3F getRotation(rapidjson::Value::ConstObject params);
+    static Vector3F getScale(rapidjson::Value::ConstObject params);
 
-#endif /* !RTECHNOLOGY_OBJECTFACTORY_HPP */
+   private:
+    static std::shared_ptr<Object> makeSphere(rapidjson::Value::ConstObject params);
+    static std::shared_ptr<Object> makePlane(rapidjson::Value::ConstObject params);
+    static std::shared_ptr<Object> makeCone(rapidjson::Value::ConstObject params);
+    static std::shared_ptr<Object> makeCylinder(rapidjson::Value::ConstObject params);
+    static std::shared_ptr<Object> makeSemiConeBot(rapidjson::Value::ConstObject params);
+    static std::shared_ptr<Object> makeSemiConeTop(rapidjson::Value::ConstObject params);
+    static std::shared_ptr<Object> makeParallelepiped(rapidjson::Value::ConstObject params);
+    static std::shared_ptr<Object> makeModel(rapidjson::Value::ConstObject params);
+  };
+
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_OBJECTFACTORY_HPP */

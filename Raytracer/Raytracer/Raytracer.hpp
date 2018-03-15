@@ -8,8 +8,8 @@
 ** Last update mer. déc. 15:28 2017 benoit_g
 */
 
-#ifndef RTECHNOLOGY_RAYTRACER_HPP
-#define RTECHNOLOGY_RAYTRACER_HPP
+#ifndef RTECHNOLOGY_RT_RAYTRACER_HPP
+#define RTECHNOLOGY_RT_RAYTRACER_HPP
 
 #include <memory>
 #include <string>
@@ -19,29 +19,36 @@
 #include "APictureDraw.hpp"
 #include "SceneManager.hpp"
 
-class RT_DLL Raytracer
-{
-  SceneManager _manager;
-  std::shared_ptr<APictureDraw> _drawer;
-  bool _stop;
-  std::array<std::thread, 4> _threads;
+RT_NAMESPACE_BEGIN
 
- public:
-  Raytracer(std::shared_ptr<APictureDraw> drawer);
-  Raytracer(const Raytracer &raytracer) = delete;
-  Raytracer(Raytracer &&raytracer) noexcept = delete;
-  Raytracer &operator=(const Raytracer &raytracer) = delete;
-  Raytracer &operator=(Raytracer &&raytracer) noexcept = delete;
-  ~Raytracer();
+  class RT_DLL Raytracer
+  {
+    const bool _useThreads;
 
-  void start();
-  void initialiseScene(const std::string &json);
-  void stop();
-  void setScenePath(const std::string &path);
+    std::shared_ptr<SceneManager> _manager;
+    std::shared_ptr<APictureDraw> _drawer;
+    bool _stop;
+    std::array<std::thread, 4> _threads;
 
- private:
-  void handleThreadFunction(const Vector2I &begin, const Vector2I &end);
-};
+   public:
+    Raytracer(std::shared_ptr<APictureDraw> drawer, const bool &useThreads);
+    Raytracer(const Raytracer &raytracer) = delete;
+    Raytracer(Raytracer &&raytracer) noexcept = delete;
+    Raytracer &operator=(const Raytracer &raytracer) = delete;
+    Raytracer &operator=(Raytracer &&raytracer) noexcept = delete;
+    ~Raytracer();
 
+    void initialiseScene(const std::string &json);
+    void initialiseScene(const rapidjson::Document &doc);
+    void reset();
+    void start();
+    void stop();
+    void setScenePath(const std::string &path);
 
-#endif /* !RTECHNOLOGY_RAYTRACER_HPP */
+   private:
+    void handleThreadFunction(const Vector2I &begin, const Vector2I &end);
+  };
+
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_RAYTRACER_HPP */

@@ -10,27 +10,31 @@
 
 #include "Model.hpp"
 
-Model::Model()
-{}
+RT_NAMESPACE_BEGIN
 
-Model::Model(const Vector3F &pos) : Object(pos)
-{}
+  Model::Model()
+  {}
 
-Model::Model(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
-{}
+  Model::Model(const Vector3F &pos) : Object(pos)
+  {}
 
-Model::Model(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
-{}
+  Model::Model(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
+  {}
 
-Model::~Model()
-{}
+  Model::Model(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
+  {}
 
-Object::HitInfo Model::Hit(const Ray &ray, const SceneManager &manager)
-{
-  return HitInfo();
-}
+  Model::~Model()
+  {}
 
-Color Model::getColorHit(const HitInfo &info, const SceneManager &manager)
-{
-  return Color();
-}
+  Object::HitInfo Model::Hit(const Ray &ray, const SceneManager &manager)
+  {
+    return HitInfo();
+  }
+
+  Color Model::getColorHit(const HitInfo &info, const SceneManager &manager)
+  {
+    return Color();
+  }
+
+RT_NAMESPACE_END

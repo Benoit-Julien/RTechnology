@@ -10,33 +10,36 @@
 
 #include "Cone.hpp"
 
-Cone::Cone()
-{}
+RT_NAMESPACE_BEGIN
 
-Cone::Cone(const Vector3F &pos) : Object(pos)
-{}
+  Cone::Cone()
+  {}
 
-Cone::Cone(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
-{}
+  Cone::Cone(const Vector3F &pos) : Object(pos)
+  {}
 
-Cone::Cone(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
-{}
+  Cone::Cone(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
+  {}
 
-Cone::~Cone()
-{}
+  Cone::Cone(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
+  {}
 
-Object::HitInfo Cone::Hit(const Ray &ray, const SceneManager &manager)
-{
-  return HitInfo();
-}
+  Cone::~Cone()
+  {}
 
-Color Cone::getColorHit(const HitInfo &info, const SceneManager &manager)
-{
-  return Color();
-}
+  Object::HitInfo Cone::Hit(const Ray &ray, const SceneManager &manager)
+  {
+    return HitInfo();
+  }
 
-void Cone::setAngle(const float &angle)
-{
-  this->angle = angle;
-}
+  Color Cone::getColorHit(const HitInfo &info, const SceneManager &manager)
+  {
+    return Color();
+  }
 
+  void Cone::setAngle(const float &angle)
+  {
+    this->angle = angle;
+  }
+
+RT_NAMESPACE_END

@@ -8,10 +8,12 @@
 ** Last update mer. janv. 16:16 2018 each
 */
 
-#ifndef RTECHNOLOGY_SPHERE_HPP
-#define RTECHNOLOGY_SPHERE_HPP
+#ifndef RTECHNOLOGY_RT_SPHERE_HPP
+#define RTECHNOLOGY_RT_SPHERE_HPP
 
 #include "../Object.hpp"
+
+RT_NAMESPACE_BEGIN
 
 class Sphere : public Object
 {
@@ -33,5 +35,6 @@ class Sphere : public Object
   float checkDelta(const float &a, const float &b, const float &delta);
 };
 
+RT_NAMESPACE_END
 
-#endif /* !RTECHNOLOGY_SPHERE_HPP */
+#endif /* !RTECHNOLOGY_RT_SPHERE_HPP */

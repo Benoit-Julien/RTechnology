@@ -8,18 +8,21 @@
 ** Last update mar. déc. 12:08 2017 benoit_g
 */
 
-#ifndef RTECHNOLOGY_IATTRIBUTE_HPP
-#define RTECHNOLOGY_IATTRIBUTE_HPP
+#ifndef RTECHNOLOGY_RT_IATTRIBUTE_HPP
+#define RTECHNOLOGY_RT_IATTRIBUTE_HPP
 
 #include "Color.hpp"
 
-class IAttribute
-{
- public:
-  virtual ~IAttribute() = default;
+RT_NAMESPACE_BEGIN
 
-  virtual void affectColor(Color &currentColor) const = 0;
-};
+  class IAttribute
+  {
+   public:
+    virtual ~IAttribute() = default;
 
+    virtual void affectColor(Color &currentColor) const = 0;
+  };
 
-#endif /* !RTECHNOLOGY_IATTRIBUTE_HPP */
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_IATTRIBUTE_HPP */

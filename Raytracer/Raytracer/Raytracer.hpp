@@ -37,6 +37,7 @@ class RT_DLL Raytracer
   void start();
   void initialiseScene(const std::string &json);
   void stop();
+  void setScenePath(const std::string &path);
 
  private:
   void handleThreadFunction(const Vector2I &begin, const Vector2I &end);

@@ -14,6 +14,7 @@
 #include <thread>
 #include <queue>
 
+#include "ModelParcer/ModelParcer.hpp"
 #include "Raytracer.hpp"
 /*
 #ifdef LINUX
@@ -26,6 +27,8 @@
 #endif
 */
 
+bool useGraphics = false;
+
 Raytracer::Raytracer(std::shared_ptr<APictureDraw> drawer)
 	: _drawer(drawer), _stop(false)
 {}
@@ -35,17 +38,6 @@ Raytracer::~Raytracer()
 
 void Raytracer::start()
 {
-  auto back = af::getActiveBackend();
-
-  if (back == 0)
-    std::cout << "AF_BACKEND_DEFAULT" << std::endl;
-  else if (back == 1)
-    std::cout << "AF_BACKEND_CPU" << std::endl;
-  else if (back == 2)
-    std::cout << "AF_BACKEND_CUDA" << std::endl;
-  else
-    std::cout << "AF_BACKEND_OPENCL" << std::endl;
-
   const auto &height = this->_drawer->getHeight();
   const auto &width = this->_drawer->getWidth();
 
@@ -60,6 +52,11 @@ void Raytracer::initialiseScene(const std::string &json)
   rapidjson::Document doc;
   doc.Parse(json.c_str());
   this->_manager.parseSceneJson(doc);
+}
+
+void Raytracer::setScenePath(const std::string &path)
+{
+  ModelParcer::getSingleton().setScenePath(path);
 }
 
 void Raytracer::stop()

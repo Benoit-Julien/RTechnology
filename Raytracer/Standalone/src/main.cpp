@@ -15,12 +15,15 @@
 #include <rapidjson/document.h>
 #include <rapidjson/filereadstream.h>
 
+#ifndef SCENES_PATH
+  #define SCENE_PATH "."
+#endif
+
 #if defined(WINDOWS) && !defined(_DEBUG)
 # include <Windows.h>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 #else
-
 int main()
 #endif
 {
@@ -45,6 +48,7 @@ int main()
   file.close();
 
   draw->updateWindow();
+  raytracer.setScenePath(SCENES_PATH);
   raytracer.initialiseScene(json);
   raytracer.start();
 

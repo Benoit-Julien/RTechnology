@@ -12,6 +12,8 @@
 #include "Objects/Objects.hpp"
 #include "ModelParcer/ModelParcer.hpp"
 
+RT_NAMESPACE_BEGIN
+
 ObjectFactory::ObjectFactory()
 {
   this->_map = {
@@ -194,7 +196,9 @@ std::shared_ptr<Object> ObjectFactory::makeModel(rapidjson::Value::ConstObject p
   assert(params.HasMember("3DModel") && params["3DModel"].IsString());
 
   if (!ModelParcer::getSingleton().compute(params["3DModel"].GetString(), model))
-    return nullptr;
+      return nullptr;
 
-  return model;
-}
+    return model;
+  }
+
+RT_NAMESPACE_END

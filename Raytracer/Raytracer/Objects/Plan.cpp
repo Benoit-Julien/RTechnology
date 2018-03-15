@@ -11,6 +11,8 @@
 #include "Plan.hpp"
 #include "../SceneManager.hpp"
 
+RT_NAMESPACE_BEGIN
+
 Plan::Plan()
 {
   this->_normal = Vector3F::up - this->position;
@@ -76,3 +78,5 @@ Color Plan::getColorHit(const HitInfo &info, const SceneManager &manager)
     }
   return color;
 }
+
+RT_NAMESPACE_END

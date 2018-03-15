@@ -8,10 +8,12 @@
 ** Last update mer. janv. 16:41 2018 each
 */
 
-#ifndef RTECHNOLOGY_CONE_HPP
-#define RTECHNOLOGY_CONE_HPP
+#ifndef RTECHNOLOGY_RT_CONE_HPP
+#define RTECHNOLOGY_RT_CONE_HPP
 
 #include "../Object.hpp"
+
+RT_NAMESPACE_BEGIN
 
 class Cone : public Object
 {
@@ -28,6 +30,6 @@ class Cone : public Object
 
   void setAngle(const float &angle);
 };
+RT_NAMESPACE_END
 
-
-#endif /* !RTECHNOLOGY_CONE_HPP */
+#endif /* !RTECHNOLOGY_RT_CONE_HPP */

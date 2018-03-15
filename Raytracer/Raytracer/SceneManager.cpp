@@ -11,7 +11,10 @@
 #include "SceneManager.hpp"
 #include "ObjectFactory.hpp"
 #include "AttributeFactory.hpp"
+
 #undef GetObject
+
+RT_NAMESPACE_BEGIN
 
 SceneManager::SceneManager()
 {}
@@ -216,3 +219,5 @@ Color SceneManager::raytracer(const Ray &ray, int depth) const
 
   return Color();
 }
+
+RT_NAMESPACE_END

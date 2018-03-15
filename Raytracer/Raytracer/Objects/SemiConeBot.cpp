@@ -11,21 +11,19 @@
 #include "SemiConeBot.hpp"
 #include "../SceneManager.hpp"
 
-SemiConeBot::SemiConeBot()
-{}
+RT_NAMESPACE_BEGIN
 
-SemiConeBot::SemiConeBot(const Vector3F &pos) : Object(pos)
-{}
+  SemiConeBot::SemiConeBot()
+  {}
 
-SemiConeBot::SemiConeBot(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
-{}
+  SemiConeBot::SemiConeBot(const Vector3F &pos) : Object(pos)
+  {}
 
-SemiConeBot::SemiConeBot(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot,
-													      scal)
-{}
+  SemiConeBot::SemiConeBot(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
+  {}
 
-SemiConeBot::~SemiConeBot()
-{}
+  SemiConeBot::SemiConeBot(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
+  {}
 
 Object::HitInfo SemiConeBot::Hit(const Ray &ray, const SceneManager &manager)
 {
@@ -98,3 +96,4 @@ void SemiConeBot::setAngle(const float &angle)
 {
   this->_angle = angle;
 }
+RT_NAMESPACE_END

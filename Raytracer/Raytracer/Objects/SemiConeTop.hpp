@@ -8,11 +8,12 @@
 ** Last update mer. janv. 17:03 2018 each
 */
 
-#ifndef RTECHNOLOGY_SEMICONETOP_HPP
-#define RTECHNOLOGY_SEMICONETOP_HPP
+#ifndef RTECHNOLOGY_RT_SEMICONETOP_HPP
+#define RTECHNOLOGY_RT_SEMICONETOP_HPP
 
 #include "../Object.hpp"
 
+RT_NAMESPACE_BEGIN
 class SemiConeTop : public Object
 {
   float _angle;
@@ -23,11 +24,12 @@ class SemiConeTop : public Object
   SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
   virtual ~SemiConeTop();
 
-  virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
-  virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
+    virtual HitInfo Hit(const Ray &ray, const SceneManager &manager);
+    virtual Color getColorHit(const HitInfo &info, const SceneManager &manager);
 
-  void setAngle(const float &angle);
-};
+    void setAngle(const float &angle);
+  };
 
+RT_NAMESPACE_END
 
-#endif /* !RTECHNOLOGY_SEMICONETOP_HPP */
+#endif /* !RTECHNOLOGY_RT_SEMICONETOP_HPP */

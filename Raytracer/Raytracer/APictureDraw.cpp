@@ -10,31 +10,25 @@
 
 #include "APictureDraw.hpp"
 
-APictureDraw::APictureDraw(const std::size_t &height, const std::size_t &width)
-	: height(height),
-	  width(width)
-{}
+RT_NAMESPACE_BEGIN
 
-const std::size_t &APictureDraw::getHeight() const
-{
-  return this->height;
-}
+  APictureDraw::APictureDraw(const std::size_t &width, const std::size_t &height)
+	  : height(height),
+	    width(width)
+  {}
 
-const std::size_t &APictureDraw::getWidth() const
-{
-  return this->width;
-}
+  void APictureDraw::setPixel(const Vector2I &position, const Color &pixColor)
+  {
+    std::lock_guard<std::mutex> lock(this->_mutex);
 
-void APictureDraw::setPixel(const Vector2I &position, const Color &pixColor)
-{
-  std::lock_guard<std::mutex> lock(this->_mutex);
+    this->_setPixel(position, pixColor);
+  }
 
-  this->_setPixel(position, pixColor);
-}
+  void APictureDraw::drawPicture(const std::vector<std::vector<Color>> &picture)
+  {
+    std::lock_guard<std::mutex> lock(this->_mutex);
 
-void APictureDraw::drawPicture(const std::vector<std::vector<Color>> &picture)
-{
-  std::lock_guard<std::mutex> lock(this->_mutex);
+    this->_drawPicture(picture);
+  }
 
-  this->_drawPicture(picture);
-}
+RT_NAMESPACE_END

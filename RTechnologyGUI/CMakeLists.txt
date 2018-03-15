@@ -12,9 +12,9 @@ if (Qt5Core_FOUND)
     link_directories(${Qt5Core_LIBRARY_DIRS})
 
     find_package(Qt5Widgets REQUIRED)
-    if (Qt5Widgets_FOUND)
-        include_directories(${Qt5Widgets_INCLUDE_DIRS})
-        link_directories(${Qt5Widgets_LIBRARY_DIRS})
+    if (Qt5Gui_FOUND)
+        include_directories(${Qt5Gui_INCLUDE_DIRS})
+        link_directories(${Qt5Gui_LIBRARY_DIRS})
     endif()
 
     find_package(Qt5OpenGL)
@@ -25,9 +25,22 @@ if (Qt5Core_FOUND)
 endif()
 
 set(SOURCES_GUI
-        Sources/main.cpp
-		Sources/RTechnologyGUI.cpp
-        )
+        RTechnology/main.cpp
+        #RTechnology/Test.cpp
+        RTechnology/mainwindow.cpp
+        RTechnology/scenesettings.cpp
+        #RTechnology/MyGLWidget.cpp
+        RTechnology/QOpenGLPictureDraw.cpp
+        RTechnology/Object/Object.cpp
+        RTechnology/Object/Sphere.cpp
+        RTechnology/Object/Cylinder.cpp
+        RTechnology/Light/Light.cpp
+        RTechnology/Light/PointLight.cpp
+        RTechnology/AttributesUi/Attribute.cpp
+        RTechnology/AttributesUi/DefaultAttribute.cpp
+        RTechnology/AttributesUi/ColorAttribute.cpp)
+
+include_directories(./RTechnology)
 
 include_directories(${INCLUDE_DIRECTORY_RAPIDJSON})
 include_directories(./GeneratedFiles)
@@ -37,7 +50,7 @@ include_directories(${INCLUDE_DIRECTORY_RAYTRACER})
 link_directories(${LIBRARY_DIRECTORY_RAYTRACER})
 
 add_executable(RTechnology ${SOURCES_GUI})
-target_link_libraries(RTechnology Qt5::Core Qt5::Widgets Qt5::OpenGL raytracer)
+target_link_libraries(RTechnology Qt5::Core Qt5::Gui Qt5::OpenGL raytracer)
 add_dependencies(RTechnology raytracer)
 
 if(WIN32)

@@ -8,11 +8,12 @@
 ** Last update mer. janv. 16:55 2018 each
 */
 
-#ifndef RTECHNOLOGY_CYLINDER_HPP
-#define RTECHNOLOGY_CYLINDER_HPP
+#ifndef RTECHNOLOGY_RT_CYLINDER_HPP
+#define RTECHNOLOGY_RT_CYLINDER_HPP
 
 #include "../Object.hpp"
 
+RT_NAMESPACE_BEGIN
 class Cylinder : public Object
 {
   float _radius;
@@ -28,6 +29,6 @@ class Cylinder : public Object
 
   void setRadius(const float &radius);
 };
+RT_NAMESPACE_END
 
-
-#endif /* !RTECHNOLOGY_CYLINDER_HPP */
+#endif /* !RTECHNOLOGY_RT_CYLINDER_HPP */

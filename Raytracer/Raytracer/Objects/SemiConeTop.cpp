@@ -11,20 +11,19 @@
 #include "SemiConeTop.hpp"
 #include "../SceneManager.hpp"
 
-SemiConeTop::SemiConeTop()
-{}
+RT_NAMESPACE_BEGIN
 
-SemiConeTop::SemiConeTop(const Vector3F &pos) : Object(pos)
-{}
+  SemiConeTop::SemiConeTop()
+  {}
 
-SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
-{}
+  SemiConeTop::SemiConeTop(const Vector3F &pos) : Object(pos)
+  {}
 
-SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
-{}
+  SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
+  {}
 
-SemiConeTop::~SemiConeTop()
-{}
+  SemiConeTop::SemiConeTop(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
+  {}
 
 Object::HitInfo SemiConeTop::Hit(const Ray &ray, const SceneManager &manager)
 {
@@ -98,3 +97,5 @@ void SemiConeTop::setAngle(const float &angle)
 {
   this->_angle = angle;
 }
+
+RT_NAMESPACE_END

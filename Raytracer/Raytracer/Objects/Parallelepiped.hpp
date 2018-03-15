@@ -8,11 +8,12 @@
 ** Last update jeu. janv. 15:42 2018 each
 */
 
-#ifndef RTECHNOLOGY_PARALLELEPIPED_HPP
-#define RTECHNOLOGY_PARALLELEPIPED_HPP
+#ifndef RTECHNOLOGY_RT_PARALLELEPIPED_HPP
+#define RTECHNOLOGY_RT_PARALLELEPIPED_HPP
 
 #include "../Object.hpp"
 
+RT_NAMESPACE_BEGIN
 class Parallelepiped : public Object
 {
   float _length;
@@ -32,6 +33,6 @@ class Parallelepiped : public Object
   void setWidth(const float &width);
   void setHeight(const float &height);
 };
+RT_NAMESPACE_END
 
-
-#endif /* !RTECHNOLOGY_PARALLELEPIPED_HPP */
+#endif /* !RTECHNOLOGY_RT_PARALLELEPIPED_HPP */

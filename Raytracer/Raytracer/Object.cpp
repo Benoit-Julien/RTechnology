@@ -10,6 +10,8 @@
 
 #include "Object.hpp"
 
+RT_NAMESPACE_BEGIN
+
 Object::HitInfo::HitInfo()
 	: haveHit(false),
 	  nbRepeatRay(0),
@@ -130,3 +132,5 @@ Vector3F Object::calculateReflect(const Ray &ray, const Vector3F &normal)
 
   return reflect;
 }
+
+RT_NAMESPACE_END

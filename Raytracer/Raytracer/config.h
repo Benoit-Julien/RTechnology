@@ -39,6 +39,9 @@
 # endif
 #endif
 
-RT_DLL extern bool useGraphics;
+//RT_DLL extern bool useGraphics;
+
+#define RT_NAMESPACE_BEGIN namespace rt {
+#define RT_NAMESPACE_END };
 
 #endif /* !RTECHNOLOGY_CONFIG_H */

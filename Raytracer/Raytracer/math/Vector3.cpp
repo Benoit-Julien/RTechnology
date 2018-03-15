@@ -10,6 +10,8 @@
 
 #include "Vector3.hpp"
 
+RT_NAMESPACE_BEGIN
+
 /*
  * int specialization
  */
@@ -415,3 +417,5 @@ bool Vector3<float>::operator>=(const Vector3<float> &vec) const
 {
   return this->getNormArray().scalar<float>() >= vec.getNormArray().scalar<float>();
 }*/
+
+RT_NAMESPACE_END

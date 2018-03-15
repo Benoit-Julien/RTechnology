@@ -8,8 +8,8 @@
 ** Last update mer. déc. 17:41 2017 benoit_g
 */
 
-#ifndef RTECHNOLOGY_OBJECT_HPP
-#define RTECHNOLOGY_OBJECT_HPP
+#ifndef RTECHNOLOGY_RT_OBJECT_HPP
+#define RTECHNOLOGY_RT_OBJECT_HPP
 
 #include <vector>
 #include <memory>
@@ -22,14 +22,16 @@
 #include "IAttribute.hpp"
 #include "SceneSettings.hpp"
 
-class SceneManager;
+RT_NAMESPACE_BEGIN
 
-class Object
-{
- public:
-  struct HitInfo
+  class SceneManager;
+
+  class Object
   {
-    explicit HitInfo();
+   public:
+    struct HitInfo
+    {
+      explicit HitInfo();
 
     bool haveHit;
     float nbRepeatRay;
@@ -40,29 +42,33 @@ class Object
     Object *hitObject;
   };
 
- protected:
-  const Vector3F position;
-  const Vector3F rotation;
-  const Vector3F scale;
+   protected:
+    const Vector3F position;
+    const Vector3F rotation;
+    const Vector3F scale;
 
-  std::vector<std::shared_ptr<IAttribute>> attributes;
+    std::vector<std::shared_ptr<IAttribute>> attributes;
 
- public:
-  explicit Object();
-  explicit Object(const Vector3F &pos);
-  Object(const Vector3F &pos, const Vector3F &rot);
-  Object(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
-  Object(const Object &obj);
-  Object(Object &&obj) noexcept;
-  Object &operator=(const Object &obj);
-  Object &operator=(Object &&obj) noexcept;
-  virtual ~Object() = default;
+   public:
+    explicit Object();
+    explicit Object(const Vector3F &pos);
+    Object(const Vector3F &pos, const Vector3F &rot);
+    Object(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal);
+    Object(const Object &obj);
+    Object(Object &&obj) noexcept;
+    Object &operator=(const Object &obj);
+    Object &operator=(Object &&obj) noexcept;
+    virtual ~Object() = default;
 
-  const Vector3F &getPosition() const;
-  const Vector3F &getRotation() const;
-  const Vector3F &getScale() const;
+    const Vector3F &getPosition() const;
+    const Vector3F &getRotation() const;
+    const Vector3F &getScale() const;
 
-  void registerAttribute(std::shared_ptr<IAttribute> attribute);
+    void registerAttribute(std::shared_ptr<IAttribute> attribute);
+
+    virtual HitInfo Hit(const Ray &ray, const SceneManager &manager) = 0;
+    virtual Color getColorHit(const HitInfo &info, const SceneManager &manager) = 0;
+  };
 
   virtual HitInfo Hit(const Ray &ray, const SceneManager &manager) = 0;
   virtual Color getColorHit(const HitInfo &info, const SceneManager &manager) = 0;
@@ -72,4 +78,6 @@ class Object
   Vector3F calculateReflect(const Ray &ray, const Vector3F &normal);
 };
 
-#endif /* !RTECHNOLOGY_OBJECT_HPP */
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_OBJECT_HPP */

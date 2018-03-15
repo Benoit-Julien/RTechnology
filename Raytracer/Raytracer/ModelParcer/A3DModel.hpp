@@ -8,33 +8,37 @@
 ** Last update mer. févr. 14:13 2018 benoit_g
 */
 
-#ifndef RTECHNOLOGY_A3DMODEL_HPP
-#define RTECHNOLOGY_A3DMODEL_HPP
+#ifndef RTECHNOLOGY_RT_A3DMODEL_HPP
+#define RTECHNOLOGY_RT_A3DMODEL_HPP
 
 #include <string>
 #include "../Objects/Model.hpp"
 
-class A3DModel
-{
- protected:
-  const std::string filepath;
+RT_NAMESPACE_BEGIN
 
- public:
-  explicit A3DModel(const std::string &filepath) : filepath(filepath)
-  {}
+  class A3DModel
+  {
+   protected:
+    const std::string filepath;
 
-  A3DModel(const A3DModel &) = delete;
-  A3DModel(A3DModel &&) noexcept = delete;
-  A3DModel &operator=(const A3DModel &) = delete;
-  A3DModel &operator=(A3DModel &&) noexcept = delete;
-  virtual ~A3DModel() = default;
+   public:
+    explicit A3DModel(const std::string &filepath) : filepath(filepath)
+    {}
 
-  virtual bool load() = 0;
-  virtual void reload() = 0;
-  virtual void compute(std::shared_ptr<Model> model) = 0;
+    A3DModel(const A3DModel &) = delete;
+    A3DModel(A3DModel &&) noexcept = delete;
+    A3DModel &operator=(const A3DModel &) = delete;
+    A3DModel &operator=(A3DModel &&) noexcept = delete;
+    virtual ~A3DModel() = default;
 
-  inline const std::string &getFilename() const
-  { return this->filepath; }
-};
+    virtual bool load() = 0;
+    virtual void reload() = 0;
+    virtual void compute(std::shared_ptr<Model> model) = 0;
 
-#endif /* !RTECHNOLOGY_A3DMODEL_HPP */
+    inline const std::string &getFilename() const
+    { return this->filepath; }
+  };
+
+RT_NAMESPACE_END
+
+#endif /* !RTECHNOLOGY_RT_A3DMODEL_HPP */

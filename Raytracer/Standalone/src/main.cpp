@@ -24,14 +24,16 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 #else
-int main()
+int main(int ac, char **av)
 #endif
 {
-  auto draw = std::make_shared<SFMLPictureDraw>(1280, 720);
-  Raytracer raytracer(draw);
+  if (ac < 2)
+    return (-1);
 
-  std::string filename = "scene.json";
-  std::string filepath = std::string(SCENES_PATH) + "/" + filename;
+  auto draw = std::make_shared<SFMLPictureDraw>(1280, 720);
+  rt::Raytracer raytracer(draw, true);
+
+  std::string filepath = av[1];
   std::ifstream file(filepath);
   std::string json;
 

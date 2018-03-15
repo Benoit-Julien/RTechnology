@@ -11,6 +11,8 @@
 #include "../SceneManager.hpp"
 #include "Sphere.hpp"
 
+RT_NAMESPACE_BEGIN
+
 Sphere::Sphere()
 	: _radius(1)
 {}
@@ -110,3 +112,5 @@ void Sphere::setRadius(const float &radius)
 {
   this->_radius = radius;
 }
+
+RT_NAMESPACE_END

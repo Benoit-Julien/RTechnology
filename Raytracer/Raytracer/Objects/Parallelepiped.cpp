@@ -11,25 +11,22 @@
 #include "Parallelepiped.hpp"
 #include "../SceneManager.hpp"
 
-Parallelepiped::Parallelepiped()
-{}
+RT_NAMESPACE_BEGIN
 
-Parallelepiped::Parallelepiped(const Vector3F &pos) : Object(pos)
-{}
+  Parallelepiped::Parallelepiped()
+  {}
 
-Parallelepiped::Parallelepiped(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
-{}
+  Parallelepiped::Parallelepiped(const Vector3F &pos) : Object(pos)
+  {}
 
-Parallelepiped::Parallelepiped(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
-{}
+  Parallelepiped::Parallelepiped(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
+  {}
 
-Parallelepiped::~Parallelepiped()
-{}
+  Parallelepiped::Parallelepiped(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
+  {}
 
-Object::HitInfo Parallelepiped::Hit(const Ray &ray, const SceneManager &manager)
-{
-  return HitInfo();
-}
+  Parallelepiped::~Parallelepiped()
+  {}
 
 Color Parallelepiped::getColorHit(const HitInfo &info, const SceneManager &manager)
 {
@@ -75,3 +72,6 @@ void Parallelepiped::setLength(const float &length)
 {
   this->_length = length;
 }
+
+RT_NAMESPACE_END
+

@@ -11,20 +11,19 @@
 #include "../SceneManager.hpp"
 #include "Cylinder.hpp"
 
-Cylinder::Cylinder()
-{}
+RT_NAMESPACE_BEGIN
 
-Cylinder::Cylinder(const Vector3F &pos) : Object(pos)
-{}
+  Cylinder::Cylinder()
+  {}
 
-Cylinder::Cylinder(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
-{}
+  Cylinder::Cylinder(const Vector3F &pos) : Object(pos)
+  {}
 
-Cylinder::Cylinder(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
-{}
+  Cylinder::Cylinder(const Vector3F &pos, const Vector3F &rot) : Object(pos, rot)
+  {}
 
-Cylinder::~Cylinder()
-{}
+  Cylinder::Cylinder(const Vector3F &pos, const Vector3F &rot, const Vector3F &scal) : Object(pos, rot, scal)
+  {}
 
 Object::HitInfo Cylinder::Hit(const Ray &ray, const SceneManager &manager)
 {
@@ -95,3 +94,4 @@ void Cylinder::setRadius(const float &radius)
 {
   this->_radius = radius;
 }
+RT_NAMESPACE_END

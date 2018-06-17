@@ -17,29 +17,9 @@
 #include <QOffscreenSurface>
 #include <iostream>
 
-class Worker2 : public QThread
-{
- Q_OBJECT
-
- public:
-  Worker2();
-  ~Worker2();
-
-  QOpenGLContext *context;
-  QOffscreenSurface *offscrnsf;
-
- protected:
-  void run();
-
- signals:
-  void result();
-};
-
 class Controller : public QOpenGLWidget
 {
  Q_OBJECT
-
-  Worker2 *workerThread;
 
  public:
   Controller(QWidget *parent = nullptr);

@@ -26,7 +26,7 @@ endif()
 
 set(SOURCES_GUI
         RTechnology/main.cpp
-        #RTechnology/Test.cpp
+        RTechnology/Test.cpp
         RTechnology/mainwindow.cpp
         RTechnology/scenesettings.cpp
         #RTechnology/MyGLWidget.cpp

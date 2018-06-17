@@ -38,7 +38,6 @@ class MyGLWidget : public QOpenGLWidget
   std::mutex _mutex;
   std::shared_ptr<QOpenGLPictureDraw> _pictureDraw;
   std::shared_ptr<rt::Raytracer> _raytracer;
-  QThread _previewWorker;
   Worker *_worker;
 
  public:
